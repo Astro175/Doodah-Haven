@@ -1,10 +1,10 @@
 import React from 'react';
+import Home from './home/Home'
 
 const AboutUs = () => {
   return (
     <div>
-      <h1>About Us</h1>
-      {/* Add content for the About Us page */}
+      <Home />
     </div>
   );
 };

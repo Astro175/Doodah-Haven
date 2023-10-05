@@ -78,8 +78,24 @@ $background-color: #E6E6E6;
 
             }
 
+            .cart {
+                .noItems {
+                    padding: 0 .5rem;
+                    font-size: 12px;
+                }
+            }
+
             @media (max-width: 768px) {
-                padding: 1rem;
+                padding: 0.5rem;
+                .logo-block {
+                    img {
+                        width: 25px;
+                        height: 25px;
+                    }
+                    .logo-text {
+                        font-size: 9px;
+                    }
+                }
                 .hamburger {
                     display: block;
                     cursor: pointer;
@@ -123,12 +139,18 @@ $background-color: #E6E6E6;
                         transition: 0.7s ease-in-out;
                         background-color: aliceblue;
                         padding: 10px;
+                        opacity: 1;
                 }
                 
                 }
                 .search-form {
                     .search-input {
-                        width: 200px;
+                        width: 150px;
+                    }
+                }
+                .cart {
+                    .noItems {
+                        padding: 0 .2rem;
                     }
                 }
             }

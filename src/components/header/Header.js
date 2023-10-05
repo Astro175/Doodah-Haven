@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './header.scss'
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faCartShopping, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../images/doodah-logo.png';
 
 const Header = () => {
@@ -37,13 +37,19 @@ const Header = () => {
                     <Link className="link" to='/' onClick={removeActive}>Home</Link>
                     <Link className="link" to='/about' onClick={removeActive}>About Us</Link>
                     <Link className="link" to='/products' onClick={removeActive}>Products</Link>
-                    <Link className="link" to='/signup' onClick={removeActive}>Sign Up/Log In</Link>
+                    <Link className="link" to='/login' onClick={removeActive}>Sign Up/Log In</Link>
                 </div>
 
                 <div className={`hamburger ${isActive ? 'active' : ''}`} onClick={toggleActiveClass}>
                     <span className="bar"></span>
                     <span className="bar"></span>
                     <span className="bar"></span>
+                </div>
+
+                <div className="cart">
+                    <FontAwesomeIcon icon={faCartShopping} color="#EB2D66" size="xs" />
+                    <span className="noItems">1</span>
+                    <FontAwesomeIcon icon={faCaretDown} size="xs"/>
                 </div>
             </nav>
         </header>

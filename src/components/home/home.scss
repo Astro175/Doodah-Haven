@@ -32,8 +32,8 @@
             margin: 1rem 0;
             .rectangle {
                 background-color: #011CBC;
-                width: 400px;
-                height: 300px;
+                width: 280px;
+                height: 200px;
                 position: relative;
                 top: 0;
                 left: 30px;
@@ -43,8 +43,8 @@
                 top: 22px;
                 left: -20px;
                 right: 0;
-                width: 400px;
-                height: 250px;
+                width: 280px;
+                height: 200px;
             }
             .dron {
                 position: absolute;
@@ -229,9 +229,14 @@
     .partner-block {
         background-color: #fff;
         margin: 20px;
+        display: flex;
+        flex-wrap: wrap;
 
         img {
             padding: .5rem;
+            @media screen and (max-width: 500px){
+                width: 100px;
+            }
         }
     }
 
