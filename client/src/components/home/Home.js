@@ -30,9 +30,41 @@ const Home = () => {
       
       <Partners />
       <div className='block'>
+        <h2>Best Sellers</h2>
+        <div className='boxes'>
+          <div className='box'>
+            <h3>Laptop</h3>
+          </div>
 
+          <div className='box'>
+            <h3>Monitor</h3>
+          </div>
+
+          <div className='box-white'>
+            <h3>Tablet</h3>
+          </div>
+
+          <div className='box-white'>
+            <h3>Camera</h3>
+          </div>
+
+          <div className='box'>
+            <h3>Laptop</h3>
+          </div>
+
+          <div className='box'>
+            <h3>Monitor</h3>
+          </div>
+
+          <div className='box-white'>
+            <h3>Tablet</h3>
+          </div>
+
+          <div className='box-white'>
+            <h3>Camera</h3>
+          </div>
+        </div>
       </div>
-      <Partners />
     </div>
   );
 };

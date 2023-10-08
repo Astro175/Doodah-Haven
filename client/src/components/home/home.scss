@@ -1,7 +1,9 @@
 .homepage {
     .hero-section {
         padding: 2rem;
-        position: relative;
+        @media (min-width: 768px) {
+            position: relative;
+        }
         .hero-text {
             h1 {
                 text-transform: uppercase;
@@ -241,6 +243,34 @@
     }
 
     .block {
-        padding : 6rem;
+        padding : 1rem;
+        h2 {
+            text-transform: uppercase;
+            margin-left: 2rem;
+            color: #2A2D46;
+            font-size: 25px;
+            font-weight: 900;
+            padding: 1rem 3rem;
+        }
+        .boxes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            .box {
+                width: 250px;
+                height: 250px;
+                background-color: #011CBC;
+                color: #FFCC01;
+                padding: 1rem; 
+            }
+            .box-white {
+                color: #2A2D46;
+                background-color: #fff;
+                width: 250px;
+                height: 250px;
+                padding: 1rem;
+            }
+        }
     }
 }
