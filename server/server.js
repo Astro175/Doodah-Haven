@@ -4,6 +4,7 @@ const cors = require("cors");
 require('dotenv').config();
 
 const userRoute = require('./routes/user');
+const productRoute = require('./routes/product');
 const db = require("./config/db");
 
 // Database Connection
@@ -21,7 +22,8 @@ app.use((req, res, next) => {
 });
 app.use(cors());
 app.use(express.json());
-app.use('/user', userRoute);
+app.use('/api/users', userRoute);
+app.use('/api/products', productRoute);
 
 app.listen(port, () => {
     console.log('Listening on port', port);
