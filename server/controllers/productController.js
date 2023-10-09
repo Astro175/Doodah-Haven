@@ -10,9 +10,9 @@ const getAProduct = async (req, res) => {
     console.log('Get a Products');
 }
 
-// Create a new product (admin-only): POST /api/products/create
-const  createProduct = async (req, res) => {
-    console.log('Create a new product');
+// Create a new product (admin-only): POST /api/products/add
+const  addProduct = async (req, res) => {
+    console.log('add a new product');
 }
 
 // Update a product (admin-only): PUT /api/products/update/:id
@@ -28,7 +28,7 @@ const  deleteProduct = async (req, res) => {
 module.exports = {
     getAllProducts,
     getAProduct,
-    createProduct,
+    addProduct,
     updateProduct,
     deleteProduct
 };
