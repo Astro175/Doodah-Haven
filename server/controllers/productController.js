@@ -9,6 +9,7 @@ const getAllProducts = async (req, res) => {
 const getAProduct = async (req, res) => {
     res.json({message: "A product deatil"});
 }
+
 // This is just a test, we will implement a middleware
 // To allow access to only admin user to the endpoints below
 
@@ -17,7 +18,7 @@ const addProduct = async (req, res) => {
     try {
         const {
             name, description, price, brand, stock_quantity, image
-        } = req.body;
+        } = req.body.params;
 
         // Create new Product Instance
         const product = new Product({
