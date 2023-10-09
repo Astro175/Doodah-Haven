@@ -36,25 +36,39 @@
                 font-size: 12px;
             }
             .google-btn{
+                margin-top: 1rem;
                 .google-icon {
                     padding-right: .5rem;
+                    padding-top: .1rem;
+                    color: #ea4335;
+                    // background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+                    // -webkit-background-clip: text;
+                    // color: transparent
                 }
+                
+            }
+            label {
+                visibility: hidden;
             }
             input[type=password], .google-btn, input[type=email], input[type=number] {
                 width: 100%;
-                border-radius: 10px;
+                border-radius: 20px;
                 background-color: transparent;
                 border: 2px solid #000;
                 padding: .8rem 1rem;
-                margin-top: 1rem;
+                // margin-top: 1rem;
             }
             input[type=text] {
-                border-radius: 10px;
+                border-radius: 20px;
                 background-color: transparent;
                 border: 2px solid #000;
                 padding: .8rem 1rem;
-                margin-top: 1rem;
+                // margin-top: 1rem;
+                color: #fff
                 
+            }
+            ::placeholder {
+                color: #fff;
             }
             .log-text {
                 width: 100%;
@@ -108,7 +122,7 @@
                 .icon {
                     position: absolute;
                     left: 10px;
-                    top: 60%;
+                    top: 65%;
                     transform: translateY(-50%);
                 }
                 input {

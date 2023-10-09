@@ -79,6 +79,13 @@ footer {
         border-color: $mainColor;
     }
 
+    .payment-icons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
     @media (min-width: 768px) {
         // position: fixed;
 

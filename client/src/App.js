@@ -7,7 +7,10 @@ import Products from './components/products/Products';
 import AboutUs from './components/AboutUs';
 import Login from './components/authentication/Login';
 import SignUp from './components/authentication/SignUp';
-import './app.scss'
+import './app.scss';
+import initFontAwesome from './fontAwesome';
+
+initFontAwesome();
 
 function App() {
   return (

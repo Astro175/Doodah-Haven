@@ -1,5 +1,10 @@
 import React from "react";
-import './footer.scss'
+import './footer.scss';
+import paypal from '../../images/paypal.png';
+import ame from '../../images/american-express.png';
+import discover from '../../images/discover.png';
+import maestro from '../../images/maestro.png';
+import visa from '../../images/visa.png'
 
 const Footer = () => {
     return (
@@ -75,6 +80,13 @@ const Footer = () => {
             </div>
             <p className="license">Copyright © 2023 Doodah</p>
             <hr className="line"/>
+            <div className="payment-icons">
+                <img src={paypal} alt="paypal icon" />
+                <img src={discover} alt="discover icon" />
+                <img src={ame} alt="american express icon" />
+                <img src={visa} alt="visa icon" />
+                <img src={maestro} alt="maestro icon" />
+            </div>
         </footer>
     )
 }

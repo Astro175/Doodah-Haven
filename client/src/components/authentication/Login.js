@@ -45,19 +45,23 @@ class Login extends Component {
                     <div className="main-block">
                     <h1>Login</h1>
                     <form onSubmit={this.handleSubmit}>
-                        <button className="google-btn"><FontAwesomeIcon icon={faUser} className="google-icon"/>Log in with google</button>
+                        <button className="google-btn"><FontAwesomeIcon icon={['fab', 'google']} className="google-icon"/>Log in with google</button>
                         <p className="or">_______ or _______</p>
+                        
                         <div className="input-group">
                             <FontAwesomeIcon icon={faUser} size="xs" className="icon"/>
+                            <label htmlFor="email">Enter your email address</label>
                             <input type="text"
+                            id="email"
                             name="emailOrMobile"
                             value={emailOrMobile}
                             onChange={this.handleInputChange}
-                             placeholder="Enter your email or mobile number" aria-required className="log-text"/>
+                             placeholder="Enter your email address" aria-required className="log-text"/>
                         </div>
                         <div className="input-group">
+                        <label htmlFor="password">Enter your password</label>
                             <FontAwesomeIcon icon={faBaby} size="xs" className="icon"/>
-                            <input type="password"
+                            <input type="password" id='password'
                             name="password"
                             value={password}
                             onChange={this.handleInputChange}

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import './auth.scss'
-
+import './auth.scss';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faB, faTw } fipi
+// import { faGoogle } from "@fortawesome/free-solid-svg-icons";
 class SignUp extends Component {
     constructor(props) {
         super(props)
@@ -10,7 +12,6 @@ class SignUp extends Component {
             lastname: '',
             email: '',
             password: '',
-            confirmPassword: '',
             error: false,
             errorPwd: '',
             fontColor: 'white',
@@ -19,7 +20,6 @@ class SignUp extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
-        this.handleConfirmPassword = this.handleConfirmPassword.bind(this);
         this.validateEmail = this.validateEmail.bind(this);
     }
         // Add form input change handlers and submit handler here
@@ -70,17 +70,6 @@ class SignUp extends Component {
             
         }
 
-        handleConfirmPassword = (event) => {
-            const confirmPassword = event.target.value;
-            const { password } = this.state;
-            let confirmPwdError = '';
-      
-            if (confirmPassword !== password) {
-              confirmPwdError = 'Passwords do not match.';
-            }
-      
-            this.setState({ confirmPassword, confirmPwdError});
-        }
 
         handleSubmit = (event) => {
             event.preventDefault(); // prevents the app from reloading when the submit button is clicked
@@ -108,32 +97,46 @@ class SignUp extends Component {
 
 
     render() {
-        const { firstname, lastname, email, password, fontColor, confirmPwdError, emailError, errorPwd } = this.state;
+        const { firstname, lastname, email, password, fontColor, emailError, errorPwd } = this.state;
         return (
             <div className="auth-block">
                 <div className="sub-auth reverse">
                     <div className="main-block">
-                    <h1>Create an Account</h1>
+                    <h1>REGISTER</h1>
                     <form onSubmit={this.handleSubmit}>
-                        <input type="text" name="firstname" placeholder="Enter Firstname"
+
+                    <label htmlFor="firstname">Enter your first name:</label><br />
+                        <input type="text" id="firstname" name="firstname" placeholder="Enter Firstname"
                         value={firstname} onChange={this.handleInputChange} aria-required className="sign-text"/>
 
-                        <input type="text" name="lastname" placeholder="Enter Lastname" className="sign-text" 
+                      {/* <label htmlFor="lastname">Enter your last name:</label><br /> */}
+                        <input type="text" id="lastname" name="lastname" placeholder="Enter Lastname" className="sign-text" 
                         value={lastname} onChange={this.handleInputChange}/><br />
 
-                        <input type="email" name='email' placeholder="Enter Email address" aria-required
+                        <label htmlFor="email">Enter your email address:</label>
+                        <input type="email" id="email" name='email' placeholder="Enter Email address" aria-required
                         value={email} onChange={this.handleInputChange} required/><br />
                         {emailError && <span className="error">{emailError}</span>}
                         
-                        <input type="number" name="phoneNumber" placeholder="Enter your mobile number" /><br />
-                        <input type="password" name="password" placeholder="Enter password"
+                        <label htmlFor="password">Enter your password:</label>
+                        <input type="password" id="password" name="password" placeholder="Enter password"
                         value={password} onChange={this.handlePassword} aria-required/><br />
                         <span className='small' style={{ color: fontColor }} >{errorPwd}</span>
 
-                        <input type="password" name="confirmPassword" placeholder="Confirm password" aria-required
-                        value={this.state.confirmPassword} onChange={this.handleConfirmPassword}/><br />
-                        {confirmPwdError && <span className='error'> {confirmPwdError}</span>}
-
+                        <p className="or">_______ or _______</p>
+                        <button className="google-btn">
+                          <FontAwesomeIcon icon={['fab', 'google']} className="google-icon"
+                          /> Log in with google
+                          </button>
+                          {/* <button className="google-btn">
+                          <FontAwesomeIcon icon={['fab', 'google']} className="google-icon"
+                          />
+                          </button>
+                          <button className="google-btn">
+                          <FontAwesomeIcon icon={['fab', 'google']} className="google-icon"
+                          />
+                          </button> */}
+                        
                         
                         <button type="submit" className="submit-btn">Sign Up</button>
                         <p className="acc">If you already have an account <span ><Link to='/login' className="sig">Log In</Link></span>.</p>
