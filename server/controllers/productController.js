@@ -10,17 +10,17 @@ const getAProduct = async (req, res) => {
     console.log('Get a Products');
 }
 
-// Create a new product (admin-only): POST /api/products
+// Create a new product (admin-only): POST /api/products/create
 const  createProduct = async (req, res) => {
     console.log('Create a new product');
 }
 
-// Update a product (admin-only): PUT /api/products/:id
+// Update a product (admin-only): PUT /api/products/update/:id
 const  updateProduct = async (req, res) => {
     console.log('Update a product');
 }
 
-// Delete a product (admin-only): DELETE /api/products/:id
+// Delete a product (admin-only): DELETE /api/products/delete/:id
 const  deleteProduct = async (req, res) => {
     console.log('Delete a product');
 }
