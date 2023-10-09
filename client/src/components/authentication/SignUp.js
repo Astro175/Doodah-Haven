@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import './auth.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faB, faTw } fipi
-// import { faGoogle } from "@fortawesome/free-solid-svg-icons";
+
+
 class SignUp extends Component {
     constructor(props) {
         super(props)
