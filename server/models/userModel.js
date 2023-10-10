@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema
+const bcrypt = require('bcrypt');
 
 const userSchema = new schema({
     firstname: {
@@ -21,6 +22,8 @@ const userSchema = new schema({
     },
     role: { type: String, default: "user"}
 });
+
+
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;

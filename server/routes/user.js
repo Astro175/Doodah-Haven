@@ -18,8 +18,8 @@ router.post('/', async (req, res) => {
         res.status(400).json({error: error.message})
 
     }
-
 })
+
 //Signup route
 router.post('/register', registerUser);
 
