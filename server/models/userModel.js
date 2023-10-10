@@ -20,7 +20,8 @@ const userSchema = new schema({
         type: String,
         required: [true, "Password Required"]
     },
-    role: { type: String, default: "user"}
+    role: { type: String, default: "user"},
+    token: { type: String }
 });
 
 
