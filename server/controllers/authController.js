@@ -49,12 +49,12 @@ const loginUser = async (req, res) => {
     if (!email) return res.status(400).json({error: "Input email"});
     if (!password) return res.status(400).json({error: "Input password"});
 
+
     try {
         let user = await User.findOne({ email });
 
         // Check if the provided password matches the hashed password in the database
         const isMatch = await bcrypt.compare(password, user.password);
-
         if (!isMatch || !user ) return res.status(400).json({ msg: 'Invalid credentials' });
   
         // Create and return JSON Web Token (JWT) for authentication
