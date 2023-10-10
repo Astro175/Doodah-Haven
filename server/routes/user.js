@@ -7,7 +7,7 @@ const router = express.Router()
 
 // Test route for creating a new user, checking atlas functionality
 
-// Posts a new user
+// Creates a new user
 router.post('/', async (req, res) => {
     const { firstname, lastname, email, password, role } = req.body
 
