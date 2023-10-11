@@ -1,4 +1,4 @@
-import { verify } from 'jsonwebtoken';
+const jwt = require('jsonwebtoken');
 const secret_key = process.env.SECRET_KEY
 
 const verifyToken = (req, res, next) => {
@@ -9,7 +9,7 @@ const verifyToken = (req, res, next) => {
   if (!token) return res.status(401).json({ error: 'Unauthorized' });
 
   try {
-    const decoded = verify(token, secret_key);
+    const decoded = jwt.verify(token, secret_key);
     req.user = decoded;
   } catch (error) {
     return res.status(401).json({ error: 'Unauthorized' });
@@ -18,4 +18,4 @@ const verifyToken = (req, res, next) => {
   next();
 };
 
-export default verifyToken;
+module.exports = verifyToken;
