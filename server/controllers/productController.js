@@ -15,22 +15,7 @@ const getAProduct = async (req, res) => {
 
 // Create a new product (admin-only): POST /api/products/add
 const addProduct = async (req, res) => {
-    try {
-        const {
-            name, description, price, brand, stock_quantity, image
-        } = req.body.params;
-
-        // Create new Product Instance
-        const product = new Product({
-            name, description, price, brand, stock_quantity, image
-        });
-
-        // Save the product to Database
-        await product.save();
-        res.status(201).json(product);
-    } catch (error) {
-        res.status(500).json({ error: 'Internal server error' });
-    }
+    res.json({message: "Add a product"});
 };
 
 // Update a product (admin-only): PUT /api/products/update/:id
