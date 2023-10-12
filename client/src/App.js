@@ -9,6 +9,8 @@ import Login from './components/authentication/Login';
 import SignUp from './components/authentication/SignUp';
 import './app.scss';
 import initFontAwesome from './fontAwesome';
+import Payment from './components/payment/Payment';
+import Cart from './components/cart/Carts';
 
 initFontAwesome();
 
@@ -22,6 +24,8 @@ function App() {
         <Route path='/about' element={<AboutUs />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
+        <Route path='/payment' element={<Payment />} />
+        <Route path='/cart' element={<Cart />} />
       </Routes>
       <Footer />
     </Router>

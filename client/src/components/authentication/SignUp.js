@@ -109,9 +109,9 @@ class SignUp extends Component {
                         <input type="text" id="firstname" name="firstname" placeholder="Enter Firstname"
                         value={firstname} onChange={this.handleInputChange} aria-required className="sign-text"/>
 
-                      {/* <label htmlFor="lastname">Enter your last name:</label><br /> */}
+                      <label htmlFor="lastname">Enter your last name:</label><br />
                         <input type="text" id="lastname" name="lastname" placeholder="Enter Lastname" className="sign-text" 
-                        value={lastname} onChange={this.handleInputChange}/><br />
+                        value={lastname} onChange={this.handleInputChange}/>
 
                         <label htmlFor="email">Enter your email address:</label>
                         <input type="email" id="email" name='email' placeholder="Enter Email address" aria-required
@@ -126,7 +126,7 @@ class SignUp extends Component {
                         <p className="or">_______ or _______</p>
                         <button className="google-btn">
                           <FontAwesomeIcon icon={['fab', 'google']} className="google-icon"
-                          /> Log in with google
+                          /> Sign up with google
                           </button>
                           {/* <button className="google-btn">
                           <FontAwesomeIcon icon={['fab', 'google']} className="google-icon"
@@ -142,13 +142,13 @@ class SignUp extends Component {
                         <p className="acc">If you already have an account <span ><Link to='/login' className="sig">Log In</Link></span>.</p>
                     </form>
                     </div>
-                    <div className="welcome-block">
+                    {/* <div className="welcome-block">
                         <h1>Welcome to doodah</h1>
                         <p>Lorem ipsum dolor sit amet consectetur. Vulputate adipiscing amet purus dui donec malesuada nunc faucibus. Nascetur adipiscing netus egestas elementum facilisi. Quis eu euismod risus netus eu lectus in suspendisse amet. Dignissim tristique mi id in egestas mauris sollicitudin.</p>
                         <button type="submit" className='log-btn'>
                             <Link to='/login' className="log-link">Log In</Link>
                         </button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         )

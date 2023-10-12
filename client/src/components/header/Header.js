@@ -46,11 +46,11 @@ const Header = () => {
                     <span className="bar"></span>
                 </div>
 
-                <div className="cart">
+                <Link className="cart" to='/cart'>
                     <FontAwesomeIcon icon={faCartShopping} color="#EB2D66" size="xs" />
                     <span className="noItems">1</span>
                     <FontAwesomeIcon icon={faCaretDown} size="xs"/>
-                </div>
+                </Link>
             </nav>
         </header>
         
