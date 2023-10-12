@@ -3,11 +3,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Home from './components/home/Home';
-import Products from './components/Products';
+import Products from './components/products/Products';
 import AboutUs from './components/AboutUs';
 import Login from './components/authentication/Login';
 import SignUp from './components/authentication/SignUp';
-import './app.scss'
+import './app.scss';
+import initFontAwesome from './fontAwesome';
+
+initFontAwesome();
 
 function App() {
   return (
