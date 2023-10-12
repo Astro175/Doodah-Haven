@@ -149,6 +149,8 @@ $background-color: #E6E6E6;
                     }
                 }
                 .cart {
+                    color: $primary-color;
+                    text-decoration: none;
                     .noItems {
                         padding: 0 .2rem;
                     }
