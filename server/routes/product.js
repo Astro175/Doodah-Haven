@@ -1,6 +1,7 @@
 const express = require('express');
 const {
-    getAllProducts, getAProduct, addProduct, updateProduct, deleteProduct
+    getAllProducts, getAProduct, addProduct, updateProduct, 
+    deleteProduct, filterProduct
 } = require('../controllers/productController');
 
 const router = express.Router()
@@ -20,4 +21,7 @@ router.put('/update/:id', updateProduct);
 // Delete a product by ID
 router.delete('/delete/:id', deleteProduct);
 
+// Gets all product with label popular
+
+router.get('/popular', filterProduct);
 module.exports = router;

@@ -40,7 +40,11 @@ const productSchema = new mongoose.Schema({
         type: String
       }
     }
-  ]
+  ],
+  label: {
+    type: String,
+    required: true
+  }
 });
 
 const Product = mongoose.model('Product', productSchema);

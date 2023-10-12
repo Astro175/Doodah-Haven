@@ -28,10 +28,15 @@ const  deleteProduct = async (req, res) => {
     res.json({message: "Delete a Product"});
 }
 
+const filterProduct = async (req, res) => {
+    res.json({message: "Filters popular products"});
+}
+
 module.exports = {
     getAllProducts,
     getAProduct,
     addProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    filterProduct
 };
