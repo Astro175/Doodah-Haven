@@ -1,4 +1,5 @@
 const Product = require('../models/productModel');
+const mongoose = require('mongoose');
 
 // List all products: GET /api/products
 const getAllProducts = async (req, res) => {
@@ -9,6 +10,11 @@ const getAllProducts = async (req, res) => {
 // Get product details: GET /api/products/:id
 const getAProduct = async (req, res) => {
     const { id } = req.params;
+
+    // Checks if the id passed is a valid mongoose id
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such product' })
+    }
 
     const product = await Product.findById(id);
 
