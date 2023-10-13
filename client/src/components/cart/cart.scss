@@ -1,32 +1,48 @@
 $blue-color: #b04e55;
 .cart {
     padding: 2rem;
-    .cartDetails {
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-
-            th, td {
-                background-color: rgb(222, 215, 215);
-                border: 1px solid black;
-                padding: .8rem;
-                text-align: left;
-            }
-            .items {
-                margin-left: .5rem;
-                button {
-                    border-radius: 1px;
-                    background: #EDEEF0;
-                    border: none;
-                    padding: .5rem;
-                }
-                span {
-                    margin: 0 .5rem
-                }
-            }
-            
+    .cartLinks {
+        margin-bottom: 1rem;
+        .cart-link {
+            color: rgb(48, 47, 47);
+            text-decoration: none;
         }
+        .caret-icon {
+            margin: 0 .5rem;
+        }
+    }
+    .cartDetails {
+        .table-scrol {
+            overflow-x: auto;
+            margin-bottom: 1rem;
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+    
+                th, td {
+                    background-color: rgb(222, 215, 215);
+                    border: 1px solid black;
+                    padding: .8rem;
+                    text-align: left;
+                }
+                .items {
+                    margin-left: .5rem;
+                    button {
+                        border-radius: 1px;
+                        background: #EDEEF0;
+                        border: none;
+                        padding: .5rem;
+                    }
+                    span {
+                        margin: 0 .5rem
+                    }
+                }
+                
+            }
+        }
+        
         .clear {
             background-color: #fff;
             color: $blue-color;

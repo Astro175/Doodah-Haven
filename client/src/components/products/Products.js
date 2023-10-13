@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import hero from '../../images/hero2.png';
 import laptop1 from '../../images/laptop.png';
 import laptop2 from '../../images/laptop2.png';
@@ -55,7 +56,7 @@ const Products = () => {
           {/* {products.map((product, index) => (
             <ProductBadge key={index} image={product.image} title={product.title} price={product.price} />
           ))} */}
-          <div className='product-badge'>
+          <Link to='/productId' className='product-badge'>
             <div>
               <FontAwesomeIcon icon={faCheckCircle} color='#78A962'/>
               <span className='stock'>In stock</span>
@@ -70,7 +71,7 @@ const Products = () => {
             <p className='details'>EX DISPLAY : EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...</p>
             <p className='strike'>$499.00</p>
             <p>$499.00</p>
-          </div>
+          </Link>
 
           <div className='product-badge'>
           <div>
