@@ -1,18 +1,19 @@
-import './cart.scss';
+import './cart/cart.scss';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGreaterThan, faDumpster } from '@fortawesome/free-solid-svg-icons';
 
-const Cart = () => {
+const Account = () => {
     return (
         <div className='cart'>
             <div className='cartDetails'>
                 <div className='cartLinks'>
                     <Link to="/" className='cart-link'>Home</Link>
                     < FontAwesomeIcon icon={faGreaterThan} size='xs' className='caret-icon' />
-                    <Link to='/cart' className='cart-link'>Cart</Link>
+                    <Link to='/my-account' className='cart-link'>My Account</Link>
                 </div>
-                <h1>Cart</h1>
+                <h1>My Account</h1>
+                <h2>Orders</h2>
                 <div className='table-scrol'>
                 <table>
                     <thead>
@@ -62,4 +63,4 @@ const Cart = () => {
     )
 }
 
-export default Cart
+export default Account

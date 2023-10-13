@@ -1,0 +1,81 @@
+.productDetails {
+    padding: 2rem;
+    .product-block {
+        img {
+            width: 300px;
+            height: 300px;;
+        }
+        .details-block {
+            .cartLinks {
+                margin: 1rem 0;
+                .cart-link {
+                    color: rgb(48, 47, 47);
+                    text-decoration: none;
+                    &:hover, &:focus {
+                        color: rgb(35, 35, 173);
+                        text-decoration: underline;
+                        font-weight: 600;
+                    }
+                }
+                .caret-icon {
+                    margin: 0 .5rem;
+                }
+            }
+        }
+        .main-details {
+            .review {
+                color: #A2A6B0;
+                font-size: 12px;
+                margin: .5rem 0;
+                .star {
+                    color: #E9A426
+                }
+                span {
+                    margin-left: .5rem;
+                }
+            }
+
+            .strike {
+                color: #666;
+                font-size: 12px;
+                text-decoration-line: line-through;
+            }
+            p {
+                padding: .3rem 0;
+            }
+            .details {
+                font-size: 14px;
+            }
+
+            .addCart {
+                background-color: #a55157;
+                padding: .8rem 1rem;
+                border: none;
+                .cartLink {
+                    color: #fff;
+                    text-decoration: none;
+                }
+            }
+        }
+        @media screen and (min-width: 700px) {
+            display: flex;
+            justify-content: space-between;
+            .details-block {
+                width: 50%;
+            }
+            img {
+                margin-left: 2rem;
+            }
+        }
+        
+    }
+    h3 {
+        padding: 1rem 0;
+    }
+
+    .det {
+        background-color: #fff;
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+}
