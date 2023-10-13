@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const productSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -45,7 +46,7 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true
   }
-});
+}, {timestamps: true}); // Added timestamp for sorting products that were added recently
 
 const Product = mongoose.model('Product', productSchema);
 module.exports = Product;

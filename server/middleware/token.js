@@ -12,7 +12,7 @@ const verifyToken = async (req, res, next) => {
 
   try {
     const tokenId = jwt.verify(token, secret_key);
-    req.user = await User.findOne({ tokenId }).select('_id');
+    req.user = await User.findOne({ tokenId });
   } catch (error) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
