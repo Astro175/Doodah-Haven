@@ -1,16 +1,17 @@
 import React, { Component } from "react";
-import {Link} from 'react-router-dom';
+import {Link, Navigate} from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faBaby } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
 import './auth.scss';
 
 class Login extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            emailOrMobile: '',
+            email: '',
             password: '',
-            error: null
+            error: null,
+            redirect: false
         }   
     }
 
@@ -24,21 +25,48 @@ class Login extends Component {
         });
     };
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
 
-        const { emailOrMobile, password } = this.state;
+        const { email, password } = this.state;
 
-        if (!emailOrMobile || !password ) {
+        const userData = {
+            email,
+            password
+        };
+
+        try {
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
+
+            if (response.ok) {
+                console.log('User logged in successfully!');
+                this.setState({ redirect: true })
+            } else {
+                console.error('Error logging in:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error signing up:', error);
+        };
+
+        if (!email || !password ) {
             this.setState({
                 error: 'Please fill in all fields.'
             });
         } else {
             console.log('Form submitted!');
-        }
-    }
+        };
+    };
     render() {
-        const { emailOrMobile, password, error } = this.state;
+        const { email, password, error } = this.state;
+        if (this.state.redirect) {
+            return <Navigate to='/' />
+        }
         return (
             <div className="auth-block">
                 <div className="sub-auth">
@@ -53,14 +81,14 @@ class Login extends Component {
                             <label htmlFor="email">Enter your email address</label>
                             <input type="text"
                             id="email"
-                            name="emailOrMobile"
-                            value={emailOrMobile}
+                            name="email"
+                            value={email}
                             onChange={this.handleInputChange}
                              placeholder="Enter your email address" aria-required className="log-text"/>
                         </div>
                         <div className="input-group">
                         <label htmlFor="password">Enter your password</label>
-                            <FontAwesomeIcon icon={faBaby} size="xs" className="icon"/>
+                            <FontAwesomeIcon icon={faKey} size="xs" className="icon"/>
                             <input type="password" id='password'
                             name="password"
                             value={password}
@@ -73,13 +101,13 @@ class Login extends Component {
                         <p className="acc">Don't have an account? <span><Link to='/signup' className="sig">Sign up</Link></span>.</p>
                     </form>
                     </div>
-                    <div className="welcome-block">
+                    {/* <div className="welcome-block">
                         <h1>Hello customer</h1>
                         <p>Lorem ipsum dolor sit amet consectetur. Vulputate adipiscing amet purus dui donec malesuada nunc faucibus. Nascetur adipiscing netus egestas elementum facilisi. Quis eu euismod risus netus eu lectus in suspendisse amet. Dignissim tristique mi id in egestas mauris sollicitudin.</p>
                         <button className='sig-btn'>
                             <Link to='/signup' className="sig-link">Sign Up</Link>
                         </button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         )

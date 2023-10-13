@@ -7,6 +7,7 @@ import logo from '../../images/doodah-logo.png';
 
 const Header = () => {
     const [isActive, setIsActive] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     // add the active class
     const toggleActiveClass = () => {
@@ -16,6 +17,11 @@ const Header = () => {
     // clean up function to remove the active class
     const removeActive = () => {
         setIsActive(false)
+    };
+
+    // Function to handle logout
+    const handleLogout = () => {
+        setIsLoggedIn(false)
     }
     return (
         <header>
@@ -37,7 +43,18 @@ const Header = () => {
                     <Link className="link" to='/' onClick={removeActive}>Home</Link>
                     <Link className="link" to='/about' onClick={removeActive}>About Us</Link>
                     <Link className="link" to='/products' onClick={removeActive}>Products</Link>
-                    <Link className="link" to='/login' onClick={removeActive}>Sign Up/Log In</Link>
+                    
+                    {isLoggedIn ? (
+                        <>
+                            <Link className="link" to='/my-account' onClick={removeActive}>My Account</Link>
+                            <Link className="link" to='/' onClick={() => {
+                                handleLogout();
+                                removeActive();
+                            }}> Sign Out </Link>
+                        </>
+                    ) : (
+                        <Link className="link" to='/login' onClick={removeActive}>Sign Up/Log In</Link>
+                    )}
                 </div>
 
                 <div className={`hamburger ${isActive ? 'active' : ''}`} onClick={toggleActiveClass}>
@@ -46,11 +63,11 @@ const Header = () => {
                     <span className="bar"></span>
                 </div>
 
-                <div className="cart">
+                <Link className="cart" to='/cart'>
                     <FontAwesomeIcon icon={faCartShopping} color="#EB2D66" size="xs" />
                     <span className="noItems">1</span>
                     <FontAwesomeIcon icon={faCaretDown} size="xs"/>
-                </div>
+                </Link>
             </nav>
         </header>
         
