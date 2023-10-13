@@ -42,14 +42,14 @@ const Cart = () => {
 
             </div>
 
-            <div>
-                <div>
+            <div className='payCart'>
+                <div className='total'>
                     <p>Subtotal</p>
                     <p>N160,000.00</p>
                 </div>
-                <p>Shippings fees are free</p>
+                <p className='shipfee'>Shippings fees are free</p>
                 <button>
-                    <Link to='/payment'>
+                    <Link to='/payment' className='ship-link'>
                         Proceed to checkout
                     </Link>
                 </button>
