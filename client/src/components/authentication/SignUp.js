@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import './auth.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -16,6 +16,7 @@ class SignUp extends Component {
             errorPwd: '',
             fontColor: 'white',
             emailError: '',
+            redirect: false
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -71,9 +72,36 @@ class SignUp extends Component {
         }
 
 
-        handleSubmit = (event) => {
+        handleSubmit = async (event) => {
             event.preventDefault(); // prevents the app from reloading when the submit button is clicked
             const { firstname, lastname, email, password } = this.state;
+
+            const userData = {
+              firstname,
+              lastname,
+              email,
+              password
+            };
+
+            try {
+              const response = await fetch('/api/register', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+              });
+
+              if (response.ok) {
+                console.log('User signed up successfully!')
+                // You can redirect or perform other actions upon successful signup
+                this.setState({ redirect: true })
+              } else {
+                console.error('Error signing up:', response.statusText);
+              }
+            } catch (error) {
+              console.error('Error signing up:', error);
+            }
           
             // Validate email
             const isEmailValid = this.validateEmail(email);
@@ -98,6 +126,9 @@ class SignUp extends Component {
 
     render() {
         const { firstname, lastname, email, password, fontColor, emailError, errorPwd } = this.state;
+        if (this.state.redirect) {
+          return <Navigate to='/' />;
+        }
         return (
             <div className="auth-block">
                 <div className="sub-auth reverse">

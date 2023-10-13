@@ -1,3 +1,4 @@
+$blue-color: #b04e55;
 .cart {
     padding: 2rem;
     .cartDetails {
@@ -28,9 +29,55 @@
         }
         .clear {
             background-color: #fff;
-            color: blue;
-            border: 1px solid blue;
-            padding: .8rem 1.1rem
+            color: $blue-color;
+            border: 1px solid $blue-color;
+            padding: .8rem 1.1rem;
+            width: 100%;
+            text-align: center;
+            font-weight: 600;
+            align-items: center;
+        }
+
+    }
+    .payCart {
+        background-color: #fff;
+        margin: 1rem 0;
+        padding: 1rem;
+        .total {
+            display: flex;
+            justify-content: space-between;
+        }
+        .shipfee {
+            color: red;
+            text-transform: uppercase;
+            padding: .6rem 0;
+        }
+        button {
+            background-color: $blue-color;
+            color: #fff;
+            border: none;
+            padding: .8rem 1.1rem;
+            width: 100%;
+            .ship-link {
+                color: #fff;
+                text-decoration: none;
+
+            }
+        }
+    }
+    @media screen and (min-width: 700px) {
+        .cartDetails {
+            .clear {
+                width: 40%;
+                display: flex;
+                margin: 2rem auto;
+            }
+        }
+        .payCart {
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            margin: 2rem auto;
         }
     }
 }

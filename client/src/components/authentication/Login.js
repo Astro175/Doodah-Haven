@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Link} from 'react-router-dom';
+import {Link, Navigate} from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
 import './auth.scss';
@@ -10,7 +10,8 @@ class Login extends Component {
         this.state = {
             email: '',
             password: '',
-            error: null
+            error: null,
+            redirect: false
         }   
     }
 
@@ -24,10 +25,34 @@ class Login extends Component {
         });
     };
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
 
         const { email, password } = this.state;
+
+        const userData = {
+            email,
+            password
+        };
+
+        try {
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
+
+            if (response.ok) {
+                console.log('User logged in successfully!');
+                this.setState({ redirect: true })
+            } else {
+                console.error('Error logging in:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error signing up:', error);
+        };
 
         if (!email || !password ) {
             this.setState({
@@ -35,10 +60,13 @@ class Login extends Component {
             });
         } else {
             console.log('Form submitted!');
-        }
-    }
+        };
+    };
     render() {
         const { email, password, error } = this.state;
+        if (this.state.redirect) {
+            return <Navigate to='/' />
+        }
         return (
             <div className="auth-block">
                 <div className="sub-auth">
