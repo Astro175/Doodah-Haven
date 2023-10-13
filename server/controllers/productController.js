@@ -2,12 +2,20 @@ const Product = require('../models/productModel');
 
 // List all products: GET /api/products
 const getAllProducts = async (req, res) => {
-    res.json({message: "All Users"});
+    const products = Product.find({}).sort({createdAt: -1})
+    res.status(200).json({products});
 }
 
 // Get product details: GET /api/products/:id
 const getAProduct = async (req, res) => {
-    res.json({message: "A product deatil"});
+    const { id } = req.params;
+
+    const product = await Product.findById(id);
+
+    if (!product) {
+        return res.status(404).json({ error: 'No such product' });
+    }
+    res.status(200).json(product)
 }
 
 // This is just a test, we will implement a middleware
@@ -29,7 +37,9 @@ const  deleteProduct = async (req, res) => {
 }
 
 const filterProduct = async (req, res) => {
-    res.json({message: "Filters popular products"});
+    const popularProducts = Product.find({label: 'popular'}).sort({createdAt: -1})
+    // Gets all popular products, sorted by the newest
+    res.status(200).json(popularProducts);
 }
 
 module.exports = {
