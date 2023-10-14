@@ -18,8 +18,8 @@ $background-color: #E6E6E6;
                 img {
                     width: 40px;
                     height: 40px;
-                    margin-top: 10px;
-                    margin-left: 20px;
+                    // margin-top: 10px;
+                    // margin-left: 20px;
                 }
                 .logo-text {
                     margin-left: .3rem;
@@ -86,7 +86,6 @@ $background-color: #E6E6E6;
             }
 
             @media (max-width: 768px) {
-                padding: 0.5rem;
                 .logo-block {
                     img {
                         width: 25px;
@@ -146,13 +145,23 @@ $background-color: #E6E6E6;
                 .search-form {
                     .search-input {
                         width: 150px;
+                        margin: 0 5px
                     }
                 }
                 .cart {
                     color: $primary-color;
                     text-decoration: none;
+                    padding: 1rem;
                     .noItems {
                         padding: 0 .2rem;
+                    }
+                }
+            }
+            @media (max-width: 768px) {
+                padding: 0;
+                .logo-block {
+                    img {
+                        margin-left: 10px;
                     }
                 }
             }

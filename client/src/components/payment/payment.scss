@@ -6,7 +6,7 @@ $blueColor: #011FCF;
     padding: 1rem;
     .order {
         background-color: #fff;
-        padding: 3rem 2rem;
+        padding: 2rem 1rem;
         a {
             color: $blueColor;
             .arrow {
@@ -19,7 +19,7 @@ $blueColor: #011FCF;
         }
 
         .summary {
-            padding: 1rem 2rem;
+            padding: 1rem;
             display: flex;
             justify-content: space-between;
             text-align: right;
@@ -40,7 +40,7 @@ $blueColor: #011FCF;
             }
         }
         .otherDetails {
-            padding: 2rem;
+            padding: 1rem .5rem;
             // text-align: center;
             .discount {
                 input[type=text] {
@@ -76,7 +76,7 @@ $blueColor: #011FCF;
     }
     .pay-ship {
         background-color: #F4F4F4;
-        padding: 3rem 2rem;
+        padding: 1.5rem 1rem;
         color: $mainColor;
         .payment-link {
             margin: 2rem 1rem;
@@ -132,9 +132,17 @@ $blueColor: #011FCF;
         display: flex;
         .order {
             width: 50%;
+            padding: 3rem 2rem;
+            .summary {
+                padding: 1rem 2rem;
+            }
+            .otherDetails {
+                padding: 2rem;
+            }
         }
         .pay-ship {
             width: 50%;
+            padding: 3rem 2rem;
         }
     }
     
