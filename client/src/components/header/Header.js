@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import './header.scss'
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faCartShopping, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../images/doodah-logo.png';
+import { CartContext } from "../cart/CartContext";
 
 const Header = () => {
+    const { cart } = useContext(CartContext);
     const [isActive, setIsActive] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -21,6 +23,9 @@ const Header = () => {
 
     // Function to handle logout
     const handleLogout = () => {
+        // Add logout actions
+
+        // Update login status
         setIsLoggedIn(false)
     }
     return (
@@ -41,7 +46,7 @@ const Header = () => {
                 </form>
                 <div className={`menu-link ${isActive ? 'active' : ''}`}>
                     <Link className="link" to='/' onClick={removeActive}>Home</Link>
-                    <Link className="link" to='/about' onClick={removeActive}>About Us</Link>
+                    {/* <Link className="link" to='/about' onClick={removeActive}>About Us</Link> */}
                     <Link className="link" to='/products' onClick={removeActive}>Products</Link>
                     
                     {isLoggedIn ? (
@@ -65,7 +70,7 @@ const Header = () => {
 
                 <Link className="cart" to='/cart'>
                     <FontAwesomeIcon icon={faCartShopping} color="#EB2D66" size="xs" />
-                    <span className="noItems">1</span>
+                    <span className="noItems">{cart.length}</span>
                     <FontAwesomeIcon icon={faCaretDown} size="xs"/>
                 </Link>
             </nav>

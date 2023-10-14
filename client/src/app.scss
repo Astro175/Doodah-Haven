@@ -10,5 +10,10 @@ $background-color: #E6E6E6;
 body {
     background-color: $background-color;
     font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+
+    @media screen and (max-width: 600px) {
+      font-size: 14px;
+    }
 
 }

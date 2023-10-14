@@ -4,6 +4,7 @@ import rectangleDrone from '../../images/Rectangle-drone.png';
 import drone from '../../images/drone.png';
 import HomeProducts from './homeProducts'
 import Partners from './partner';
+import { Link } from 'react-router-dom';
 
 
 const Home = () => {
@@ -13,7 +14,11 @@ const Home = () => {
         <div className='hero-text'>
           <h1>Best selling products</h1>
           <p>We have offered affordable products to customers who always come back to buy more of this products.</p>
-          <button>Shop here</button>
+          <button>
+            <Link className='shop-link' to='/products'>
+            Shop here
+            </Link>
+          </button>
         </div>
 
        

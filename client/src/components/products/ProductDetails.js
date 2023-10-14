@@ -1,12 +1,25 @@
 import './details.scss';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGreaterThan, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faGreaterThan, faStar, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import laptop1 from '../../images/laptop.png';
-// import laptop2 from '../../images/laptop2.png';
+import { CartContext } from '../cart/CartContext';
+import { useContext } from 'react';
 
 
 const ProductDetails = () => {
+    const { addToCart } = useContext(CartContext);
+
+    const handleAddToCart = () => {
+        const selectedItem = {
+            name: 'MSI Creator 17',
+            price: 499.0,
+            quantity: 1,
+            details: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop'
+          };
+      
+          addToCart(selectedItem);
+    }
     return (
         <div className='productDetails'>
             <div className='product-block'>
@@ -30,9 +43,13 @@ const ProductDetails = () => {
                         <p className='details'>
                             MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop
                         </p>
+                        <div>
+                            <p>Quantity: 1</p>
+                        </div>
                         <p className='strike'>$499.00</p>
                         <p>$499.00</p>
-                        <button className='addCart'>
+                        <button className='addCart' onClick={handleAddToCart}>
+                            <FontAwesomeIcon icon={faCartShopping} size='xs' color='#fff'/>
                             <Link to='/cart' className='cartLink'>Add to Cart</Link>
                         </button>
                     </div>
