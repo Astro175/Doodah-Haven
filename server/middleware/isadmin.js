@@ -8,3 +8,5 @@ const isAdmin = (req, res, next) => {
         // The user is not an admin so forbid access
     }
 }
+
+module.exports = isAdmin;
