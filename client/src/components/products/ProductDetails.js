@@ -3,14 +3,12 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGreaterThan, faStar, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import laptop1 from '../../images/laptop.png';
-import { CartContext } from '../cart/CartContext';
+import { CartContext } from '../context/CartContext';
 import { useContext, useState } from 'react';
-// import Counter from '../Counter';
 
 
 const ProductDetails = () => {
     const { addToCart } = useContext(CartContext);
-    // const { counter, increase, decrease } = Counter();
     const [quantity, setQuantity] = useState(1);
 
 
@@ -21,8 +19,23 @@ const ProductDetails = () => {
             quantity: quantity,
             details: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop'
           };
+        //   displayCustomAlert(selectedItem);
       
           addToCart(selectedItem);
+
+          
+    }
+
+    const displayCustomAlert = (item) => {
+        const confirmMesage = `Product "${item.name}" has been added to cart!`;
+        // const viewCart = 'View Cart';
+        // const checkout = 'Checkout';
+
+        if (window.confirm(confirmMesage)) {
+            window.location.href = '/cart';
+        } else {
+            window.location.href = '/payment';
+        }
     }
 
     const increaseQuantity = () => {
@@ -34,7 +47,7 @@ const ProductDetails = () => {
             setQuantity(quantity - 1);
         }
     }
-    return (
+    return(
         <div className='productDetails'>
             <div className='product-block'>
                 <img src={laptop1} alt='product' />

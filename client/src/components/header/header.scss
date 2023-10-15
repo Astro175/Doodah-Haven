@@ -73,12 +73,15 @@ $background-color: #E6E6E6;
                     &:hover, &:focus {
                         color: $primary-color;
                         font-weight: 700;
+                        text-transform: uppercase;
                     }
                 }
 
             }
 
             .cart {
+                color: $primary-color;
+                text-decoration: none;
                 .noItems {
                     padding: 0 .5rem;
                     font-size: 12px;
@@ -125,18 +128,23 @@ $background-color: #E6E6E6;
                     display: none;
 
                     .link {
-                        padding: 10px 0;
+                        padding: 1rem 0;
+                        color: #fff;
+                        margin: 0;
+                        &:hover, &:active {
+                            color: #fff;
+                        }
                     }
 
                     &.active {
                         position: absolute;
                         display: flex;
                         flex-direction: column;
-                        top: 80px;
+                        top: 50px;
                         text-align: center;
-                        width: 90%;
+                        width: 100%;
                         transition: 0.7s ease-in-out;
-                        background-color: aliceblue;
+                        background-color: black;
                         padding: 10px;
                         opacity: 1;
                 }
@@ -149,8 +157,6 @@ $background-color: #E6E6E6;
                     }
                 }
                 .cart {
-                    color: $primary-color;
-                    text-decoration: none;
                     padding: 1rem;
                     .noItems {
                         padding: 0 .2rem;
