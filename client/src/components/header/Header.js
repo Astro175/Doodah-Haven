@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faCartShopping, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../images/doodah-logo.png';
-import { CartContext } from "../cart/CartContext";
+import { CartContext } from "../context/CartContext";
+import { AuthContext } from '../context/AuthContext';
 
 const Header = () => {
     const { cart } = useContext(CartContext);
     const [isActive, setIsActive] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const { isLoggedIn, logout } = useContext(AuthContext);
 
     // add the active class
     const toggleActiveClass = () => {
@@ -23,10 +24,7 @@ const Header = () => {
 
     // Function to handle logout
     const handleLogout = () => {
-        // Add logout actions
-
-        // Update login status
-        setIsLoggedIn(false)
+        logout();
     }
 
     

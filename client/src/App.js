@@ -13,28 +13,31 @@ import Payment from './components/payment/Payment';
 import Cart from './components/cart/Carts';
 import Account from './components/Account';
 import ProductDetails from './components/products/ProductDetails'
-import { CartProvider } from './components/cart/CartContext';
+import { CartProvider } from './components/context/CartContext';
+import { AuthProvider } from './components/context/AuthContext';
 
 initFontAwesome();
 
 function App() {
   return (
     <Router>
-      <CartProvider>
-        <Header />
-        <Routes>
-          <Route path='/' exact element={<Home />} />
-          <Route path='/products' element={<Products />} />
-          <Route path='/productId' element={<ProductDetails />} />
-          <Route path='/about' element={<AboutUs />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<SignUp />} />
-          <Route path='/payment' element={<Payment />} />
-          <Route path='/cart' element={<Cart />} />
-          <Route path='/my-account' element={<Account />} />
-        </Routes>
-        <Footer />
-      </CartProvider>
+      <AuthProvider>
+        <CartProvider>
+          <Header />
+          <Routes>
+            <Route path='/' exact element={<Home />} />
+            <Route path='/products' element={<Products />} />
+            <Route path='/productId' element={<ProductDetails />} />
+            <Route path='/about' element={<AboutUs />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<SignUp />} />
+            <Route path='/payment' element={<Payment />} />
+            <Route path='/cart' element={<Cart />} />
+            <Route path='/my-account' element={<Account />} />
+          </Routes>
+          <Footer />
+        </CartProvider>
+      </AuthProvider>
     </Router>
   );
 }

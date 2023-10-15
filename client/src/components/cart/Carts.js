@@ -3,26 +3,33 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGreaterThan, faTrash } from '@fortawesome/free-solid-svg-icons';
 import React, { useContext, useState } from 'react';
-import { CartContext } from './CartContext';
+import { CartContext } from '../context/CartContext';
 
 const Cart = () => {
     const { cart, removeFromCart, clearCart } = useContext(CartContext);
     
-    const [counters, setCounters] = useState(Array(cart.length).fill(1));
+    const [quantities, setQuantities] = useState(Array(cart.length).fill(1));
+
 
     const increase = (index) => {
-        const updatedCounters = [...counters];
-        updatedCounters[index] += 1;
-        setCounters(updatedCounters);
+        const updatedQuantities = [...quantities];
+        updatedQuantities[index] += 1;
+        setQuantities(updatedQuantities);
     }
 
     const decrease = (index) => {
-        if (counters[index] > 1) {
-            const updatedCounters = [...counters];
-            updatedCounters[index] -= 1;
-            setCounters(updatedCounters);
+        if (quantities[index] > 1) {
+            const updatedQuantities = [...quantities];
+            updatedQuantities[index] -= 1;
+            setQuantities(updatedQuantities);
         }
     }
+
+    const calculateSubtotal = (item) => {
+        return item.price * quantities[cart.indexOf(item)];
+    };
+
+    const totalSubtotal = cart.reduce((total, item) => total + calculateSubtotal(item), 0);
 
     const handleDeleteItem = (index) => {
         removeFromCart(index);
@@ -64,15 +71,15 @@ const Cart = () => {
                                     {cart.map((item, index) => (
                                         <tr key={index}>
                                             <td>{item.name}</td>
-                                            <td>{item.price}</td>
+                                            <td>N{item.price}</td>
                                             <td className='items'>
                                                 <button onClick={() => decrease(index)}>-</button>
-                                                <span>{item.quantity}</span>
+                                                <span>{quantities[cart.indexOf(item)]}</span>
                                                 <button onClick={() => increase(index)}>+</button> 
                                             </td>
-                                            <td>{item.price * counters[index]}</td>
+                                            <td>N{calculateSubtotal(item)}</td>
                                             <td>
-                                                <FontAwesomeIcon icon={faTrash} onClick={() => handleDeleteItem(index)} />
+                                                <FontAwesomeIcon icon={faTrash} onClick={() => handleDeleteItem(index)} cursor='pointer'/>
                                             </td>
                                         </tr>
                                     ))}
@@ -101,7 +108,7 @@ const Cart = () => {
                 <div className='payCart'>
                     <div className='total'>
                         <p>Subtotal</p>
-                        <p>N160,000</p>
+                        <p>N{totalSubtotal}</p>
                     </div>
                     <p className='shipfee'>Shippings fees are free</p>
                     <button>

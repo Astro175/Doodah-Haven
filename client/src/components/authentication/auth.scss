@@ -97,12 +97,12 @@
 
             .error{
                 display: block;
-                background-color: red;
-                color: white;
+                // background-color: red;
+                color: rgb(136, 34, 34);
                 width: fit-content;
                 padding: 5px;
                 font-size: .8rem;
-                margin-bottom: .5rem;
+                // margin-top: .3rem;
               }
     
             .acc {
@@ -147,6 +147,7 @@
                 padding: .8rem 1rem;
                 margin-top: 3rem;
                 border: none;
+                cursor: pointer;
                 .log-link {
                     color: #fff;
                     text-decoration: none;
@@ -159,6 +160,7 @@
                 padding: .8rem 1rem;
                 margin-top: 3rem;
                 border: none;
+                cursor: pointer;
                 .sig-link {
                     color: #000;
                     text-decoration: none;

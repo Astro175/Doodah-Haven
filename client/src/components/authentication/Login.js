@@ -1,49 +1,37 @@
-import React, { Component } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {Link, Navigate} from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
 import './auth.scss';
+import { AuthContext } from "../context/AuthContext";
 
-class Login extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            email: '',
-            password: '',
-            error: null,
-            redirect: false,
-            isLoggedIn: false,
-        }   
-    }
+const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+    const [redirect, setRedirect] = useState(false);
+    const { login } = useContext(AuthContext);
 
-    handleInputChange = (e) => {
+    const handleInputChange = (e) => {
         // example of an event(e) is a user typing in an input field
         const { name, value } = e.target;
         // the name corresponds to the name attribute of the input field, and value corresponds to the current value entered by the user in the input field.
-        this.setState({
-            [name]: value,
-            error: null
-        });
+        if (name === 'email') setEmail(value);
+        else if (name === 'password') setPassword(value);
+        setError(null);
     };
 
-    handlelogin = () => {
-        // Add login actions later
-        this.setState({
-            isLoggedIn: true
-        });
+    const handleLogin = () => {
+        login();
     }
 
-    handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const { email, password } = this.state;
-
-        if (!email || !password ) {
-            this.setState({
-                error: 'Please fill in all the fields.'
-            });
+        if (!email || !password) {
+            setError('Please fill in all the fields.');
             return;
-        };
+        }
 
         const userData = {
             email,
@@ -61,35 +49,31 @@ class Login extends Component {
 
             if (response.ok) {
                 console.log('User logged in successfully!');
-                this.handleLogin();
+                handleLogin();
                 window.alert(`Logged in successfully as ${email}`)
-                this.setState({ redirect: true })
+                setRedirect(true);
             } else {
                 console.error('Error logging in:', response.statusText);
-                this.setState({
-                    error: 'Invalid email or password. Please try again.'
-                })
+                setError('Invalid email or password. Please try again.');
             }
         } catch (error) {
             console.error('Error signing up:', error);
-            this.setState({
-                error: 'An error occured. Please try again later'
-            })
-        };
-
-        
+                setError('An error occured. Please try again later');
+        }; 
     };
-    render() {
-        const { email, password, error } = this.state;
-        if (this.state.redirect) {
-            return <Navigate to='/' />
+
+    useEffect(() => {
+        if (redirect) {
+            <Navigate to='/' />
         }
-        return (
-            <div className="auth-block">
-                <div className="sub-auth">
-                    <div className="main-block">
+    }, [redirect]);
+    
+    return (
+        <div className="auth-block">
+            <div className="sub-auth">
+                <div className="main-block">
                     <h1>Login</h1>
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={handleSubmit}>
                         <button className="google-btn"><FontAwesomeIcon icon={['fab', 'google']} className="google-icon"/>Log in with google</button>
                         <p className="or">_______ or _______</p>
                         
@@ -100,7 +84,7 @@ class Login extends Component {
                             id="email"
                             name="email"
                             value={email}
-                            onChange={this.handleInputChange}
+                            onChange={handleInputChange}
                              placeholder="Enter your email address" aria-required className="log-text"/>
                         </div>
                         <div className="input-group">
@@ -109,7 +93,7 @@ class Login extends Component {
                             <input type="password" id='password'
                             name="password"
                             value={password}
-                            onChange={this.handleInputChange}
+                            onChange={handleInputChange}
                             placeholder="Enter password" aria-required />
                         </div>
                         {error && <div className="error">{error}</div>}
@@ -126,9 +110,10 @@ class Login extends Component {
                         </button>
                     </div> */}
                 </div>
-            </div>
-        )
-    }
+        </div>
+    )
+    
 }
+
 
 export default Login
