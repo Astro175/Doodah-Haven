@@ -3,6 +3,7 @@ import {Link, Navigate} from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
 import './auth.scss';
+import { handleLogin } from '../header/Header';
 
 class Login extends Component {
     constructor(props) {
@@ -11,7 +12,8 @@ class Login extends Component {
             email: '',
             password: '',
             error: null,
-            redirect: false
+            redirect: false,
+            isLoggedIn: false,
         }   
     }
 
@@ -25,10 +27,24 @@ class Login extends Component {
         });
     };
 
+    handlelogin = () => {
+        // Add login actions later
+        this.setState({
+            isLoggedIn: true
+        });
+    }
+
     handleSubmit = async (e) => {
         e.preventDefault();
 
         const { email, password } = this.state;
+
+        if (!email || !password ) {
+            this.setState({
+                error: 'Please fill in all the fields.'
+            });
+            return;
+        };
 
         const userData = {
             email,
@@ -46,21 +62,23 @@ class Login extends Component {
 
             if (response.ok) {
                 console.log('User logged in successfully!');
+                this.handleLogin();
+                window.alert(`Logged in successfully as ${email}`)
                 this.setState({ redirect: true })
             } else {
                 console.error('Error logging in:', response.statusText);
+                this.setState({
+                    error: 'Invalid email or password. Please try again.'
+                })
             }
         } catch (error) {
             console.error('Error signing up:', error);
+            this.setState({
+                error: 'An error occured. Please try again later'
+            })
         };
 
-        if (!email || !password ) {
-            this.setState({
-                error: 'Please fill in all fields.'
-            });
-        } else {
-            console.log('Form submitted!');
-        };
+        
     };
     render() {
         const { email, password, error } = this.state;
