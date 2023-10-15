@@ -3,7 +3,6 @@ import {Link, Navigate} from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
 import './auth.scss';
-import { handleLogin } from '../header/Header';
 
 class Login extends Component {
     constructor(props) {
