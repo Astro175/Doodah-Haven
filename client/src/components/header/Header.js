@@ -19,7 +19,7 @@ const Header = () => {
     // clean up function to remove the active class
     const removeActive = () => {
         setIsActive(false)
-    };
+    };  
 
     // Function to handle logout
     const handleLogout = () => {
@@ -28,6 +28,8 @@ const Header = () => {
         // Update login status
         setIsLoggedIn(false)
     }
+
+    
     return (
         <header>
             <nav>
