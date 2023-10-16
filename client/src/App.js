@@ -15,6 +15,7 @@ import Account from './components/Account';
 import ProductDetails from './components/products/ProductDetails'
 import { CartProvider } from './components/context/CartContext';
 import { AuthProvider } from './components/context/AuthContext';
+import { PaymentType } from './components/payment/PaymentType';
 
 initFontAwesome();
 
@@ -34,6 +35,7 @@ function App() {
             <Route path='/payment' element={<Payment />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/my-account' element={<Account />} />
+            <Route path='/pay-type' element={<PaymentType />} />
           </Routes>
           <Footer />
         </CartProvider>

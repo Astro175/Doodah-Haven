@@ -65,14 +65,18 @@
             }
 
             .addCart {
-                background-color: #a55157;
+                background-color: #a5484f;
                 padding: .8rem 1rem;
                 border: none;
-                .cartLink {
-                    color: #fff;
-                    margin-left: 0.5rem;
-                    text-decoration: none;
+                color: #fff;
+                .cart-icon {
+                    margin-right: 0.5rem;
                 }
+                // .cartLink {
+                //     color: #fff;
+                //     margin-left: 0.5rem;
+                //     text-decoration: none;
+                // }
             }
         }
         @media screen and (min-width: 700px) {
