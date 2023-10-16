@@ -112,7 +112,7 @@ const Cart = () => {
                     </div>
                     <p className='shipfee'>Shippings fees are free</p>
                     <button>
-                        <Link to='/payment' className='ship-link'>
+                        <Link to={{ pathname: '/payment', state: {cartItems: cart } }} className='ship-link'>
                             Proceed to checkout
                         </Link>
                     </button>

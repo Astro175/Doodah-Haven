@@ -1,9 +1,20 @@
 import './payment.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faDumpster, faCheckCircle} from '@fortawesome/free-solid-svg-icons';
-import ordImg from '../../images/order.png';
-import { Link } from 'react-router-dom'
+import { faArrowLeft, faTrash, faCheckCircle} from '@fortawesome/free-solid-svg-icons';
+// import ordImg from '../../images/order.png';
+import { Link, useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react';
+
 const Payment = () => {
+    const location = useLocation();
+    const [cartItems, setCartItems] = useState([]);
+
+    useEffect(() => {
+        if (location.state && location.state.cartItems) {
+            console.log('Cart Items:', location.state.cartItems);
+            setCartItems(location.state.cartItems);
+        }
+    }, [location.state])
     return (
         <div className='payment'>
             <div className='order'>
@@ -13,26 +24,27 @@ const Payment = () => {
                 </a>
 
                 <h2>Order Summary</h2>
-                <div className='summary'>
+                {cartItems.map((item, index) => (
+                <div className='summary' key={index}>
+                    <div className='order-box'>     
+                    <img src={item.img} alt='order icon' />
+                    <div className='items'>
+                        <p>{item.name}</p>
+                        <div className='noitems'>
+                            <p>Quantity: {item.quantity} item(s)</p>
+                        </div>
+                    </div>
+                </div>
+                <div className='price-box'>
+                    <p>{item.price}</p>
+                    <FontAwesomeIcon icon={faTrash} size='xs' />
+                </div>
+                </div>     
+                ))}
                     
-                    <div className='order-box'>
-                        <img src={ordImg} alt='order icon' />
-                        <div className='items'>
-                            <p>Pure Set</p>
-                            <div className='noitems'>
-                                <button className='reduceNo'>-</button>
-                                <span>1</span>
-                                <button className='addNo'>+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='price-box'>
-                        <p>$65.00</p>
-                        <FontAwesomeIcon icon={faDumpster} size='xs' />
-                    </div>
-                </div>
+                
 
-                <div className='summary'>
+                {/* <div className='summary'>
                     <div className='order-box'>
                         <img src={ordImg} alt='order icon' />
                         <div className='items'>
@@ -48,7 +60,7 @@ const Payment = () => {
                         <p>$65.00</p>
                         <FontAwesomeIcon icon={faDumpster} size='xs' />
                     </div>
-                </div>
+                </div> */}
                 
 
                 <div className='otherDetails'>

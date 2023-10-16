@@ -14,6 +14,7 @@ const ProductDetails = () => {
 
     const handleAddToCart = () => {
         const selectedItem = {
+            img: laptop1, 
             name: 'MSI Creator 17',
             price: 499.0,
             quantity: quantity,
@@ -26,17 +27,17 @@ const ProductDetails = () => {
           
     }
 
-    const displayCustomAlert = (item) => {
-        const confirmMesage = `Product "${item.name}" has been added to cart!`;
-        // const viewCart = 'View Cart';
-        // const checkout = 'Checkout';
+    // const displayCustomAlert = (item) => {
+    //     const confirmMesage = `Product "${item.name}" has been added to cart!`;
+    //     // const viewCart = 'View Cart';
+    //     // const checkout = 'Checkout';
 
-        if (window.confirm(confirmMesage)) {
-            window.location.href = '/cart';
-        } else {
-            window.location.href = '/payment';
-        }
-    }
+    //     if (window.confirm(confirmMesage)) {
+    //         window.location.href = '/cart';
+    //     } else {
+    //         window.location.href = '/payment';
+    //     }
+    // }
 
     const increaseQuantity = () => {
         setQuantity(quantity + 1);
