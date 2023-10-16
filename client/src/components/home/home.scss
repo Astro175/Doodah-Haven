@@ -14,7 +14,7 @@
             }
 
             p {
-                max-width: 400px;
+                max-width: 450px;
                 text-wrap: balance;
             }
     
@@ -28,6 +28,12 @@
                 .shop-link {
                     color: #fff;
                     text-decoration: none;
+                    &:hover {
+                        color: #011CBC;
+                    }
+                }
+                &:hover {
+                    background-color: #fff;
                 }
             }
         }
