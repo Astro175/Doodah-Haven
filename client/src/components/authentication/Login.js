@@ -110,6 +110,7 @@ const Login = () => {
                         </button>
                     </div> */}
                 </div>
+                {redirect && <Navigate to='/' />}
         </div>
     )
     
