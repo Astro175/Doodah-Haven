@@ -113,3 +113,38 @@ $blue-color: #b04e55;
         }
     }
 }
+
+/* Add this in details.scss */
+.cart-popup {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 0.7rem 1.2rem;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+
+    .buttons {
+        display: flex;
+        justify-content: space-between;
+
+        .view-cart-button,
+        .checkout-button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            margin-top: .5rem;
+            font-weight: 600;
+        }
+
+        .checkout-button {
+            background-color: #a5484f;
+          }
+    }
+  }
+  
+  
+  

@@ -5,11 +5,13 @@ import { faGreaterThan, faStar, faCartShopping } from '@fortawesome/free-solid-s
 import laptop1 from '../../images/laptop.png';
 import { CartContext } from '../context/CartContext';
 import { useContext, useState } from 'react';
+import CartPopup from '../cart/CartPopup';
 
 
 const ProductDetails = () => {
     const { addToCart } = useContext(CartContext);
     const [quantity, setQuantity] = useState(1);
+    const [showPopup, setShowPopup] = useState(false);
 
 
     const handleAddToCart = () => {
@@ -20,24 +22,11 @@ const ProductDetails = () => {
             quantity: quantity,
             details: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop'
           };
-        //   displayCustomAlert(selectedItem);
-      
+        setShowPopup(true);
           addToCart(selectedItem);
 
           
-    }
-
-    // const displayCustomAlert = (item) => {
-    //     const confirmMesage = `Product "${item.name}" has been added to cart!`;
-    //     // const viewCart = 'View Cart';
-    //     // const checkout = 'Checkout';
-
-    //     if (window.confirm(confirmMesage)) {
-    //         window.location.href = '/cart';
-    //     } else {
-    //         window.location.href = '/payment';
-    //     }
-    // }
+        }
 
     const increaseQuantity = () => {
         setQuantity(quantity + 1);
@@ -50,6 +39,7 @@ const ProductDetails = () => {
     }
     return(
         <div className='productDetails'>
+            {showPopup && <CartPopup />}
             <div className='product-block'>
                 <img src={laptop1} alt='product' />
                 <div className='details-block'>
@@ -82,9 +72,12 @@ const ProductDetails = () => {
                         <p className='strike'>$499.00</p>
                         <p>$499.00</p>
                         <button className='addCart' onClick={handleAddToCart}>
-                            <FontAwesomeIcon icon={faCartShopping} size='xs' color='#fff'/>
-                            <Link to='/cart' className='cartLink'>Add to Cart</Link>
+                            <FontAwesomeIcon icon={faCartShopping} size='xs' color='#fff' className='cart-icon'/>
+                            Add To Cart
+                            {/* <Link to='/cart' className='cartLink'>Add to Cart</Link> */}
                         </button>
+
+                        
                     </div>
                 </div>
             </div>
