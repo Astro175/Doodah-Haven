@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, Navigate } from "react-router-dom";
 import './auth.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { AuthContext } from "../context/AuthContext";
 
 class SignUp extends Component {
     constructor(props) {
@@ -31,6 +31,9 @@ class SignUp extends Component {
             emailError: name === 'email' && !this.validateEmail(value) ? 'Valid email required' : ''
             });
         };
+
+        // handle the logged in state after the user signs up
+        static contextType = AuthContext;
 
         validateEmail = (email) => {
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -69,7 +72,12 @@ class SignUp extends Component {
               this.setState({errorPwd: "Password is strong!", fontColor});
             }
             
-        }
+        };
+
+        handleLogin = () => {
+          const login = this.context
+          login();
+      }
 
 
         handleSubmit = async (event) => {
@@ -94,8 +102,9 @@ class SignUp extends Component {
 
               if (response.ok) {
                 console.log('User signed up successfully!')
-                // You can redirect or perform other actions upon successful signup
-                this.setState({ redirect: true })
+                window.alert(`Signed up successfully as ${firstname + lastname} `)
+                this.setState({ redirect: true });
+                this.handleLogin();
               } else {
                 console.error('Error signing up:', response.statusText);
               }
