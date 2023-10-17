@@ -1,9 +1,35 @@
 import './payment.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faDumpster, faCheckCircle} from '@fortawesome/free-solid-svg-icons';
-import ordImg from '../../images/order.png';
+import { faArrowLeft, faTrash, faCheckCircle} from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom'
+import { useContext, useEffect, useState } from 'react';
+import { CartContext } from '../context/CartContext';
+
 const Payment = () => {
+    const { cart, removeFromCart } = useContext(CartContext);
+    const [cartItems, setCartItems] = useState([]);
+    const [activeLink, setActiveLink] = useState('Payment'); // State to track the active link
+
+
+   
+    useEffect(() => {
+        setCartItems(cart)
+    }, [cart]);
+
+    const calculateTotalPrice = () => {
+        return cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
+    };
+
+    const calculateSalesTax = () => {
+        return calculateTotalPrice() * 0.065;
+    };
+      
+    const totalDue = calculateTotalPrice() + calculateSalesTax();
+
+    const handleDeleteItem = (index) => {
+        removeFromCart(index);
+    }
+
     return (
         <div className='payment'>
             <div className='order'>
@@ -13,43 +39,21 @@ const Payment = () => {
                 </a>
 
                 <h2>Order Summary</h2>
-                <div className='summary'>
-                    
-                    <div className='order-box'>
-                        <img src={ordImg} alt='order icon' />
+                {cartItems.map((item, index) => (
+                <div className='summary' key={index}>
+                    <div className='order-box'>     
+                        <img src={item.img} alt='order icon' />
                         <div className='items'>
-                            <p>Pure Set</p>
-                            <div className='noitems'>
-                                <button className='reduceNo'>-</button>
-                                <span>1</span>
-                                <button className='addNo'>+</button>
-                            </div>
+                            <p className='itemname'>{item.name}</p>
+                            <p className='qty'>Quantity: {item.quantity} item(s)</p>
                         </div>
                     </div>
                     <div className='price-box'>
-                        <p>$65.00</p>
-                        <FontAwesomeIcon icon={faDumpster} size='xs' />
+                        <p>N{item.price}</p>
+                        <FontAwesomeIcon icon={faTrash} size='xs' onClick={() => handleDeleteItem(index)} cursor='pointer' />
                     </div>
-                </div>
-
-                <div className='summary'>
-                    <div className='order-box'>
-                        <img src={ordImg} alt='order icon' />
-                        <div className='items'>
-                            <p>Pure Set</p>
-                            <div className='noitems'>
-                                <button className='reduceNo'>-</button>
-                                <span>1</span>
-                                <button className='addNo'>+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='price-box'>
-                        <p>$65.00</p>
-                        <FontAwesomeIcon icon={faDumpster} size='xs' />
-                    </div>
-                </div>
-                
+                </div>     
+                ))}
 
                 <div className='otherDetails'>
                     <form className='discount'>
@@ -58,27 +62,35 @@ const Payment = () => {
                         <button type='submit'>Apply</button>
                     </form>
 
-                    <p>Subtotal <span>$160.00</span></p>
+                    <p>Subtotal <span>N{calculateTotalPrice()}</span></p>
                     <hr />
-                    <p>Sales tax (6.5%) <span>$4.23</span></p>
+                    <p>Sales tax (6.5%) <span>N{calculateSalesTax()}</span></p>
                     <hr />
                     <p>Shipping fee <span className='free'>FREE</span></p>
                     <hr />
-                    <p>Total due <span>$164.23</span></p>
+                    <p>Total due <span>N{totalDue}</span></p>
                 </div>
             </div>
             <div className='pay-ship'>
-                <div className='payment-link'>
-                    <Link className='link'>Payment</Link>
-                    -- <FontAwesomeIcon icon={faCheckCircle} /> ---
+            <div className='payment-link'>
+                <Link className={activeLink === 'Payment' ? 'active-link' : 'link'} onClick={() => setActiveLink('Payment')}>
+                Payment
+                </Link>
+                -- <FontAwesomeIcon icon={faCheckCircle} /> ---
 
-                    <Link className='link'>Shipping</Link>
-                    -- <FontAwesomeIcon icon={faCheckCircle} /> ---
+                <Link className={activeLink === 'Shipping' ? 'active-link' : 'link'} onClick={() => setActiveLink('Shipping')}>
+                Shipping
+                </Link>
+                -- <FontAwesomeIcon icon={faCheckCircle} /> ---
 
-                    <Link className='link'>Delivery</Link>
-                </div>
+                <Link className={activeLink === 'Delivery' ? 'active-link' : 'link'} onClick={() => setActiveLink('Delivery')}>
+                Delivery
+                </Link>
+          </div>
 
                 <div className='toPay'>
+                    {activeLink === 'Payment' && (
+                        <div>
                     <form className='payment-form'>
                         <h2>Payment Method</h2>
                         <input type="radio" id="delivery" name="payment_method" value="Pay on delivery" />
@@ -102,8 +114,57 @@ const Payment = () => {
                         </label><br />
                     </form>
                     <button className='back-btn'>Back</button>
-                    <button className='makePayment-btn'>Pay $164.23</button>
-                    
+                    <button className='makePayment-btn'>Pay N{totalDue}</button>
+                    </div>
+                    )}
+
+                    {activeLink === 'Shipping' && (
+                        <div>
+                            <form>
+                                <div>
+                                    <h2>Contact Details</h2>
+                                    <label htmlFor='firstname'>Firstname</label>
+                                    <input type='text' name='firstname' />
+
+                                    <label htmlFor='lastname'>Lastname:</label>
+                                    <input type='text' name='lastname' /><br />
+
+                                    <label htmlFor='email'>Email:</label>
+                                    <input type='email' name='email' /><br />
+
+                                    <label htmlFor='number'>Phone number:</label>
+                                    <input type='number' name='number' /><br />
+                                </div>
+
+                                <div>
+                                    <h2>Shipping Details</h2>
+                                    <label htmlFor='addressNo'>Flat/House no.</label>
+                                    <input type='number' name='addressNo' /><br />
+
+                                    <label htmlFor='address'>Address</label>
+                                    <input type='text' name='address' /><br/>
+
+                                    <label htmlFor='city'>City</label>
+                                    <input type='text' name='city' />
+
+                                    <label htmlFor='state'>State</label>
+                                    <input type='text' name='state' />
+
+                                    <label htmlFor='code'>Postal Code</label>
+                                    <input type='number' name='code' />
+
+                                    <label htmlFor='landmark'>Famous Landmark</label>
+                                    <input type='text' name='landmark' />
+
+                                    <input type='check' name='check' />
+                                    <label htmlFor='check'>My shipping and Billing address are the same</label>
+                                </div>
+                                <button type='submit'>Continue</button>
+                            </form>
+
+                            
+                        </div>
+                    )}
 
                 </div>
             </div>

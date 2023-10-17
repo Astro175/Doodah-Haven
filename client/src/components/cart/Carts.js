@@ -7,7 +7,7 @@ import { CartContext } from '../context/CartContext';
 
 const Cart = () => {
     const { cart, removeFromCart, clearCart } = useContext(CartContext);
-    
+    console.log('Cart items:', cart) 
     const [quantities, setQuantities] = useState(Array(cart.length).fill(1));
 
 
@@ -112,7 +112,7 @@ const Cart = () => {
                     </div>
                     <p className='shipfee'>Shippings fees are free</p>
                     <button>
-                        <Link to='/payment' className='ship-link'>
+                        <Link to={{ pathname: '/payment', state: { cartItems: cart } }} className='ship-link'>
                             Proceed to checkout
                         </Link>
                     </button>
