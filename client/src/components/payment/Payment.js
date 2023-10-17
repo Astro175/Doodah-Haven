@@ -45,6 +45,13 @@ const Payment = () => {
 
     const handleDeleteItem = (index) => {
         removeFromCart(index);
+    };
+
+    const handleSubmit = (event, formStep) => {
+        event.preventDefault();
+        if (formStep === 'Delivery') {
+
+        }
     }
 
     return (
@@ -108,20 +115,20 @@ const Payment = () => {
                 <div className='toPay'>
                     {activeLink === 'Shipping' && (
                         <div>
-                            <form>
+                            <form onSubmit={handleSubmit}>
                                 <div className='shipment-form'>
                                     <h2>Contact Details</h2>
                                     <label htmlFor='firstname'>Firstname:</label><br />
-                                    <input type='text' name='firstname' />
+                                    <input type='text' name='firstname' required />
 
                                     <label htmlFor='lastname'>Lastname:</label>
                                     <input type='text' name='lastname' /><br />
 
                                     <label htmlFor='email'>Email:</label><br />
-                                    <input type='email' name='email' /><br />
+                                    <input type='email' name='email' aria-required/><br />
 
                                     <label htmlFor='number'>Phone number:</label><br />
-                                    <PhoneInput value={phoneNumber} defaultCountry='NG' onChange={handlePhoneNumberChange} id='number'/>
+                                    <PhoneInput value={phoneNumber} defaultCountry='NG' onChange={handlePhoneNumberChange} id='number' />
                                 </div>
 
                                 <div className='shipment-form'>
@@ -130,15 +137,13 @@ const Payment = () => {
                                     <input type='number' name='addressNo' /><br />
 
                                     <label htmlFor='address'>Address:</label><br />
-                                    <input type='text' name='address' /><br/>
+                                    <input type='text' name='address' aria-required/><br/>
 
                                     <label htmlFor='city'>City:</label><br />
-                                    <input type='text' name='city' />
+                                    <input type='text' name='city' aria-required/>
 
                                     <label htmlFor='state'>State:</label><br />
-                                    {/* <input type='text' name='state' /> */}
                                     <select id='state' name='state' value={selectedState} onChange={handleStateChange}>
-                                    {/* <option value='' disabled>Select a state</option> */}
                                         {states.map((state, index) => {
                                            return (
                                             <option key={index} value={state}>
@@ -154,12 +159,11 @@ const Payment = () => {
                                     <label htmlFor='landmark'>Famous Landmark:</label><br />
                                     <input type='text' name='landmark' /><br />
 
-                                    <input type='checkbox' name='check' />
+                                    <input type='checkbox' name='check' aria-required/>
                                     <label htmlFor='check' className='checkbox'>My shipping and Billing address are the same</label>
                                 </div>
                                 <button type='submit' onClick={() => handleClick('Delivery')}>Continue to Delivery</button>
                             </form>
-
                             
                         </div>
                     )};
