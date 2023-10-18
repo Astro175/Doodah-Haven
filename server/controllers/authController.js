@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const validator = require('validator');
-const generateToken = require('../utils/generateToken');A
+const generateToken = require('../utils/generateToken');
 
 // Registers a user
 const registerUser = async (req, res) => {
