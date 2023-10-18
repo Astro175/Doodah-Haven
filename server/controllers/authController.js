@@ -46,7 +46,7 @@ const loginUser = async (req, res) => {
 
     const token = await generateToken(user);
 
-    res.status(200).json({ data: { user, token } });
+    res.status(200).json({ user, token });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Database error" });

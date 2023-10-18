@@ -1,10 +1,15 @@
 const Product = require('../models/productModel');
 const mongoose = require('mongoose');
+const fs = require("fs");
 
 // List all products: GET /api/products
 const getAllProducts = async (req, res) => {
+    try {
     const products = Product.find({}).sort({createdAt: -1})
     res.status(200).json({products});
+    } catch (error) {
+        res.status(500).send({error: error.message})
+    }
 }
 
 // Get product details: GET /api/products/:id
@@ -24,12 +29,56 @@ const getAProduct = async (req, res) => {
     res.status(200).json(product)
 }
 
-// This is just a test, we will implement a middleware
-// To allow access to only admin user to the endpoints below
-
 // Create a new product (admin-only): POST /api/products/add
 const addProduct = async (req, res) => {
-    res.json({message: "Add a product"});
+    try {
+        const { name, description, price, brand, stock_quantity } = req.fields;
+        const { photo1, photo2, photo3 } = req.files;
+        //validation
+        switch (true) {
+          case !name:
+            return res.status(500).send({ error: "Name is Required" });
+          case !description:
+            return res.status(500).send({ error: "Description is Required" });
+          case !price:
+            return res.status(500).send({ error: "Price is Required" });
+          case !brand:
+            return res.status(500).send({ error: "Brand is Required" });
+          case !stock_quantity:
+            return res.status(500).send({ error: "Stock Quantity is Required" });
+          case
+          (photo1 && photo1.size > 2000000) ||
+          (photo2 && photo2.size > 2000000) ||
+          (photo3 && photo3.size > 2000000):
+            return res
+              .status(500)
+              .send({ error: "Photos are Required and should be less then 2mb" });
+        }
+    
+        const products = new Product({ ...req.fields });
+        if (photo1) {
+          products.photo1.data = fs.readFileSync(photo1.path);
+          products.photo1.contentType = photo1.type;
+        }
+        if (photo2) {
+          products.photo2.data = fs.readFileSync(photo2.path);
+          products.photo2.contentType = photo2.type;
+        }
+        if (photo3) {
+          products.photo3.data = fs.readFileSync(photo3.path);
+          products.photo3.contentType = photo3.type;
+        }
+        await products.save();
+        res.status(201).send({
+          message: "Product Created Successfully",
+          products,
+        });
+      } catch (error) {
+        console.log(error);
+        res.status(500).send({
+          error: error.message
+        });
+      }
 };
 
 // Update a product (admin-only): PUT /api/products/update/:id
