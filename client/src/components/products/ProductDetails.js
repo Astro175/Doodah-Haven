@@ -6,15 +6,22 @@ import laptop1 from '../../images/laptop.png';
 import { CartContext } from '../context/CartContext';
 import { useContext, useState } from 'react';
 import CartPopup from '../cart/CartPopup';
+import { AuthContext } from '../context/AuthContext';
 
 
 const ProductDetails = () => {
     const { addToCart } = useContext(CartContext);
     const [quantity, setQuantity] = useState(1);
     const [showPopup, setShowPopup] = useState(false);
+    const { isLoggedIn } = useContext(AuthContext);
 
 
     const handleAddToCart = () => {
+        if (!isLoggedIn) {
+            alert('Please log in before adding to cart.');
+            return;
+        }
+        
         const selectedItem = {
             img: laptop1, 
             name: 'MSI Creator 17',
