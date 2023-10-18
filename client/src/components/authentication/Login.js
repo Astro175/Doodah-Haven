@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
-import {Link, Navigate} from 'react-router-dom';
+import { faKey, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
-import './auth.scss';
+import React, { useContext, useEffect, useState } from "react";
+import { Link, Navigate } from 'react-router-dom';
 import { AuthContext } from "../context/AuthContext";
+import './auth.scss';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -45,18 +45,13 @@ const Login = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': token,
                     'Authorization': token
                 },
                 body: JSON.stringify(userData)
             });
 
             if (response.ok) {
-                const responseData = await response.json();
-                const { token } = responseData;
-
-                localStorage.setItem('token', token); // store in localStorage for simplicity
-
-                // Handle user login
                 console.log('User logged in successfully!');
                 handleLogin();
                 window.alert(`Logged in successfully as ${email}`)
