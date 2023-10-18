@@ -23,7 +23,7 @@ const productSchema = new mongoose.Schema({
     required: [true, "Product stock quantity is required"]
   },
   image: {
-    data: buffer,
+    type: Buffer,
     required: [true, "Product image is required"],
     contentType: String
   },
