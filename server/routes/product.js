@@ -7,7 +7,7 @@ const {
     deleteProduct,
     filterProduct
 } = require('../controllers/productController');
-const isAdmin = require('../middleware/isadmin');
+const isAdmin = require('../middleware/isAdmin');
 const requireLogin = require("../middleware/requireLogin");
 const formidable = require("express-formidable");
 
