@@ -29,7 +29,26 @@ const getAProduct = async (req, res) => {
 
 // Create a new product (admin-only): POST /api/products/add
 const addProduct = async (req, res) => {
-    res.json({message: "Add a product"});
+    const { 
+        name, description, price, brand,
+        stock_quantity, reviews, labels
+     } = req.fields;
+     const { image } = req.files;
+     if (!name || !description || !price || 
+        !brand || !stock_quantity || !reviews || !labels) {
+    return res.status(400).json({ error: "All fields are required" });
+  }
+  if (image.size > 1000000) {
+    return res.status(500).json({ error: "image should less than 1mb"});
+  }
+  const newProduct = Product.create({...req.fields});
+  newProduct.image.data = fs.readFileSync(image.path);
+  newProduct.image.contentType = image.type
+  (await newProduct).save();
+  res.status(400).json({
+    message: "Successfully created a new Product",
+    newProduct
+  });
 };
 
 // Update a product (admin-only): PUT /api/products/update/:id

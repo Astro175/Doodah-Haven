@@ -4,6 +4,7 @@ const {
     deleteProduct, filterProduct
 } = require('../controllers/productController');
 const isAdmin = require('../middleware/isadmin');
+const formidable = require('express-formidable');
 
 const router = express.Router()
 
@@ -14,7 +15,7 @@ router.get('/', getAllProducts);
 router.get('/:id', getAProduct);
 
 // Create a new product
-router.post('/add', isAdmin, addProduct);
+router.post('/add', isAdmin, formidable(), addProduct);
 
 // Update a product by ID
 router.put('/update/:id', isAdmin, updateProduct);

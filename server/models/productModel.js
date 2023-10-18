@@ -23,8 +23,9 @@ const productSchema = new mongoose.Schema({
     required: [true, "Product stock quantity is required"]
   },
   image: {
-    type: String,
-    required: [true, "Product image is required"]
+    data: buffer,
+    required: [true, "Product image is required"],
+    contentType: String
   },
   reviews: [
     {
