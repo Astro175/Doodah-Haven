@@ -20,11 +20,11 @@ const userSchema = new schema({
         type: String,
         required: [true, "Password Required"]
     },
-    role: { type: String, default: "user"},
-    token: { type: String }
+    role: {
+        type: String,
+        enum: ['user', 'admin'], // Possible roles
+        default: "user"}
 });
-
-
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;

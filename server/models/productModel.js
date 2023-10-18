@@ -22,9 +22,17 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Product stock quantity is required"]
   },
-  image: {
-    type: String,
-    required: [true, "Product image is required"]
+  photo1: {
+    data: Buffer,
+    contentType: String
+  },
+  photo2: {
+    data: Buffer,
+    contentType: String
+  },
+  photo3: {
+    data: Buffer,
+    contentType: String
   },
   reviews: [
     {
@@ -41,11 +49,7 @@ const productSchema = new mongoose.Schema({
         type: String
       }
     }
-  ],
-  label: {
-    type: String,
-    required: true
-  }
+  ]
 }, {timestamps: true}); // Added timestamp for sorting products that were added recently
 
 const Product = mongoose.model('Product', productSchema);
