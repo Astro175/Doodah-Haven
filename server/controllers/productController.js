@@ -32,7 +32,7 @@ const getAProduct = async (req, res) => {
 // Create a new product (admin-only): POST /api/products/add
 const addProduct = async (req, res) => {
     try {
-        const { name, description, price, brand, stock_quantity } = req.fields;
+        const { name, description, price, brand, stock_quantity, label } = req.fields;
         const { photo1, photo2, photo3 } = req.files;
         //validation
         switch (true) {
@@ -46,6 +46,8 @@ const addProduct = async (req, res) => {
             return res.status(500).send({ error: "Brand is Required" });
           case !stock_quantity:
             return res.status(500).send({ error: "Stock Quantity is Required" });
+          case !label:
+            return res.status(500).send({ error: "Label is Required" });
           case
           (photo1 && photo1.size > 2000000) ||
           (photo2 && photo2.size > 2000000) ||
@@ -54,6 +56,7 @@ const addProduct = async (req, res) => {
               .status(500)
               .send({ error: "Photos are Required and should be less then 2mb" });
         }
+        
     
         const products = new Product({ ...req.fields });
         if (photo1) {

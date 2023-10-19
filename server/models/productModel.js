@@ -11,7 +11,7 @@ const productSchema = new mongoose.Schema({
     required: [true, "Product description is required"]
   },
   price: {
-    type: Number,
+    type: String,
     required: [true, "Product price is required"]
   },
   brand: {
@@ -43,13 +43,16 @@ const productSchema = new mongoose.Schema({
       },
       rating: {
         type: Number,
-        required: [true, "Review rating is required"]
       },
       comment: {
         type: String
       }
     }
-  ]
+  ],
+  label: {
+    type: String,
+    required: [true, "Product's label is required"]
+  }
 }, {timestamps: true}); // Added timestamp for sorting products that were added recently
 
 const Product = mongoose.model('Product', productSchema);
