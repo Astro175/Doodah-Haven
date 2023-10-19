@@ -1,10 +1,15 @@
 const express = require('express');
 const {
-    getAllProducts, getAProduct, addProduct, updateProduct, 
-    deleteProduct, filterProduct
+    getAllProducts,
+    getAProduct,
+    addProduct,
+    updateProduct, 
+    deleteProduct,
+    filterProduct
 } = require('../controllers/productController');
-const isAdmin = require('../middleware/isadmin');
-const formidable = require('express-formidable');
+const isAdmin = require('../middleware/isAdmin');
+const requireLogin = require("../middleware/requireLogin");
+const formidable = require("express-formidable");
 
 const router = express.Router()
 
@@ -15,13 +20,13 @@ router.get('/', getAllProducts);
 router.get('/:id', getAProduct);
 
 // Create a new product
-router.post('/add', isAdmin, formidable(), addProduct);
+router.post('/add', requireLogin, isAdmin, formidable(), addProduct);
 
 // Update a product by ID
-router.put('/update/:id', isAdmin, updateProduct);
+router.put('/update/:id', requireLogin, isAdmin, updateProduct);
 
 // Delete a product by ID
-router.delete('/delete/:id', isAdmin, deleteProduct);
+router.delete('/delete/:id', requireLogin, isAdmin, deleteProduct);
 
 // Gets all product with label popular
 
