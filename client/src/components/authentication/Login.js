@@ -56,6 +56,7 @@ const Login = () => {
 
                 localStorage.setItem('token', token); // Store in localStorage for simplicity
 
+
                 // Handle user login
                 console.log('User logged in successfully!');
                 handleLogin();

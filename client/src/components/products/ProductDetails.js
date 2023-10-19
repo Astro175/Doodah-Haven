@@ -4,9 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGreaterThan, faStar, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import laptop1 from '../../images/laptop.png';
 import { CartContext } from '../context/CartContext';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import CartPopup from '../cart/CartPopup';
 import { AuthContext } from '../context/AuthContext';
+import { useParams } from 'react-router-dom';
 
 
 const ProductDetails = () => {
@@ -14,6 +15,20 @@ const ProductDetails = () => {
     const [quantity, setQuantity] = useState(1);
     const [showPopup, setShowPopup] = useState(false);
     const { isLoggedIn } = useContext(AuthContext);
+    const { productId } = useParams();
+    const [product, setProduct] = useState(null);
+
+    useEffect(() => {
+        // Fetch product data based on the productId
+        fetch(`http://localhost:4000/api/products/${productId}`)
+          .then((response) => response.json())
+          .then((data) => setProduct(data))
+          .catch((error) => console.error('Error fetching product', error));
+      }, [productId]);
+    
+      if (!product) {
+        return <div>Loading...</div>;
+      }
 
 
     const handleAddToCart = () => {
@@ -23,16 +38,14 @@ const ProductDetails = () => {
         }
         
         const selectedItem = {
-            img: laptop1, 
-            name: 'MSI Creator 17',
-            price: 499.0,
-            quantity: quantity,
-            details: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop'
+            img: product.img, 
+            name: product.name,
+            price: product.price,
+            quantity,
+            details: product.details,
           };
         setShowPopup(true);
           addToCart(selectedItem);
-
-          
         }
 
     const increaseQuantity = () => {
@@ -48,7 +61,7 @@ const ProductDetails = () => {
         <div className='productDetails'>
             {showPopup && <CartPopup />}
             <div className='product-block'>
-                <img src={laptop1} alt='product' />
+                <img src={product.name} alt='product' />
                 <div className='details-block'>
                     <div className='cartLinks'>
                         <Link to="/" className='cart-link'>Home</Link>
@@ -58,7 +71,7 @@ const ProductDetails = () => {
                         <Link to='/products' className='cart-link'>ProductName</Link>
                     </div>
                     <div className='main-details'>
-                        <h2>MSI Creator 17</h2>
+                        <h2>{product.description}</h2>
                         <div className='review'>
                             {[...Array(5)].map((_, index) => (
                                 <FontAwesomeIcon key={index} icon={faStar} className='star'/>
@@ -66,7 +79,7 @@ const ProductDetails = () => {
                         <span>2 Reviews</span>
                         </div>
                         <p className='details'>
-                            MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop
+                            {product.description}
                         </p>
                         <div className='quantity'>
                             <p>Quantity</p>
@@ -76,8 +89,8 @@ const ProductDetails = () => {
                                 <button onClick={increaseQuantity}>+</button> 
                             </div>
                         </div>
-                        <p className='strike'>$499.00</p>
-                        <p>$499.00</p>
+                        <p className='strike'>{product.price}</p>
+                        <p>{product.price}</p>
                         <button className='addCart' onClick={handleAddToCart}>
                             <FontAwesomeIcon icon={faCartShopping} size='xs' color='#fff' className='cart-icon'/>
                             Add To Cart
