@@ -39,15 +39,24 @@ const Login = () => {
         };
 
         try {
+            const token = localStorage.getItem('token'); // Get the token from localStorage
+
             const response = await fetch('http://localhost:4000/api/users/login', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': token
                 },
                 body: JSON.stringify(userData)
             });
 
             if (response.ok) {
+                const responseData = await response.json();
+                const { token } = responseData;
+
+                localStorage.setItem('token', token); // store in localStorage for simplicity
+
+                // Handle user login
                 console.log('User logged in successfully!');
                 handleLogin();
                 window.alert(`Logged in successfully as ${email}`)
