@@ -75,8 +75,7 @@ class SignUp extends Component {
         };
 
         handleLogin = () => {
-          const login = this.context
-          login();
+          this.context.login();
       }
 
 

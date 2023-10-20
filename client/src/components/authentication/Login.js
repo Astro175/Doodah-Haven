@@ -51,10 +51,10 @@ const Login = () => {
             });
 
             if (response.ok) {
-                const responseData = await response.json();
+                const responseData = await response.json(); // Parse the response body as JSON
                 const { token } = responseData;
 
-                localStorage.setItem('token', token); // store in localStorage for simplicity
+                localStorage.setItem('token', token); // Store in localStorage for simplicity
 
                 // Handle user login
                 console.log('User logged in successfully!');
