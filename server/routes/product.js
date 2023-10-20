@@ -5,7 +5,8 @@ const {
     addProduct,
     updateProduct, 
     deleteProduct,
-    filterProduct
+    filterProduct,
+    searchProduct
 } = require('../controllers/productController');
 const isAdmin = require('../middleware/isAdmin');
 const requireLogin = require("../middleware/requireLogin");
@@ -31,4 +32,8 @@ router.delete('/delete/:id', requireLogin, isAdmin, deleteProduct);
 // Gets all product with label popular
 
 router.get('/popular', filterProduct);
+
+// Searches for product
+
+router.get('/search/:keyword', searchProduct)
 module.exports = router;

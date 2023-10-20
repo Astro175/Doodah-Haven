@@ -100,11 +100,28 @@ const filterProduct = async (req, res) => {
     res.status(200).json(popularProducts);
 }
 
+const searchProduct = async (req, res) => {
+  try {
+    const { keyword } = req.params;
+    const results = Product.find({
+      $or: [
+        {name: {$regex: keyword, $options:'i'}},
+        {description: {$regex: keyword, $options:'i'}},
+      ]
+    }).select(`~photo`);
+    res.status(200).json({ results });
+  } catch(err) {
+    console.log(error);
+    res.status(400).json({ error: `Something went wrong`})
+  }
+}
+
 module.exports = {
     getAllProducts,
     getAProduct,
     addProduct,
     updateProduct,
     deleteProduct,
-    filterProduct
+    filterProduct,
+    searchProduct
 };
