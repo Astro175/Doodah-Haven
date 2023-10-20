@@ -108,7 +108,7 @@ const searchProduct = async (req, res) => {
         {name: {$regex: keyword, $options:'i'}},
         {description: {$regex: keyword, $options:'i'}},
       ]
-    }).select(`~photo`);
+    }).select('photo');
     res.status(200).json({ results });
   } catch(err) {
     console.log(error);
