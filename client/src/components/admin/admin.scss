@@ -1,0 +1,47 @@
+.dashboard {
+    display: flex;
+    justify-content: center;
+    margin: 2rem auto;
+
+    form {
+        padding: 2rem 3rem;
+        width: 100%;
+        input, textarea {
+            width: 100%;
+            margin: 1rem 0;
+            border-radius: 5px;
+            padding: 0.8rem 1rem;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            
+        }
+        textarea {
+            height: 150px;
+        }
+        .addTag {
+            border: none;
+            background-color: green;
+            color: #fff;
+            padding: 0.3rem 0.5rem
+        }
+
+        .submit {
+            background-color: #fff;
+            color: #1e1eb9;
+            padding: 0.8rem 1rem;
+            border: none;
+            font-weight: bold;
+            margin: 1rem 0;
+            border-radius: 3px;
+            &:hover {
+               color: #fff;
+                background-color: #1e1eb9; 
+            }
+        }
+        .addimages {
+            color: #fff;
+            background-color: blue;
+            padding: 0.6rem 0.8rem;
+        }
+    }
+}

@@ -15,10 +15,12 @@ import Account from './components/Account';
 import ProductDetails from './components/products/ProductDetails'
 import { CartProvider } from './components/context/CartContext';
 import { AuthProvider } from './components/context/AuthContext';
-
+import AdminDashboard from './components/admin/AdminDashboard';
+import RouteGuard from './RouteGuard';
 initFontAwesome();
 
 function App() {
+  const isAdmin = true
   return (
     <Router>
       <AuthProvider>
@@ -27,13 +29,18 @@ function App() {
           <Routes>
             <Route path='/' exact element={<Home />} />
             <Route path='/products' element={<Products />} />
-            <Route path='/productId' element={<ProductDetails />} />
+            <Route path='/products/:productId' element={<ProductDetails />} />
             <Route path='/about' element={<AboutUs />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path='/payment' element={<Payment />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/my-account' element={<Account />} />
+            {/* <Route path='/admin' element={<AdminDashboard />} /> */}
+            <Route path="/admin" element={<RouteGuard isAdmin={isAdmin} />} >
+              <Route index element={<AdminDashboard />} />
+            </Route>
+            
           </Routes>
           <Footer />
         </CartProvider>
