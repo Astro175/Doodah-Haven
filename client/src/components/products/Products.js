@@ -60,6 +60,7 @@ const Products = () => {
           <a href='/'>See all new products</a>
         </div>
         <div className='product-block'>
+
           {products.map((product) => (
             <div key={product._id}>
             <Link to={`/product/${product._id}`} className='product-badge'>
@@ -67,6 +68,7 @@ const Products = () => {
               <FontAwesomeIcon icon={faCheckCircle} color='#78A962'/>
               <span className='stock'>In stock</span>
             </div>
+
             {/* <img src={`data:${product.photo.contentType};base64,${product.photo.data}`} alt='product' /> */}
             <h3>{product.name}</h3>
             <p>Brand: {product.brand}</p>
@@ -75,10 +77,12 @@ const Products = () => {
 
             <div className='review'>
               {[...Array(5)].map((_, index) => (
+
                 <FontAwesomeIcon key={index} icon={faStar} className={index < 4 ? 'star' : ''}/>
               ))}
             <span>Review 4</span>
             </div>
+
             <p className='details'>{product.description}</p>
             <p className='strike'>{product.price}</p>
             <p>{product.price}</p>

@@ -14,9 +14,10 @@ import Cart from './components/cart/Carts';
 import Account from './components/Account';
 import ProductDetails from './components/products/ProductDetails'
 import { CartProvider } from './components/context/CartContext';
-import { AuthProvider } from './components/context/AuthContext';
+import { AuthProvider } from './components/context/AuthContext
 import AdminDashboard from './components/admin/AdminDashboard';
 import RouteGuard from './RouteGuard';
+
 initFontAwesome();
 
 function App() {
@@ -36,10 +37,6 @@ function App() {
             <Route path='/payment' element={<Payment />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/my-account' element={<Account />} />
-            {/* <Route path='/admin' element={<AdminDashboard />} /> */}
-            <Route path="/admin" element={<RouteGuard isAdmin={isAdmin} />} >
-              <Route index element={<AdminDashboard />} />
-            </Route>
             
           </Routes>
           <Footer />
