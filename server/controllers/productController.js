@@ -4,13 +4,27 @@ const fs = require("fs");
 
 // List all products: GET /api/products
 const getAllProducts = async (req, res) => {
-    try {
-    const products = Product.find({}).sort({createdAt: -1})
-    res.status(200).json({products});
-    } catch (error) {
-        res.status(500).send({error: error.message})
-    }
-}
+  try {
+    const products = await Product
+      .find({})
+      .select("-photo")
+      .limit(12)
+      .sort({ createdAt: -1 });
+    res.status(200).send({
+      success: true,
+      counTotal: products.length,
+      message: "ALlProducts ",
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Erorr in getting products",
+      error: error.message,
+    });
+  }
+};
 
 // Get product details: GET /api/products/:id
 const getAProduct = async (req, res) => {
@@ -49,12 +63,12 @@ const addProduct = async (req, res) => {
           case !label:
             return res.status(500).send({ error: "Label is Required" });
           case
-          (photo1 && photo1.size > 2000000) ||
-          (photo2 && photo2.size > 2000000) ||
-          (photo3 && photo3.size > 2000000):
+          (photo1 && photo1.size > 500000) ||
+          (photo2 && photo2.size > 500000) ||
+          (photo3 && photo3.size > 500000):
             return res
               .status(500)
-              .send({ error: "Photos are Required and should be less then 2mb" });
+              .send({ error: "Photos are Required and should be less then 500kb" });
         }
         
     
