@@ -1,9 +1,9 @@
-import { faKey, faUser } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
-import { Link, Navigate } from 'react-router-dom';
-import { AuthContext } from "../context/AuthContext";
+import {Link, Navigate} from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
 import './auth.scss';
+import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -33,6 +33,7 @@ const Login = () => {
             return;
         }
 
+
         const userData = {
             email,
             password
@@ -45,13 +46,19 @@ const Login = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': token,
                     'Authorization': token
                 },
                 body: JSON.stringify(userData)
             });
 
             if (response.ok) {
+
+                const responseData = await response.json(); // Parse the response body as JSON
+                const { token } = responseData;
+
+                localStorage.setItem('token', token); // Store in localStorage for simplicity
+
+                // Handle user login
                 console.log('User logged in successfully!');
                 handleLogin();
                 window.alert(`Logged in successfully as ${email}`)

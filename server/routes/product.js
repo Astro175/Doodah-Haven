@@ -5,8 +5,9 @@ const {
     addProduct,
     updateProduct, 
     deleteProduct,
+
     filterProduct,
-    searchProduct
+    searchProduct,
 } = require('../controllers/productController');
 const isAdmin = require('../middleware/isAdmin');
 const requireLogin = require("../middleware/requireLogin");
