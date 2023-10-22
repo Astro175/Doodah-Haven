@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './admin.scss'
 
 const AdminDashboard  = () => {
@@ -10,11 +10,9 @@ const AdminDashboard  = () => {
         specification: '',
         images: [],
         quantity: '',
-        tag: '',
-        tags: []
     });
 
-   
+    const [tags, setTags] = useState([])
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -23,54 +21,83 @@ const AdminDashboard  = () => {
 
     const handleImageChange = (e) => {
         const selectedImages = Array.from(e.target.files);
-        setProduct({ ...product, image: [...product.images, ...selectedImages] });
+        const imageNames = selectedImages.map((image) => image.name);
+        setProduct({ ...product, images: [...product.images, ...imageNames] });
     };
 
-    const handleTagChange = () => {
-        if (product.tag.trim() !== '') {
-          setProduct({ ...product, tags: [...product.tags, product.tag], tag: '' });
+    const handleTagINputKeyDown = (event) => {
+        console.log();
+        if (product.tags === undefined) {
+            product.tags = [];
+          }
+        event.preventDefault();
+        if (event.key === "Enter" && event.target.value.trim() !== "") {
+            setTags([...tags, event.target.value]);
+            // props.selectedTags([...tags, event.target.value]);
+            event.target.value = "";
         }
-    };
+        console.log('Updated tags:', product.tags)
+        console.error(product.tags)
+
+      };
+
+    const handleTagDelete = (index) => {
+        const updatedTags = [...tags];
+        updatedTags.splice(index, 1);
+        setTags(updatedTags);
+    
+};
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+    
+        if (product === undefined) {
+        return;
+        }
+    
         const formData = new FormData();
         formData.append('name', product.name);
         formData.append('description', product.description);
         product.images.forEach((image, index) => {
-          formData.append(`image-${index}`, image)
-       })
+        formData.append(`image-${index}`, image)
+        });
         formData.append('price', product.price);
         formData.append('brand', product.brand);
         formData.append('specification', product.specification);
         formData.append('quantity', product.quantity);
+    
+        if (product.tags !== undefined) {
         product.tags.forEach((tag, index) => {
             formData.append(`tags-${index}`, tag)
         });
-
+        }
+    
         const jwt = 'JWT-TOKEN';
-
+    
         const headers = {
-            'Authorization': `Bearer ${jwt}`,
+        'Authorization': `Bearer ${jwt}`,
         };
-
+    
         const response = await fetch('http://localhost:4000/api/products/add', {
-            method: 'POST',
-            headers,
-            body: formData
+        method: 'POST',
+        headers,
+        body: formData
         });
-
+    
         if (response.ok) {
-            const data = await response.json();
-            console.log('Product added successfully', data);
+        const data = await response.json();
+        console.log('Product added successfully', data);
         } else {
-            console.error('Error adding product:', response.statusText)
+        console.error('Error adding product:', response.statusText)
         }
     };
 
     return (
         <div className='dashboard'>
-        <form onSubmit={handleSubmit}>
+            
+        <form >
+            <h1>Admin Dashboard</h1>
+            <p>Welcome back </p>
             <label htmlFor='name'>Product name:</label><br />
             <input type='text' name='name' value={product.name} onChange={handleInputChange} /><br />
 
@@ -81,7 +108,7 @@ const AdminDashboard  = () => {
             <input type='text' name='brand' value={product.brand} onChange={handleInputChange} /><br />
 
             <label htmlFor='price'>Price:</label><br />
-            <textarea name='price' value={product.price} onChange={handleInputChange} /><br />
+            <input type='number' name='price' value={product.price} onChange={handleInputChange} /><br />
 
             <label htmlFor='specification'>Specification:</label><br />
             <textarea name='specification' value={product.specification} onChange={handleInputChange} /><br />
@@ -91,21 +118,40 @@ const AdminDashboard  = () => {
 
             <label htmlFor='images'>Product Images:</label><br />
             <input type='file' name='images' accept='image/' onChange={handleImageChange} multiple className='addImages'/><br />
+            {product.images.length > 0 && (
+            <ul className='imagenames'>
+                {product.images.map((imageName, index) => (
+                <li key={index}>{imageName}</li>
+                ))}
+            </ul>
+            )}
 
             <label htmlFor='tags'>Product Tags:</label><br />
-            <input type='text' name='tags' value={product.tag} onChange={handleInputChange} placeholder="Add tags" />
-            <button type='button' onClick={handleTagChange} className='addTag'>Add</button><br />
+            <div className='tags-input'>
+                <ul id='tags'>
+                    {tags.map((tag, index) => (
+                        <li key={index} className="tag">
+                            <span>{tag}</span>
+                        <button className="delete-button" onClick={() => handleTagDelete(index)}>
+                            X
+                        </button>
+                        </li>
+                    ))}
+                </ul>
+           
+                    <input
+                    type="text"
+                    name="tags"
+                    value={product.tag}
+                    // onChange={(event) => setProduct({ ...product, tag: event.target.value })}
+                    onKeyDown={(event) => handleTagINputKeyDown(event)}
+                    placeholder="Add tags"
+                    />
+                {/* <button type='button' onClick={handleTagChange} className='addTag'>Add</button><br /> */}
+            </div>
 
-            <div className="tags">
-          {product.tags.map((tag, index) => (
-            <span key={index} className="tag">
-              {tag}
-            </span>
-          ))}
-        </div>
 
-
-            <button type='submit' className='submit'>Add Product</button>
+            <button type='submit' className='submit' onClick={handleSubmit}>Add Product</button>
         </form>
         </div>  
     )

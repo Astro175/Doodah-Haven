@@ -4,6 +4,12 @@
     margin: 2rem auto;
 
     form {
+        h1, p {
+            text-align: center;
+        }
+        p {
+            margin-bottom: 1rem;
+        }
         padding: 2rem 3rem;
         width: 100%;
         input, textarea {
@@ -42,6 +48,57 @@
             color: #fff;
             background-color: blue;
             padding: 0.6rem 0.8rem;
+        }
+        .imagenames {
+            background-color: #fff;
+            margin-bottom: 1rem;
+            list-style: none;
+            font-size: 12px;
+            padding: 0.5rem;
+            margin-top: -1rem;
+        }
+
+        .tags-input {
+            display: inline-block;
+            position: relative;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            padding: 5px;
+            width: 100%;
+            // background-color: #fff;
+             ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+
+                li {
+                    display: inline-block; 
+                    background-color: rgb(54, 54, 240); 
+                    color: #f2f2f2; 
+                    border-radius: 20px;
+                    font-size: 12px;
+                    padding: 5px 10px; 
+                    margin-right: 5px; 
+                    margin-bottom: 5px;
+                    font-family: 600;
+                }
+             }
+
+             input[type="text"] { 
+                border: none; 
+                outline: none; 
+                padding: 8px; 
+                &:focus {
+                    outline: none;
+                }
+             }
+             .delete-button { 
+                background-color: transparent; 
+                border: none; 
+                color: #fff; 
+                cursor: pointer; 
+                margin-left: 5px; 
+            } 
         }
     }
 }

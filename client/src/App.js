@@ -42,7 +42,8 @@ function App() {
             </Route>
             
           </Routes>
-          <Footer />
+          {/* Render the Footer only if isAdmin is false */}
+          {!isAdmin && <Footer />}
         </CartProvider>
       </AuthProvider>
     </Router>
