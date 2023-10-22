@@ -15,12 +15,15 @@ import Account from './components/Account';
 import ProductDetails from './components/products/ProductDetails'
 import { CartProvider } from './components/context/CartContext';
 import { AuthProvider } from './components/context/AuthContext';
-import AdminDashboard from './components/admin/AdminDashboard';
-import RouteGuard from './RouteGuard';
+import CreateProduct from './components/admin/CreateProducts';
+// import RouteGuard from './RouteGuard';
+// import AdminLayout from './components/admin/AdminLayout.js';
+
 initFontAwesome();
 
 function App() {
   const isAdmin = true
+
   return (
     <Router>
       <AuthProvider>
@@ -37,13 +40,26 @@ function App() {
             <Route path='/cart' element={<Cart />} />
             <Route path='/my-account' element={<Account />} />
             {/* <Route path='/admin' element={<AdminDashboard />} /> */}
-            <Route path="/admin" element={<RouteGuard isAdmin={isAdmin} />} >
+            {/* <Route path="/admin" element={<RouteGuard isAdmin={isAdmin} />} >
               <Route index element={<AdminDashboard />} />
-            </Route>
+            </Route> */}
             
           </Routes>
           {/* Render the Footer only if isAdmin is false */}
-          {!isAdmin && <Footer />}
+          {/* {!isAdmin && <Footer />} */}
+
+           {/* <Route path="/admin" element={<RouteGuard isAdmin={isAdmin} />}>
+              <Route index element={<AdminDashboard />} />
+            </Route> */}
+            {/* <Route path='/admin/*' element={ */}
+            {/* <AdminLayout> */}
+              {/* <Route path='add-product' element={<CreateProduct />} /> */}
+              {/* Add more admin-related routes here */}
+            {/* </AdminLayout> */}
+          {/* } */}
+        {/* /> */}
+        <Route path='/admin' element={<CreateProduct />} />
+          <Footer />
         </CartProvider>
       </AuthProvider>
     </Router>

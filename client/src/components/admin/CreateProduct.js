@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState } from 'react';
 import './admin.scss'
 
-const AdminDashboard  = () => {
+const CreateProduct = () => {
     const [product, setProduct] = useState({
         name: '',
         description: '',
@@ -72,7 +72,7 @@ const AdminDashboard  = () => {
         });
         }
     
-        const jwt = 'JWT-TOKEN';
+        const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTM1NGM2MjA3MTNkNjA0M2RmOGY5MjUiLCJlbWFpbCI6Ik5uZW5uYVVkZWZpQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY5Nzk5MjI5NSwiZXhwIjoxNjk3OTk1ODk1fQ.Vxv9no-fQEh-0AhNhHTYGeyOL01VA8WrC8CLQsLViyg';
     
         const headers = {
         'Authorization': `Bearer ${jwt}`,
@@ -95,7 +95,7 @@ const AdminDashboard  = () => {
     return (
         <div className='dashboard'>
             
-        <form >
+        <form onClick={handleSubmit}>
             <h1>Admin Dashboard</h1>
             <p>Welcome back </p>
             <label htmlFor='name'>Product name:</label><br />
@@ -151,10 +151,10 @@ const AdminDashboard  = () => {
             </div>
 
 
-            <button type='submit' className='submit' onClick={handleSubmit}>Add Product</button>
+            <button type='submit' className='submit'>Add Product</button>
         </form>
         </div>  
     )
 }
 
-export default AdminDashboard;
+export default CreateProduct;

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import {Link, Navigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
 import './auth.scss';
@@ -9,8 +9,9 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
-    const [redirect, setRedirect] = useState(false);
+    // const [redirect, setRedirect] = useState(false);
     const { login } = useContext(AuthContext);
+    const navigate = useNavigate(); // Use the useNavigate hook
 
     const handleInputChange = (e) => {
         // example of an event(e) is a user typing in an input field
@@ -24,6 +25,10 @@ const Login = () => {
     const handleLogin = () => {
         login();
     }
+
+    // const handleLogin = (userData) => {
+    //     login(userData);
+    // }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -56,11 +61,16 @@ const Login = () => {
 
                 localStorage.setItem('token', token); // Store in localStorage for simplicity
 
+                // Call handleLogin with user data (including 'role')
+                // handleLogin({
+                //     ...responseData.user,
+                //     role: responseData.user.role
+                // });
                 // Handle user login
                 console.log('User logged in successfully!');
                 handleLogin();
                 window.alert(`Logged in successfully as ${email}`)
-                setRedirect(true);
+                navigate('/'); // Navigate to the home page
             } else {
                 console.error('Error logging in:', response.statusText);
                 setError('Invalid email or password. Please try again.');
@@ -71,11 +81,11 @@ const Login = () => {
         }; 
     };
 
-    useEffect(() => {
-        if (redirect) {
-            <Navigate to='/' />
-        }
-    }, [redirect]);
+    // useEffect(() => {
+    //     if (redirect) {
+    //         <Navigate to='/' />
+    //     }
+    // }, [redirect]);
     
     return (
         <div className="auth-block">
@@ -119,7 +129,7 @@ const Login = () => {
                         </button>
                     </div> */}
                 </div>
-                {redirect && <Navigate to='/' />}
+                {/* {redirect && <Navigate to='/' />} */}
         </div>
     )
     
