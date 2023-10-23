@@ -70,7 +70,6 @@ const addProduct = async (req, res) => {
               .send({ error: "Photos are Required and should be less then 500kb" });
         }
         
-    
         const products = new Product({ ...req.fields });
         if (photo1) {
           products.photo1.data = fs.readFileSync(photo1.path);
