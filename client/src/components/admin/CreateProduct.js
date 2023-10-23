@@ -1,81 +1,49 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import './admin.scss'
 
 const CreateProduct = () => {
     const [product, setProduct] = useState({
         name: '',
         description: '',
+        price: 0,
         brand: '',
-        price: '',
-        specification: '',
-        images: [],
-        quantity: '',
+        stock_quantity: 0,
+        photo1: null,
+        photo2: null,
+        photo3: null,
+        reviews: [], // You may need to update this if you want to add reviews
+        label: '',
     });
-
-    const [tags, setTags] = useState([])
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setProduct({ ...product, [name]: value });
     };
 
-    const handleImageChange = (e) => {
-        const selectedImages = Array.from(e.target.files);
-        const imageNames = selectedImages.map((image) => image.name);
-        setProduct({ ...product, images: [...product.images, ...imageNames] });
-    };
-
-    const handleTagINputKeyDown = (event) => {
-        console.log();
-        if (product.tags === undefined) {
-            product.tags = [];
-          }
-        event.preventDefault();
-        if (event.key === "Enter" && event.target.value.trim() !== "") {
-            setTags([...tags, event.target.value]);
-            // props.selectedTags([...tags, event.target.value]);
-            event.target.value = "";
-        }
-        console.log('Updated tags:', product.tags)
-        console.error(product.tags)
-
+    const handlePhotoChange = (e) => {
+        const { name, files } = e.target;
+        setProduct({ ...product, [name]: files[0] });
       };
-
-    const handleTagDelete = (index) => {
-        const updatedTags = [...tags];
-        updatedTags.splice(index, 1);
-        setTags(updatedTags);
     
-};
 
     const handleSubmit = async (e) => {
         e.preventDefault();
     
-        if (product === undefined) {
-        return;
-        }
-    
         const formData = new FormData();
         formData.append('name', product.name);
         formData.append('description', product.description);
-        product.images.forEach((image, index) => {
-        formData.append(`image-${index}`, image)
-        });
         formData.append('price', product.price);
         formData.append('brand', product.brand);
-        formData.append('specification', product.specification);
-        formData.append('quantity', product.quantity);
+        formData.append('stock_quantity', product.stock_quantity);
+        formData.append('label', product.label);
+        formData.append('photo1', product.photo1);
+        formData.append('photo2', product.photo2);
+        formData.append('photo3', product.photo3);
     
-        if (product.tags !== undefined) {
-        product.tags.forEach((tag, index) => {
-            formData.append(`tags-${index}`, tag)
-        });
-        }
-    
-        const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTM1NGM2MjA3MTNkNjA0M2RmOGY5MjUiLCJlbWFpbCI6Ik5uZW5uYVVkZWZpQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY5Nzk5MjI5NSwiZXhwIjoxNjk3OTk1ODk1fQ.Vxv9no-fQEh-0AhNhHTYGeyOL01VA8WrC8CLQsLViyg';
+        const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiO…jk2fQ.C8CiJa1f23IvvKAb1ID7Zz5swZmoEBDdHNbWbxQ-Dew';
     
         const headers = {
-        'Authorization': `Bearer ${jwt}`,
+            'Authorization': `Bearer ${jwt}`,
         };
     
         const response = await fetch('http://localhost:4000/api/products/add', {
@@ -95,60 +63,48 @@ const CreateProduct = () => {
     return (
         <div className='dashboard'>
             
-        <form onClick={handleSubmit}>
-            <h1>Admin Dashboard</h1>
-            <p>Welcome back </p>
+        <form onSubmit={handleSubmit}>
+            <h1>Add Products</h1>
             <label htmlFor='name'>Product name:</label><br />
             <input type='text' name='name' value={product.name} onChange={handleInputChange} /><br />
 
             <label htmlFor='description'>Product Description</label><br />
             <textarea name='description' value={product.description} onChange={handleInputChange} /><br />
 
-            <label htmlFor='brand'>Brand Name:</label><br />
-            <input type='text' name='brand' value={product.brand} onChange={handleInputChange} /><br />
-
             <label htmlFor='price'>Price:</label><br />
             <input type='number' name='price' value={product.price} onChange={handleInputChange} /><br />
 
-            <label htmlFor='specification'>Specification:</label><br />
-            <textarea name='specification' value={product.specification} onChange={handleInputChange} /><br />
 
-            <label htmlFor='quantity'>Items Available</label><br />
-            <input type='number' name='quantity' value={product.quantity} onChange={handleInputChange} /><br />
+            <label htmlFor='brand'>Brand Name:</label><br />
+            <input type='text' name='brand' value={product.brand} onChange={handleInputChange} /><br />
 
-            <label htmlFor='images'>Product Images:</label><br />
-            <input type='file' name='images' accept='image/' onChange={handleImageChange} multiple className='addImages'/><br />
-            {product.images.length > 0 && (
-            <ul className='imagenames'>
-                {product.images.map((imageName, index) => (
-                <li key={index}>{imageName}</li>
-                ))}
-            </ul>
-            )}
+            <label htmlFor='stock_quantity'>Number of Items in stock:</label><br />
+            <input type='number' name='stock_quantity' value={product.stock_quantity} onChange={handleInputChange} /><br />
 
-            <label htmlFor='tags'>Product Tags:</label><br />
-            <div className='tags-input'>
-                <ul id='tags'>
-                    {tags.map((tag, index) => (
-                        <li key={index} className="tag">
-                            <span>{tag}</span>
-                        <button className="delete-button" onClick={() => handleTagDelete(index)}>
-                            X
-                        </button>
-                        </li>
-                    ))}
-                </ul>
-           
-                    <input
-                    type="text"
-                    name="tags"
-                    value={product.tag}
-                    // onChange={(event) => setProduct({ ...product, tag: event.target.value })}
-                    onKeyDown={(event) => handleTagINputKeyDown(event)}
-                    placeholder="Add tags"
-                    />
-                {/* <button type='button' onClick={handleTagChange} className='addTag'>Add</button><br /> */}
-            </div>
+            <label htmlFor="photo1">Product Photo 1:</label>
+            <br />
+            <input type="file" name="photo1" accept="image/*" onChange={handlePhotoChange} />
+            <br />
+
+            <label htmlFor="photo2">Product Photo 2:</label>
+            <br />
+            <input type="file" name="photo2" accept="image/*" onChange={handlePhotoChange} />
+            <br />
+
+            <label htmlFor="photo3">Product Photo 3:</label>
+            <br />
+            <input type="file" name="photo3" accept="image/*" onChange={handlePhotoChange} />
+            <br />
+            
+            <label htmlFor="label">Product Label:</label>
+            <br />
+            <input
+            type="text"
+            name="label"
+            value={product.label}
+            onChange={handleInputChange}
+            />
+            <br />
 
 
             <button type='submit' className='submit'>Add Product</button>

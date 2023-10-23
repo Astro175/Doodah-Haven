@@ -1,0 +1,32 @@
+.container-fluid {
+    margin: 2rem 0;
+    .admin-welcome {
+        display: flex;
+        justify-content: space-around;
+        .signout-btn {
+            padding: 0.6rem 1rem;
+            background-color: transparent;
+            .link {
+                color: #000;
+                text-decoration: none;
+            }
+        }
+    }
+    .row {
+        .sidebar-submenu {
+            padding: 2rem;
+            display: flex;
+            justify-content: space-evenly;
+            li {
+                list-style: none;
+                margin: 1rem 1rem 0;
+                background-color: black;
+                padding: 0.8rem 1rem;
+                .active {
+                    text-decoration: none;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

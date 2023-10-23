@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import {Link, useNavigate} from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
@@ -54,6 +54,7 @@ const Login = () => {
                 },
                 body: JSON.stringify(userData)
             });
+            
 
             if (response.ok) {
                 const responseData = await response.json(); // Parse the response body as JSON
@@ -67,6 +68,7 @@ const Login = () => {
                 //     role: responseData.user.role
                 // });
                 // Handle user login
+                console.log(responseData);
                 console.log('User logged in successfully!');
                 handleLogin();
                 window.alert(`Logged in successfully as ${email}`)
@@ -125,7 +127,7 @@ const Login = () => {
                         <h1>Hello customer</h1>
                         <p>Lorem ipsum dolor sit amet consectetur. Vulputate adipiscing amet purus dui donec malesuada nunc faucibus. Nascetur adipiscing netus egestas elementum facilisi. Quis eu euismod risus netus eu lectus in suspendisse amet. Dignissim tristique mi id in egestas mauris sollicitudin.</p>
                         <button className='sig-btn'>
-                            <Link to='/signup' className="sig-link">Sign Up</Link>
+                                <Link to='/signup' className="sig-link">Sign Up</Link>
                         </button>
                     </div> */}
                 </div>
