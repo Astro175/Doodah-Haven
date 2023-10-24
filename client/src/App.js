@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
@@ -14,14 +14,23 @@ import Cart from './components/cart/Carts';
 import Account from './components/Account';
 import ProductDetails from './components/products/ProductDetails'
 import { CartProvider } from './components/context/CartContext';
-import { AuthProvider } from './components/context/AuthContext
-import AdminDashboard from './components/admin/AdminDashboard';
-import RouteGuard from './RouteGuard';
+
+import { AuthProvider } from './components/context/AuthContext';
+import CreateProduct from './components/admin/CreateProduct';
+// import AdminRouteGuard from './components/RouteGuard';
+import AdminLayout from './components/admin/AdminLayout.js';
+
 
 initFontAwesome();
 
 function App() {
-  const isAdmin = true
+//   const [token, setToken] = useState(null);
+//   // const isAdmin = true
+//   function setTokenInApp(token) {
+//     setToken(token);
+// }
+
+
   return (
     <Router>
       <AuthProvider>
@@ -37,8 +46,30 @@ function App() {
             <Route path='/payment' element={<Payment />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/my-account' element={<Account />} />
-            
+
+            <Route path='/admin/add-product' element={<CreateProduct />} />
+            <Route path='/admin' element={<AdminLayout />} />
+            {/* <Route path='/admin' element={<AdminRouteGuard><AdminLayout /></AdminRouteGuard>} /> */}
+
+
+        
+
           </Routes>
+          {/* Render the Footer only if isAdmin is false */}
+          {/* {!isAdmin && <Footer />} */}
+
+           {/* <Route path="/admin" element={<RouteGuard isAdmin={isAdmin} />}>
+              <Route index element={<AdminDashboard />} />
+            </Route> */}
+            {/* <Route path='/admin/*' element={ */}
+            {/* <AdminLayout> */}
+              {/* <Route path='add-product' element={<CreateProduct />} /> */}
+              {/* Add more admin-related routes here */}
+            {/* </AdminLayout> */}
+          {/* } */}
+        {/* /> */}
+        
+        
           <Footer />
         </CartProvider>
       </AuthProvider>

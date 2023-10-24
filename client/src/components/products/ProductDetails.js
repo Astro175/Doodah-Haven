@@ -2,7 +2,6 @@ import './details.scss';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGreaterThan, faStar, faCartShopping } from '@fortawesome/free-solid-svg-icons';
-import laptop1 from '../../images/laptop.png';
 import { CartContext } from '../context/CartContext';
 import { useContext, useState, useEffect } from 'react';
 import CartPopup from '../cart/CartPopup';
@@ -38,7 +37,7 @@ const ProductDetails = () => {
         }
         
         const selectedItem = {
-            img: product.img, 
+            img: product.photo1, 
             name: product.name,
             price: product.price,
             quantity,
@@ -57,21 +56,29 @@ const ProductDetails = () => {
             setQuantity(quantity - 1);
         }
     }
+
+    const arrayBufferToBase64 = (buffer) => {
+        const binary = [];
+        const bytes = new Uint8Array(buffer);
+        bytes.forEach((byte) => binary.push(String.fromCharCode(byte)));
+        return window.btoa(binary.join(''));
+      }
+
     return(
         <div className='productDetails'>
             {showPopup && <CartPopup />}
             <div className='product-block'>
-                <img src={product.name} alt='product' />
+                <img src={`data:image/jpeg;base64,${arrayBufferToBase64(product.photo1.data.data)}`} alt='product' />
                 <div className='details-block'>
                     <div className='cartLinks'>
                         <Link to="/" className='cart-link'>Home</Link>
                         <FontAwesomeIcon icon={faGreaterThan} size='xs' className='caret-icon' />
                         <Link to='/products' className='cart-link'>Product</Link>
                         < FontAwesomeIcon icon={faGreaterThan} size='xs' className='caret-icon' />
-                        <Link to='/products' className='cart-link'>ProductName</Link>
+                        <Link to='/products' className='cart-link'>{product.name}</Link>
                     </div>
                     <div className='main-details'>
-                        <h2>{product.description}</h2>
+                        <h2>{product.name}</h2>
                         <div className='review'>
                             {[...Array(5)].map((_, index) => (
                                 <FontAwesomeIcon key={index} icon={faStar} className='star'/>
@@ -102,13 +109,13 @@ const ProductDetails = () => {
                 </div>
             </div>
 
-            <h3>Description</h3>
+            {/* <h3>Description</h3>
             <hr />
             <ul className='det'>
                 <li>Thin Bezel Intel 10th Gen i7 10875H.</li>
                 <li>16GB RAM - 1TB SSD NVME</li>
                 <li>Windows 10 PRO Laptop</li>
-            </ul>
+            </ul> */}
             
         
     </div>
