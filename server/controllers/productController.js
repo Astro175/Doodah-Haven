@@ -4,15 +4,20 @@ const fs = require("fs");
 
 // List all products: GET /api/products
 const getAllProducts = async (req, res) => {
+  const page = req.query.page || 1;
+  const limit = 20 // 20 products per page to paginate
+
   try {
     const products = await Product
       .find({})
-      .select("-photo")
-      .limit(12)
-      .sort({ createdAt: -1 });
+      .limit(limit)
+      .skip((page - 1) * limit)
+      .sort({ createdAt: -1 })
+      .exec();
+    const total = await Product.countDocuments();
     res.status(200).send({
-      success: true,
-      counTotal: products.length,
+      totalPages: Math.ceil( total / limit ),
+      currentPage: page,
       products,
     });
   } catch (error) {
@@ -123,7 +128,7 @@ const searchProduct = async (req, res) => {
     }).select('photo');
     res.status(200).json({ results });
   } catch(err) {
-    console.log(error);
+    console.log(err);
     res.status(400).json({ error: `Something went wrong`})
   }
 }
