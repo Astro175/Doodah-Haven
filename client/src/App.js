@@ -14,10 +14,12 @@ import Cart from './components/cart/Carts';
 import Account from './components/Account';
 import ProductDetails from './components/products/ProductDetails'
 import { CartProvider } from './components/context/CartContext';
+
 import { AuthProvider } from './components/context/AuthContext';
 import CreateProduct from './components/admin/CreateProduct';
 // import AdminRouteGuard from './components/RouteGuard';
 import AdminLayout from './components/admin/AdminLayout.js';
+
 
 initFontAwesome();
 
@@ -44,12 +46,14 @@ function App() {
             <Route path='/payment' element={<Payment />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/my-account' element={<Account />} />
+
             <Route path='/admin/add-product' element={<CreateProduct />} />
             <Route path='/admin' element={<AdminLayout />} />
             {/* <Route path='/admin' element={<AdminRouteGuard><AdminLayout /></AdminRouteGuard>} /> */}
 
 
         
+
           </Routes>
           {/* Render the Footer only if isAdmin is false */}
           {/* {!isAdmin && <Footer />} */}
