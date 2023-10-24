@@ -4,14 +4,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
 import './auth.scss';
 import { AuthContext } from "../context/AuthContext";
+// import CreateProduct from "../admin/CreateProduct";
+import { useToken } from "../context/tokenContext";
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
-    // const [redirect, setRedirect] = useState(false);
     const { login } = useContext(AuthContext);
-    const navigate = useNavigate(); // Use the useNavigate hook
+    const navigate = useNavigate();
+    // const [token, setToken] = useState('');
+    const token = useToken();
 
     const handleInputChange = (e) => {
         // example of an event(e) is a user typing in an input field
@@ -50,7 +53,7 @@ const Login = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': token
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(userData)
             });
@@ -61,14 +64,19 @@ const Login = () => {
                 const { token } = responseData;
 
                 localStorage.setItem('token', token); // Store in localStorage for simplicity
+                // setToken(token)
 
-                // Call handleLogin with user data (including 'role')
-                // handleLogin({
-                //     ...responseData.user,
-                //     role: responseData.user.role
-                // });
-                // Handle user login
-                console.log(responseData);
+            
+                console.log('role:', responseData.user.role);
+                if (responseData.user.role === 'admin') {
+                    try {
+                        console.log(`${responseData.user.firstname} Admin logged in successfully`)
+                        return navigate('/admin');
+                        
+                      } catch (error) {
+                        console.error("Navigation error:", error);
+                      }
+                }
                 console.log('User logged in successfully!');
                 handleLogin();
                 window.alert(`Logged in successfully as ${email}`)
@@ -82,15 +90,10 @@ const Login = () => {
                 setError('An error occured. Please try again later');
         }; 
     };
-
-    // useEffect(() => {
-    //     if (redirect) {
-    //         <Navigate to='/' />
-    //     }
-    // }, [redirect]);
     
     return (
         <div className="auth-block">
+            
             <div className="sub-auth">
                 <div className="main-block">
                     <h1>Login</h1>
@@ -131,7 +134,6 @@ const Login = () => {
                         </button>
                     </div> */}
                 </div>
-                {/* {redirect && <Navigate to='/' />} */}
         </div>
     )
     

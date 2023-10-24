@@ -52,7 +52,7 @@ const Header = () => {
                     {isLoggedIn ? (
                         <>
                             <Link className="link" to='/my-account' onClick={removeActive}>My Account</Link>
-                            <Link className="link" to='/' onClick={() => {
+                            <Link className="out-link" to='/' onClick={() => {
                                 handleLogout();
                                 removeActive();
                             }}> Sign Out </Link>

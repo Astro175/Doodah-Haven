@@ -3,15 +3,20 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import './layout.scss'
 const AdminLayout = () => {
-  const { logout } = useContext(AuthContext);
+  const { logout, user } = useContext(AuthContext);
   const handleLogout = () => {
     logout();
-}
+  }
+
   return (
     <div className='container-fluid'>
 
       <div className="admin-welcome">
-            <h2>Welcome, Admin </h2> {/* Display the admin's name */}
+        {user ? (
+          <h2>Welcome, {user.firstname} (Admin) </h2>
+        ) : (
+          <h2>Welcome, Admin</h2>
+        )}
             <button onClick={logout} className='signout-btn'>
             <Link className="link" to='/' onClick={() => {handleLogout()}}>
               Sign Out

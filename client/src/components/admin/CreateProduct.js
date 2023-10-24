@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import './admin.scss'
+import React, { useContext, useState } from 'react';
+import './admin.scss';
+import { useToken } from '../context/tokenContext';
 
 const CreateProduct = () => {
+    const token = useToken();
     const [product, setProduct] = useState({
         name: '',
         description: '',
@@ -28,7 +30,7 @@ const CreateProduct = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+        
         const formData = new FormData();
         formData.append('name', product.name);
         formData.append('description', product.description);
@@ -40,11 +42,10 @@ const CreateProduct = () => {
         formData.append('photo2', product.photo2);
         formData.append('photo3', product.photo3);
     
-        const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiO…jk2fQ.C8CiJa1f23IvvKAb1ID7Zz5swZmoEBDdHNbWbxQ-Dew';
-    
         const headers = {
-            'Authorization': `Bearer ${jwt}`,
+            'Authorization': `Bearer ${token}`,
         };
+        console.log('headers', headers)
     
         const response = await fetch('http://localhost:4000/api/products/add', {
         method: 'POST',

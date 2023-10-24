@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
@@ -22,7 +22,12 @@ import AdminLayout from './components/admin/AdminLayout.js';
 initFontAwesome();
 
 function App() {
-  // const isAdmin = true
+//   const [token, setToken] = useState(null);
+//   // const isAdmin = true
+//   function setTokenInApp(token) {
+//     setToken(token);
+// }
+
 
   return (
     <Router>
@@ -41,7 +46,7 @@ function App() {
             <Route path='/my-account' element={<Account />} />
             <Route path='/admin/add-product' element={<CreateProduct />} />
             <Route path='/admin' element={<AdminLayout />} />
-            {/* <Route path="/admin" element={<AdminRouteGuard element={<AdminLayout />} />} /> */}
+            {/* <Route path='/admin' element={<AdminRouteGuard><AdminLayout /></AdminRouteGuard>} /> */}
 
 
         
