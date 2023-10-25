@@ -14,7 +14,7 @@ const Login = () => {
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
     // const [token, setToken] = useState('');
-    const token = useToken();
+    const { updateToken } = useToken();
 
     const handleInputChange = (e) => {
         // example of an event(e) is a user typing in an input field
@@ -25,8 +25,8 @@ const Login = () => {
         setError(null);
     };
 
-    const handleLogin = () => {
-        login();
+    const handleLogin = (userData) => {
+        login(userData);
     }
 
     // const handleLogin = (userData) => {
@@ -61,16 +61,17 @@ const Login = () => {
 
             if (response.ok) {
                 const responseData = await response.json(); // Parse the response body as JSON
-                const { token } = responseData;
+                const { token, user } = responseData;
 
                 localStorage.setItem('token', token); // Store in localStorage for simplicity
-                // setToken(token)
+                updateToken(token);
 
             
                 console.log('role:', responseData.user.role);
                 if (responseData.user.role === 'admin') {
                     try {
-                        console.log(`${responseData.user.firstname} Admin logged in successfully`)
+                        console.log(`${responseData.user.firstname} Admin logged in successfully`);
+                        handleLogin(user);
                         return navigate('/admin');
                         
                       } catch (error) {
@@ -79,6 +80,7 @@ const Login = () => {
                 }
                 console.log('User logged in successfully!');
                 handleLogin();
+                handleLogin(user);
                 window.alert(`Logged in successfully as ${email}`)
                 navigate('/'); // Navigate to the home page
             } else {

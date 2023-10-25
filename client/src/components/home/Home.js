@@ -2,7 +2,8 @@ import React from 'react';
 import './home.scss';
 import rectangleDrone from '../../images/Rectangle-drone.png';
 import drone from '../../images/drone.png';
-import HomeProducts from './homeProducts'
+// import HomeProducts from './homeProducts'
+import ProductCarousel from './ProductCarousel';
 import Partners from './partner';
 import { Link } from 'react-router-dom';
 
@@ -31,10 +32,11 @@ const Home = () => {
         </div>
       </div>
 
-      <HomeProducts />
+      {/* <HomeProducts /> */}
+      <ProductCarousel />
       
       <Partners />
-      <div className='block'>
+      {/* <div className='block'>
         <h2>Best Sellers</h2>
         <div className='boxes'>
           <div className='box'>
@@ -69,7 +71,7 @@ const Home = () => {
             <h3>Camera</h3>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
