@@ -39,6 +39,7 @@ const Products = () => {
           <a href='/'>See all new products</a>
         </div>
         <div className='product-block'>
+
           {products.map((product) => (
             <div key={product._id} className='product-badge'>
 
@@ -48,11 +49,13 @@ const Products = () => {
               <span className='stock'>In stock</span>
             </div>
 
+
             {product.photo1 ? ( // Check if photo1 exists
             <img src={`data:image/jpeg;base64,${arrayBufferToBase64(product.photo1.data.data)}`} alt='product-img' />
               ) : (
                 <img src={product.photo1} alt='placeholder' /> // Provide a placeholder image
               )}
+
 
             <h3>{product.name}</h3>
             <p className='small'>Brand: {product.brand}</p>

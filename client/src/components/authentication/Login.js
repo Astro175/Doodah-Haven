@@ -41,6 +41,7 @@ const Login = () => {
             return;
         }
 
+
         const userData = {
             email,
             password
@@ -60,6 +61,7 @@ const Login = () => {
             
 
             if (response.ok) {
+
                 const responseData = await response.json(); // Parse the response body as JSON
                 const { token, user } = responseData;
 
