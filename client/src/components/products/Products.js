@@ -23,6 +23,7 @@ const Products = () => {
       })
       .catch((error) => console.error('Error fetching products', error));
   }, []);
+  console.log('Products:', products)
 
   const arrayBufferToBase64 = (buffer) => {
     const binary = [];
