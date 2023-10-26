@@ -15,7 +15,9 @@ const getAllProducts = async (req, res) => {
       .sort({ createdAt: -1 })
       .exec();
     const total = await Product.countDocuments();
+    // console.log(products);
     res.status(200).send({
+      success: true,
       totalPages: Math.ceil( total / limit ),
       currentPage: page,
       products,
