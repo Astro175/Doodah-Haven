@@ -24,7 +24,7 @@ const ProductDetails = () => {
           .then((data) => setProduct(data))
           .catch((error) => console.error('Error fetching product', error));
       }, [productId]);
-    
+
       if (!product) {
         return <div>Loading...</div>;
       }
@@ -96,8 +96,8 @@ const ProductDetails = () => {
                                 <button onClick={increaseQuantity}>+</button> 
                             </div>
                         </div>
-                        <p className='strike'>{product.price}</p>
-                        <p>{product.price}</p>
+                        <p className='strike'>NGN {product.price}</p>
+                        <p>NGN {product.price}</p>
                         <button className='addCart' onClick={handleAddToCart}>
                             <FontAwesomeIcon icon={faCartShopping} size='xs' color='#fff' className='cart-icon'/>
                             Add To Cart

@@ -7,7 +7,6 @@ import { CartContext } from '../context/CartContext';
 
 const Cart = () => {
     const { cart, removeFromCart, clearCart } = useContext(CartContext);
-    console.log('Cart items:', cart) 
     const [quantities, setQuantities] = useState(Array(cart.length).fill(1));
 
 
@@ -37,6 +36,14 @@ const Cart = () => {
 
     const handleClearCart = () => {
         clearCart();
+    }
+
+    const truncateName = (name) => {
+        const words = name.split(' ');
+        if (words.length > 3) {
+            return words.slice(0, 3).join(' ') + '...';
+        }
+        return name;
     }
     return (
         <div className='cart'>
@@ -70,32 +77,19 @@ const Cart = () => {
                                 <tbody>
                                     {cart.map((item, index) => (
                                         <tr key={index}>
-                                            <td>{item.name}</td>
-                                            <td>N{item.price}</td>
+                                            <td>{truncateName(item.name)}</td>
+                                            <td># {item.price}</td>
                                             <td className='items'>
                                                 <button onClick={() => decrease(index)}>-</button>
                                                 <span>{quantities[cart.indexOf(item)]}</span>
                                                 <button onClick={() => increase(index)}>+</button> 
                                             </td>
-                                            <td>N{calculateSubtotal(item)}</td>
+                                            <td># {calculateSubtotal(item)}</td>
                                             <td>
                                                 <FontAwesomeIcon icon={faTrash} onClick={() => handleDeleteItem(index)} cursor='pointer'/>
                                             </td>
                                         </tr>
                                     ))}
-                                    {/* <tr>
-                                        <td>MacBook</td>
-                                        <td>N160,000.00</td>
-                                        <td className='items'>
-                                            <button>-</button>
-                                                <span>1</span>
-                                            <button>+</button>
-                                        </td>
-                                        <td>N160,000.00</td>
-                                        <td>
-                                            <FontAwesomeIcon icon={faDumpster} />
-                                        </td>
-                                    </tr> */}
                                 </tbody>
                                 
                             </table>
@@ -108,7 +102,7 @@ const Cart = () => {
                 <div className='payCart'>
                     <div className='total'>
                         <p>Subtotal</p>
-                        <p>N{totalSubtotal}</p>
+                        <p># {totalSubtotal}</p>
                     </div>
                     <p className='shipfee'>Shippings fees are free</p>
                     <button>
