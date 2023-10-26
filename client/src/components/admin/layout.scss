@@ -11,21 +11,38 @@
                 text-decoration: none;
             }
         }
+        .active {
+            text-decoration: none;
+            color: #fff;
+            background-color: black;
+            padding: 0.8rem 1rem;
+        }
     }
-    .row {
-        .sidebar-submenu {
-            padding: 2rem;
-            display: flex;
-            justify-content: space-evenly;
-            li {
-                list-style: none;
-                margin: 1rem 1rem 0;
-                background-color: black;
-                padding: 0.8rem 1rem;
-                .active {
-                    text-decoration: none;
-                    color: #fff;
-                }
+    .product-table {
+        margin: 2rem;
+        h3 {
+            text-align: center;
+            padding-bottom: 1rem;
+        }
+        .product-list {
+            border-collapse: collapse;
+            width: 100%;
+            td{
+                border: 1px solid #ddd;
+                padding: 0.5rem;
+            }
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+            &:hover {
+                background-color: #ddd;
+            }
+            th {
+                border: 1px solid #ddd;
+                padding: 0.8rem 0.5rem;
+                text-align: left;
+                background-color: #2920aa;
+                color: #fff;
             }
         }
     }

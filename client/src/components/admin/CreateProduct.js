@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import './admin.scss';
 import { useToken } from '../context/tokenContext';
 
 const CreateProduct = () => {
-    const token = useToken();
+    const { token } = useToken();
     const [product, setProduct] = useState({
         name: '',
         description: '',
@@ -13,18 +13,25 @@ const CreateProduct = () => {
         photo1: null,
         photo2: null,
         photo3: null,
-        reviews: [], // You may need to update this if you want to add reviews
+        reviews: [],
         label: '',
     });
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setProduct({ ...product, [name]: value });
+        setProduct((prevProduct) => ({
+            ...prevProduct,
+            [name]: value,
+          }));
     };
 
     const handlePhotoChange = (e) => {
         const { name, files } = e.target;
-        setProduct({ ...product, [name]: files[0] });
+        setProduct((prevProduct) => ({
+            ...prevProduct,
+            [name]: files[0],
+          }));
+        
       };
     
 
@@ -43,21 +50,21 @@ const CreateProduct = () => {
         formData.append('photo3', product.photo3);
     
         const headers = {
-            'Authorization': `Bearer ${token}`,
+            'Authorization': token,
         };
         console.log('headers', headers)
     
         const response = await fetch('http://localhost:4000/api/products/add', {
-        method: 'POST',
-        headers,
-        body: formData
+            method: 'POST',
+            headers,
+            body: formData,
         });
     
         if (response.ok) {
-        const data = await response.json();
-        console.log('Product added successfully', data);
+            const data = await response.json();
+            console.log('Product added successfully', data);
         } else {
-        console.error('Error adding product:', response.statusText)
+            console.error('Error adding product:', response.statusText)
         }
     };
 

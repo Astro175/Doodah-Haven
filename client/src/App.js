@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
@@ -19,6 +19,7 @@ import { AuthProvider } from './components/context/AuthContext';
 import CreateProduct from './components/admin/CreateProduct';
 // import AdminRouteGuard from './components/RouteGuard';
 import AdminLayout from './components/admin/AdminLayout.js';
+import { TokenProvider } from './components/context/tokenContext';
 
 
 initFontAwesome();
@@ -35,6 +36,7 @@ function App() {
     <Router>
       <AuthProvider>
         <CartProvider>
+          <TokenProvider>
           <Header />
           <Routes>
             <Route path='/' exact element={<Home />} />
@@ -68,7 +70,7 @@ function App() {
             {/* </AdminLayout> */}
           {/* } */}
         {/* /> */}
-        
+        </TokenProvider>
         
           <Footer />
         </CartProvider>
