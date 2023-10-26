@@ -74,24 +74,24 @@ const CreateProduct = () => {
         <form onSubmit={handleSubmit}>
             <h1>Add Products</h1>
             <label htmlFor='name'>Product name:</label><br />
-            <input type='text' name='name' value={product.name} onChange={handleInputChange} /><br />
+            <input type='text' name='name' value={product.name} onChange={handleInputChange} required/><br />
 
             <label htmlFor='description'>Product Description</label><br />
-            <textarea name='description' value={product.description} onChange={handleInputChange} /><br />
+            <textarea name='description' value={product.description} onChange={handleInputChange} required/><br />
 
             <label htmlFor='price'>Price:</label><br />
-            <input type='number' name='price' value={product.price} onChange={handleInputChange} /><br />
+            <input type='number' name='price' value={product.price} onChange={handleInputChange} required/><br />
 
 
             <label htmlFor='brand'>Brand Name:</label><br />
             <input type='text' name='brand' value={product.brand} onChange={handleInputChange} /><br />
 
             <label htmlFor='stock_quantity'>Number of Items in stock:</label><br />
-            <input type='number' name='stock_quantity' value={product.stock_quantity} onChange={handleInputChange} /><br />
+            <input type='number' name='stock_quantity' value={product.stock_quantity} onChange={handleInputChange} required/><br />
 
             <label htmlFor="photo1">Product Photo 1:</label>
             <br />
-            <input type="file" name="photo1" accept="image/*" onChange={handlePhotoChange} />
+            <input type="file" name="photo1" accept="image/*" onChange={handlePhotoChange} required/>
             <br />
 
             <label htmlFor="photo2">Product Photo 2:</label>
@@ -104,16 +104,10 @@ const CreateProduct = () => {
             <input type="file" name="photo3" accept="image/*" onChange={handlePhotoChange} />
             <br />
             
-            <label htmlFor="label">Product Label:</label>
+            <label htmlFor="label" required>Label:</label>
             <br />
-            <input
-            type="text"
-            name="label"
-            value={product.label}
-            onChange={handleInputChange}
-            />
+            <input type="text" name="label" value={product.label} onChange={handleInputChange} />
             <br />
-
 
             <button type='submit' className='submit'>Add Product</button>
         </form>

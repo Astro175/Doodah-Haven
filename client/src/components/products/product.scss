@@ -30,16 +30,16 @@
         display: flex;
         margin-top: 1rem;
         flex-wrap: wrap;
-        gap: 20px;
+        // gap: 20px;
         justify-content: center;
         padding: 1rem;
         
         .product-badge {
             background-color: #fff;
-            border: 1px solid gray;
+            // border: 1px solid gray;
             padding: 1.5rem;
             
-            width: 250px;
+            width: 300px;
             .product-link {
                 color: #000;
                 text-decoration: none;
@@ -48,7 +48,6 @@
                 width: 200px;
                 height: 200px;
                 margin: 1rem 0;
-                border: 1px solid;
             }
             .small {
                 font-weight: 500;

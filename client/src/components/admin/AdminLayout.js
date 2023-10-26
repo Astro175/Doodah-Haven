@@ -11,21 +11,32 @@ const AdminLayout = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetchProducts();
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/api/products/');
+        if (!response.ok) {
+          console.error('API response does not indicate success');
+          return;
+        }
+  
+        const data = await response.json();
+  
+        setProducts(data.products);
+      } catch (error) {
+        console.error('Error fetching products', error);
+      }
+    };
+  
+    fetchData();
   }, []);
 
-  const fetchProducts = () => {
-    fetch('http://localhost:4000/api/products')
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          setProducts(data.products);
-        } else {
-          console.error('API response does not indicate success');
-        }
-      })
-      .catch((error) => console.error('Error fetching products', error));
-  };
+  const truncateName = (name) => {
+    const words = name.split(' ');
+    if (words.length > 4) {
+        return words.slice(0, 3).join(' ') + '...';
+    }
+    return name;
+  }
 
   return (
     <div className='container-fluid'>
@@ -60,7 +71,7 @@ const AdminLayout = () => {
           <tbody>
             {products.map((product) => (
               <tr key={product._id}>
-                <td>{product.name}</td>
+                <td>{truncateName(product.name)}</td>
                 <td>{product.brand}</td>
                 <td>{product.stock_quantity}</td>
                 <td>{product.price}</td>
