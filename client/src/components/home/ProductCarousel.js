@@ -57,7 +57,7 @@ const ProductCarousel = () => {
             <p>{truncateName(product.name)}</p>
             <img src={product.image} alt='popular products' />
             <div className="product-price">
-                <p>Price: ${product.price}</p>
+                <p>Price: # {product.price}</p>
                 <FontAwesomeIcon icon={faArrowRight} className="arrow"/>
             </div>
             </Link>
