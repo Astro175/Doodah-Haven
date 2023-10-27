@@ -2,20 +2,52 @@ const Product = require('../models/productModel');
 const mongoose = require('mongoose');
 const fs = require("fs");
 
+
+
 // List all products: GET /api/products
 const getAllProducts = async (req, res) => {
-  const page = req.query.page || 1;
   const limit = 20 // 20 products per page to paginate
+  let total;
 
   try {
-    const products = await Product
-      .find({})
-      .limit(limit)
-      .skip((page - 1) * limit)
-      .sort({ createdAt: -1 })
-      .exec();
-    const total = await Product.countDocuments();
-    // console.log(products);
+    // Filtering through the products
+    const queryObj = { ...req.query };
+    const excludedFields = ["page", "sort", "fields"];
+    excludedFields.forEach((element) => delete queryObj[element]);
+
+    let queryStr = JSON.stringify(queryObj);
+    console.log(queryStr);
+    queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
+    console.log(JSON.parse(queryStr));
+    
+
+    let query = Product.find(JSON.parse(queryStr));
+
+    //Sorts the products by their field keyword alphabetically
+    if (req.query.sort) {
+      const sortBy = req.query.sort.split(',').join(' ');
+      query = query.sort(sortBy);
+    } else {
+      query = query.sort('-createdAt')
+    }
+
+    // limiting the fields
+    if (req.query.fields) {
+      const fields = req.query.fields.split(',').join(' ');
+      query = query.select(fields);
+    } else {
+      query = query.select('-__v')
+    }
+    // pagination
+    const { page } = req.query;
+    const skip = (page - 1) * limit;
+    query.skip(skip).limit(limit);
+    if (req.query.page) {
+      total = await Product.countDocuments();
+      if (skip >= total) return res.status(404).json({ error: 'Page does not exist' });
+    }
+    
+    const products = await query;
     res.status(200).send({
       success: true,
       totalPages: Math.ceil( total / limit ),
