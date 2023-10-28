@@ -66,6 +66,20 @@ const CreateProduct = () => {
         } else {
             console.error('Error adding product:', response.statusText)
         }
+
+        // Clear form data after submit
+        setProduct({
+            name: '',
+            description: '',
+            price: 0,
+            brand: '',
+            stock_quantity: 0,
+            photo1: null,
+            photo2: null,
+            photo3: null,
+            reviews: [],
+            label: '',
+        });
     };
 
     return (
@@ -114,9 +128,9 @@ const CreateProduct = () => {
                 onChange={handleInputChange}
                 required
                 >
-                <option value="popular">popular</option>
-                <option value="hot">hot</option>
-                <option value="regular">regular</option>
+                <option >popular</option>
+                <option >hot</option>
+                <option >regular</option>
                 </select>
             <br />
 

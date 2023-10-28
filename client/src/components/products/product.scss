@@ -39,7 +39,7 @@
             padding: 2rem 0.5rem;
             border: 1px solid rgb(59, 59, 216);
             height: 100vmax;
-            width: 400px;
+            width: 500px;
             hr {
                 color: rgb(59, 59, 216);
             }
@@ -87,6 +87,11 @@
             }
             .stock {
                 color: #78A962;
+                font-size: 11px;
+                margin-left: .5rem;
+            }
+            .red {
+                color: red;
                 font-size: 11px;
                 margin-left: .5rem;
             }

@@ -100,7 +100,10 @@ const Products = () => {
               <Link to={`/products/${product._id}`} className='product-link'>
                 <div>
                   <FontAwesomeIcon icon={faCheckCircle} color='#78A962'/>
-                  <span className='stock'>In stock</span>
+                  {/* <span className='stock'>In stock</span> */}
+                  <span className={`${product.stock_quantity > 0 ? 'stock' : 'red'}`}>
+            {product.stock_quantity > 0 ? 'In stock' : 'Not available'}
+          </span>
                 </div>
 
                 {product.photo1 ? ( // Check if photo1 exists
