@@ -148,7 +148,9 @@ const filterProduct = async (req, res) => {
     const popularProducts = await Product
       .find({ label: 'popular' })
       .sort({ createdAt: -1 });
-    res.status(200).json(popularProducts);
+    res.status(200).send({
+      success: true,
+      popularProducts});
   } catch (error) {
     console.log(error);
     res.status(500).send({
