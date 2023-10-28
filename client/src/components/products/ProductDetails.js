@@ -16,7 +16,6 @@ const ProductDetails = () => {
     const { isLoggedIn } = useContext(AuthContext);
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
-
     useEffect(() => {
         // Fetch product data based on the productId
         fetch(`http://localhost:4000/api/products/${productId}`)
