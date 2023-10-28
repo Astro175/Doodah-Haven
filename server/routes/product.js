@@ -14,6 +14,9 @@ const formidable = require("express-formidable");
 
 const router = express.Router()
 
+// Gets all product with label popular
+router.get('/popular', filterProduct);
+
 // List all products
 router.get('/', getAllProducts);
 
@@ -29,11 +32,8 @@ router.put('/update/:id', requireLogin, isAdmin, updateProduct);
 // Delete a product by ID
 router.delete('/delete/:id', requireLogin, isAdmin, deleteProduct);
 
-// Gets all product with label popular
-
-router.get('/popular', filterProduct);
-
 // Searches for product
 
 router.get('/search/:keyword', searchProduct)
+
 module.exports = router;
