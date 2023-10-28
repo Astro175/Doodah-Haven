@@ -104,9 +104,20 @@ const CreateProduct = () => {
             <input type="file" name="photo3" accept="image/*" onChange={handlePhotoChange} />
             <br />
             
-            <label htmlFor="label" required>Label:</label>
-            <br />
-            <input type="text" name="label" value={product.label} onChange={handleInputChange} />
+            <label htmlFor="label">Label:</label>
+            {/* <br /> */}
+            {/* <input type="text" name="label" value={product.label} onChange={handleInputChange} /> */}
+            <select
+                className="label-select"
+                name="label"
+                value={product.label}
+                onChange={handleInputChange}
+                required
+                >
+                <option value="popular">popular</option>
+                <option value="hot">hot</option>
+                <option value="regular">regular</option>
+                </select>
             <br />
 
             <button type='submit' className='submit'>Add Product</button>

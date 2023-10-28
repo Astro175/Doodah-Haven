@@ -39,7 +39,7 @@ const Header = () => {
                     </div>
                 </div>
                 <form className="search-form">
-                    <input type="search" name="search" className="search-input"/>
+                    <input type="search" name="search" className="search-input" placeholder="Search products and prices"/>
                     <button type="submit">
                         <FontAwesomeIcon icon={faSearch} />
                     </button>
