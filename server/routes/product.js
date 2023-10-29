@@ -27,7 +27,7 @@ router.get('/:id', getAProduct);
 router.post('/add', requireLogin, isAdmin, formidable(), addProduct);
 
 // Update a product by ID
-router.put('/update/:id', requireLogin, isAdmin, updateProduct);
+router.patch('/update/:id', requireLogin, isAdmin, updateProduct);
 
 // Delete a product by ID
 router.delete('/delete/:id', requireLogin, isAdmin, deleteProduct);
