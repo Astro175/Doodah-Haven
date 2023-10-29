@@ -67,7 +67,7 @@ const getAProduct = async (req, res) => {
 
   // Checks if the id passed is a valid mongoose id
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: 'No such product' });
+    return res.status(404).json({ error: 'Invalid ID' });
   }
 
   const product = await Product.findById(id);
@@ -134,12 +134,38 @@ const addProduct = async (req, res) => {
 
 // Update a product (admin-only): PUT /api/products/update/:id
 const updateProduct = async (req, res) => {
-  res.json({ message: 'Update a product' });
+  const { id } = req.params;
+
+  // Checks if ID is valid
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: 'Invalid ID' });
+  }
+  const product = await Product.findByIdAndUpdate(id, { ...req.body }, { new: true });
+
+  if (!product) {
+    return res.status(200).send({
+      message: 'Updated product successfully',
+      product
+    });
+  }
+  res.status(200).json(product);
 };
 
 // Delete a product (admin-only): DELETE /api/products/delete/:id
 const deleteProduct = async (req, res) => {
-  res.json({ message: 'Delete a Product' });
+  const { id } = req.body;
+  // Checks if ID is valid
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: 'Invalid ID' });
+  }
+  const product = Product.findByIdAndDelete(id);
+
+  if (!product) {
+    return res.status(404).json({ error: 'Invalid ID' });
+  }
+  res.status(200).send({
+    message: 'Product deleted successfully'
+  });
 };
 
 const filterProduct = async (req, res) => {
@@ -150,7 +176,8 @@ const filterProduct = async (req, res) => {
       .sort({ createdAt: -1 });
     res.status(200).send({
       success: true,
-      popularProducts});
+      popularProducts
+    });
   } catch (error) {
     console.log(error);
     res.status(500).send({
