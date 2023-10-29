@@ -14,12 +14,13 @@ import Cart from './components/cart/Carts';
 import Account from './components/Account';
 import ProductDetails from './components/products/ProductDetails'
 import { CartProvider } from './components/context/CartContext';
-import ProductsByPriceRange from './components/products/ProductsByPriceRange';
 import { AuthProvider } from './components/context/AuthContext';
 import CreateProduct from './components/admin/CreateProduct';
 // import AdminRouteGuard from './components/RouteGuard';
 import AdminLayout from './components/admin/AdminLayout.js';
 import { TokenProvider } from './components/context/tokenContext';
+import EditProduct from './components/admin/EditProduct';
+import { ProductsByPriceRange } from './components/products/ProductsByPriceRange';
 
 
 initFontAwesome();
@@ -35,7 +36,7 @@ function App() {
           <Routes>
             <Route path='/' exact element={<Home />} />
             <Route path='/products' element={<Products />} />
-            <Route path="/products/:minPrice-:maxPrice" element={<ProductsByPriceRange />} />
+            <Route path="/products/price/:minPrice-:maxPrice" element={<ProductsByPriceRange />} />
 
             <Route path='/products/:productId' element={<ProductDetails />} />
             <Route path='/about' element={<AboutUs />} />
@@ -47,6 +48,7 @@ function App() {
 
             <Route path='/admin/add-product' element={<CreateProduct />} />
             <Route path='/admin' element={<AdminLayout />} />
+            <Route path="/admin/edit-product/:productId" element={<EditProduct />} />
             {/* <Route path='/admin' element={<AdminRouteGuard><AdminLayout /></AdminRouteGuard>} /> */}
 
 

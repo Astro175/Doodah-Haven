@@ -2,13 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import './layout.scss'
+import { useToken } from '../context/tokenContext';
+
 const AdminLayout = () => {
   const { user } = useContext(AuthContext);
-  // const handleLogout = () => {
-  //   logout();
-  // }
-
   const [products, setProducts] = useState([]);
+  const { token } = useToken();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,6 +37,28 @@ const AdminLayout = () => {
     return name;
   }
 
+  const handleDeleteProduct = (productId) => {
+    fetch(`http://localhost:4000/api/products/delete/${productId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': token,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => {
+      if (response.ok) {
+        // If the deletion was successful, update the product list in the frontend
+        setProducts((prevProducts) =>
+          prevProducts.filter((product) => product._id !== productId)
+        );
+      } else {
+        console.error('Failed to delete the product');
+      }
+    })
+    .catch((error) => {
+      console.error('Error deleting the product', error);
+    });
+  }
   return (
     <div className='container-fluid'>
 
@@ -75,6 +96,12 @@ const AdminLayout = () => {
                 <td>{product.brand}</td>
                 <td>{product.stock_quantity}</td>
                 <td>{product.price}</td>
+                <td>
+                  <Link to={`/admin/edit-product/${product._id}`}>Edit</Link>
+                </td>
+                <td>
+                  <button className='delete-btn' onClick={() => handleDeleteProduct(product._id)}>Delete</button>
+                </td>
               </tr>
             ))}
           </tbody>
