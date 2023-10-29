@@ -66,6 +66,20 @@ const CreateProduct = () => {
         } else {
             console.error('Error adding product:', response.statusText)
         }
+
+        // Clear form data after submit
+        setProduct({
+            name: '',
+            description: '',
+            price: 0,
+            brand: '',
+            stock_quantity: 0,
+            photo1: null,
+            photo2: null,
+            photo3: null,
+            reviews: [],
+            label: '',
+        });
     };
 
     return (
@@ -104,9 +118,20 @@ const CreateProduct = () => {
             <input type="file" name="photo3" accept="image/*" onChange={handlePhotoChange} />
             <br />
             
-            <label htmlFor="label" required>Label:</label>
-            <br />
-            <input type="text" name="label" value={product.label} onChange={handleInputChange} />
+            <label htmlFor="label">Label:</label>
+            {/* <br /> */}
+            {/* <input type="text" name="label" value={product.label} onChange={handleInputChange} /> */}
+            <select
+                className="label-select"
+                name="label"
+                value={product.label}
+                onChange={handleInputChange}
+                required
+                >
+                <option >popular</option>
+                <option >hot</option>
+                <option >regular</option>
+                </select>
             <br />
 
             <button type='submit' className='submit'>Add Product</button>

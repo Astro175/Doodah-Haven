@@ -78,13 +78,13 @@ const Cart = () => {
                                     {cart.map((item, index) => (
                                         <tr key={index}>
                                             <td>{truncateName(item.name)}</td>
-                                            <td># {item.price}</td>
+                                            <td>₦{item.price}</td>
                                             <td className='items'>
                                                 <button onClick={() => decrease(index)}>-</button>
                                                 <span>{quantities[cart.indexOf(item)]}</span>
                                                 <button onClick={() => increase(index)}>+</button> 
                                             </td>
-                                            <td># {calculateSubtotal(item)}</td>
+                                            <td>₦{calculateSubtotal(item)}</td>
                                             <td>
                                                 <FontAwesomeIcon icon={faTrash} onClick={() => handleDeleteItem(index)} cursor='pointer'/>
                                             </td>
@@ -102,7 +102,7 @@ const Cart = () => {
                 <div className='payCart'>
                     <div className='total'>
                         <p>Subtotal</p>
-                        <p># {totalSubtotal}</p>
+                        <p>₦{totalSubtotal}</p>
                     </div>
                     <p className='shipfee'>Shippings fees are free</p>
                     <button>

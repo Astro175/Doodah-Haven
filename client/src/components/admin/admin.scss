@@ -24,6 +24,12 @@
         textarea {
             height: 150px;
         }
+        .label-select {
+            font-size: 1rem;
+            margin-left: 1rem;
+            padding: 0.5rem;
+            color: rgb(74, 40, 27)
+        }
         .addTag {
             border: none;
             background-color: green;
@@ -44,6 +50,7 @@
                 background-color: #1e1eb9; 
             }
         }
+        
         .addimages {
             color: #fff;
             background-color: blue;

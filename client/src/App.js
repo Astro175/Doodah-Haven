@@ -14,7 +14,7 @@ import Cart from './components/cart/Carts';
 import Account from './components/Account';
 import ProductDetails from './components/products/ProductDetails'
 import { CartProvider } from './components/context/CartContext';
-
+import ProductsByPriceRange from './components/products/ProductsByPriceRange';
 import { AuthProvider } from './components/context/AuthContext';
 import CreateProduct from './components/admin/CreateProduct';
 // import AdminRouteGuard from './components/RouteGuard';
@@ -25,12 +25,6 @@ import { TokenProvider } from './components/context/tokenContext';
 initFontAwesome();
 
 function App() {
-//   const [token, setToken] = useState(null);
-//   // const isAdmin = true
-//   function setTokenInApp(token) {
-//     setToken(token);
-// }
-
 
   return (
     <Router>
@@ -41,6 +35,8 @@ function App() {
           <Routes>
             <Route path='/' exact element={<Home />} />
             <Route path='/products' element={<Products />} />
+            <Route path="/products/:minPrice-:maxPrice" element={<ProductsByPriceRange />} />
+
             <Route path='/products/:productId' element={<ProductDetails />} />
             <Route path='/about' element={<AboutUs />} />
             <Route path='/login' element={<Login />} />

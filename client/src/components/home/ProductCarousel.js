@@ -9,27 +9,38 @@ import { Link } from 'react-router-dom';
 
 
 const ProductCarousel = () => {
-  const [products, setProducts] = useState([]);
+  const [popularProducts, setPopularProducts] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchPopular = async () => {
       try {
-        const response = await fetch('http://localhost:4000/api/products/');
-        if (!response.ok) {
-          console.error('API response does not indicate success');
-          return;
+        const response = await fetch('http://localhost:4000/api/products/popular')
+
+        if (response.ok) {
+          const data = await response.json();
+          setPopularProducts(data)
         }
-  
-        const data = await response.json();
-  
-        setProducts(data.products);
       } catch (error) {
         console.error('Error fetching products', error);
       }
-    };
-  
-    fetchData();
+    }
+    fetchPopular();
   }, []);
+
+  const truncateName = (name) => {
+    const words = name.split(' ');
+    if (words.length > 7) {
+        return words.slice(0, 3).join(' ') + '...';
+    }
+    return name;
+  };
+
+  const arrayBufferToBase64 = (buffer) => {
+    const binary = [];
+    const bytes = new Uint8Array(buffer);
+    bytes.forEach((byte) => binary.push(String.fromCharCode(byte)));
+    return window.btoa(binary.join(''));
+  };
 
   const settings = {
     dots: true,
@@ -39,30 +50,27 @@ const ProductCarousel = () => {
     slidesToScroll: 4, // Number of products to scroll by
   };
 
-  const truncateName = (name) => {
-    const words = name.split(' ');
-    if (words.length > 4) {
-        return words.slice(0, 3).join(' ') + '...';
-    }
-    return name;
-}
-
   return (
     <div className="products-display">
-      <h2>Featured Products</h2>
+      <h2>Popular Products</h2>
       <Slider {...settings}>
-        {products.map((product) => (
-          <div key={product._id} className="package">
-            <Link to={`/products/${product._id}`} className='productId-link'>
-            <p>{truncateName(product.name)}</p>
-            <img src={product.image} alt='popular products' />
+      {popularProducts && popularProducts.length > 0 ? (
+          popularProducts.map((popular) => (
+            <div key={popular._id} className="package">
+            <Link to={`/products/${popular._id}`} className='productId-link'>
+            <p>{truncateName(popular.name)}</p>
+            <img src={`data:image/jpeg;base64,${arrayBufferToBase64(popular.photo1.data.data)}`} alt='product-img' />
             <div className="product-price">
-                <p>Price: ${product.price}</p>
+                <p>Price: ₦{popular.price}</p>
                 <FontAwesomeIcon icon={faArrowRight} className="arrow"/>
             </div>
             </Link>
           </div>
-        ))}
+
+        ))
+        ) : (
+          <p>No popular products available</p>
+        )}
       </Slider>
     </div>
   );
