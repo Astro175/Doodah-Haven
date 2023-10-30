@@ -1,5 +1,6 @@
 const Product = require('../models/productModel');
 const mongoose = require('mongoose');
+const cloudinaryImageUpload = require('../utils/cloudinary');
 const fs = require('fs');
 
 // List all products: GET /api/products
@@ -81,8 +82,7 @@ const getAProduct = async (req, res) => {
 // Create a new product (admin-only): POST /api/products/add
 const addProduct = async (req, res) => {
   try {
-    const { name, description, price, brand, stock_quantity, label } = req.fields;
-    const { photo1, photo2, photo3 } = req.files;
+    const { name, description, price, brand, stock_quantity } = req.fields;
     // validation
     switch (true) {
       case !name:
@@ -95,30 +95,37 @@ const addProduct = async (req, res) => {
         return res.status(500).send({ error: 'Brand is Required' });
       case !stock_quantity:
         return res.status(500).send({ error: 'Stock Quantity is Required' });
-      case !label:
-        return res.status(500).send({ error: 'Label is Required' });
-      case
-        (photo1 && photo1.size > 500000) ||
-          (photo2 && photo2.size > 500000) ||
-          (photo3 && photo3.size > 500000):
-        return res
-          .status(500)
-          .send({ error: 'Photos are Required and should be less then 500kb' });
     }
 
     const products = new Product({ ...req.fields });
-    if (photo1) {
-      products.photo1.data = fs.readFileSync(photo1.path);
-      products.photo1.contentType = photo1.type;
+    let images;
+    // Uploads the photos to cloudinary and generates a new url path
+    try {
+      const urls = [];
+      const files = req.files;
+      console.log(files);
+
+      for (const fieldName in files) {
+        if (files.hasOwnProperty(fieldName)) {
+          const file = files[fieldName];
+          const { path } = file;
+          console.log(path);
+          const cloudPath = await cloudinaryImageUpload(path);
+          console.log(cloudPath);
+          urls.push(cloudPath);
+          fs.unlinkSync(path);
+        }
+      }
+      images = urls.map((file) => {
+        console.log(file);
+        return file
+      })
+    } catch(err) {
+      console.log(err);
+      return res.status(400).json({ error: err });
+      
     }
-    if (photo2) {
-      products.photo2.data = fs.readFileSync(photo2.path);
-      products.photo2.contentType = photo2.type;
-    }
-    if (photo3) {
-      products.photo3.data = fs.readFileSync(photo3.path);
-      products.photo3.contentType = photo3.type;
-    }
+    products.images = images;
     await products.save();
     res.status(201).send({
       message: 'Product Created Successfully',

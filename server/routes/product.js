@@ -11,6 +11,7 @@ const {
 const isAdmin = require('../middleware/isAdmin');
 const requireLogin = require("../middleware/requireLogin");
 const formidable = require("express-formidable");
+const { uploadImage, imgResize } = require('../middleware/uploadImages');
 
 const router = express.Router()
 
@@ -24,7 +25,12 @@ router.get('/', getAllProducts);
 router.get('/:id', getAProduct);
 
 // Create a new product
-router.post('/add', requireLogin, isAdmin, formidable(), addProduct);
+router.post('/add', 
+requireLogin, 
+isAdmin, 
+uploadImage.array('images', 4),
+imgResize,
+addProduct);
 
 // Update a product by ID
 router.patch('/update/:id', requireLogin, isAdmin, updateProduct);

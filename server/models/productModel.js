@@ -12,12 +12,11 @@ const productSchema = new mongoose.Schema({
   },
   slug: {
     type: String,
-    required: true,
     unique: true,
     lowercase: true,
   },
   price: {
-    type: String,
+    type: Number,
     required: [true, "Product price is required"]
   },
   brand: {
@@ -28,18 +27,7 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Product stock quantity is required"]
   },
-  photo1: {
-    data: Buffer,
-    contentType: String
-  },
-  photo2: {
-    data: Buffer,
-    contentType: String
-  },
-  photo3: {
-    data: Buffer,
-    contentType: String
-  },
+  images: [],
   reviews: [
     {
       user: {
@@ -57,7 +45,6 @@ const productSchema = new mongoose.Schema({
   ],
   label: {
     type: String,
-    required: [true, "Product's label is required"]
   },
   address: [{ type: mongoose.Schema.Types.ObjectId, ref: "Address" }],
   wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
