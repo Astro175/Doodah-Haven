@@ -2,6 +2,8 @@ const Product = require('../models/productModel');
 const mongoose = require('mongoose');
 const cloudinaryImageUpload = require('../utils/cloudinary');
 const fs = require('fs');
+const slugify = require("slugify");
+
 
 // List all products: GET /api/products
 const getAllProducts = async (req, res) => {
@@ -81,6 +83,7 @@ const getAProduct = async (req, res) => {
 
 // Create a new product (admin-only): POST /api/products/add
 const addProduct = async (req, res) => {
+  console.log(req.fields);
   try {
     const { name, description, price, brand, stock_quantity } = req.fields;
     // validation
@@ -126,6 +129,7 @@ const addProduct = async (req, res) => {
       
     }
     products.images = images;
+    products.slug = slugify(name);
     await products.save();
     res.status(201).send({
       message: 'Product Created Successfully',

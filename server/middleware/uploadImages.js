@@ -1,5 +1,6 @@
 const multer = require('multer');
 const sharp = require('sharp');
+const path = require('path');
 
 // Sets a storage for multer, which it stores on our localdisk
 // Then we upload it to Cloudinary

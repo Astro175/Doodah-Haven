@@ -26,10 +26,9 @@ router.get('/:id', getAProduct);
 
 // Create a new product
 router.post('/add', 
-requireLogin, 
-isAdmin, 
-uploadImage.array('images', 4),
-imgResize,
+requireLogin,
+isAdmin,
+formidable(),
 addProduct);
 
 // Update a product by ID

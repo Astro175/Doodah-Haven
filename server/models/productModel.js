@@ -12,7 +12,7 @@ const productSchema = new mongoose.Schema({
   },
   slug: {
     type: String,
-    unique: true,
+    unique: true, // False for now
     lowercase: true,
   },
   price: {
