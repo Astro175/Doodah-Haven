@@ -85,7 +85,7 @@ const getAProduct = async (req, res) => {
 const addProduct = async (req, res) => {
   console.log(req.fields);
   try {
-    const { name, description, price, brand, stock_quantity } = req.fields;
+    const { name, description, price, brand, stock_quantity, label } = req.fields;
     // validation
     switch (true) {
       case !name:
