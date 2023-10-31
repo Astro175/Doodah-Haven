@@ -10,11 +10,11 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: [true, "Product description is required"]
   },
-  category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Category",
-    required: true,
-  },
+  // category: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "Category",
+  //   required: true,
+  // },
   slug: {
     type: String,
     unique: true, 
