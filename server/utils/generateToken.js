@@ -8,7 +8,7 @@ const generateToken = (user) => {
     jwt.sign(
       { userId: user._id, email: user.email, role: user.role },
       secret_key,
-      { expiresIn: '1h' },
+      { expiresIn: '3h' },
       (err, token) => {
         if (err) reject(err);
         else {
