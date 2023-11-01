@@ -30,6 +30,8 @@ export const ProductsByPriceRange = () => {
       });
   }, [minPrice, maxPrice]);
 
+  console.log(productsInPriceRange);
+
   return (
     <div>
       {isLoading && <div>Loading...</div>}

@@ -34,9 +34,9 @@ function App() {
           <Header />
           <Routes>
             <Route path='/' exact element={<Home />} />
-            <Route path='/products' element={<Products />} />
+            <Route path='/products' element={<Products />} exact/>
             <Route path="/products/price/:minPrice-:maxPrice" element={<ProductsByPriceRange />} />
-            <Route path='/products/:productId' element={<ProductDetails />} />
+  <Route path='/products/:productId' element={<ProductDetails />} />
             <Route path='/about' element={<AboutUs />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
