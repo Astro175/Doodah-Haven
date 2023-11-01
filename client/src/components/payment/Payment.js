@@ -7,6 +7,7 @@ import { CartContext } from '../context/CartContext';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { useNavigate } from 'react-router-dom';
+import paystackimg from '../../images/paystack.png'
 
 const Payment = () => {
     const { cart, removeFromCart } = useContext(CartContext);
@@ -15,6 +16,22 @@ const Payment = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [selectedState, setSelectedState] = useState('');
     const navigate = useNavigate();
+
+    const [userDetails, setUserDetails] = useState({
+        firstname: '',
+        lastname: '',
+        email: '',
+        phoneNumber: '',
+      });
+      
+      const [shippingDetails, setShippingDetails] = useState({
+        addressNo: '',
+        address: '',
+        city: '',
+        state: '',
+        code: '',
+        landmark: '',
+      });
 
 
     const handleStateChange = (event) => {
@@ -49,13 +66,6 @@ const Payment = () => {
         removeFromCart(index);
     };
 
-    const handleSubmit = (event, formStep) => {
-        event.preventDefault();
-        if (formStep === 'Delivery') {
-
-        }
-    }
-
     const truncateName = (name) => {
         const words = name.split(' ');
         if (words.length > 3) {
@@ -64,10 +74,53 @@ const Payment = () => {
         return name;
     };
 
-    const handlePaymentState = () => {
-        window.alert('Payment successful');
-        navigate('/')
-    }
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        if (activeLink === 'Payment') {
+          // Create an order object with user, products, shipping details, and payment method
+          const order = {
+            user: {
+              firstname: userDetails.firstname,
+              lastname: userDetails.lastname,
+              email: userDetails.email,
+              phoneNumber: userDetails.phoneNumber,
+            },
+            products: cartItems,
+            shippingDetails: {
+              addressNo: shippingDetails.addressNo,
+              address: shippingDetails.address,
+              city: shippingDetails.city,
+              state: shippingDetails.state,
+              code: shippingDetails.code,
+              landmark: shippingDetails.landmark,
+            },
+            paymentMethod: 'Pay online', // Update based on user selection
+          };
+    
+          try {
+            const response = await fetch('/api/orders/add', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(order),
+            });
+    
+            if (response.ok) {
+              // Order was successfully created
+              // Redirect the user to the order history in the "myAccount" component
+              navigate('/my-account');
+              window.alert('Order was created successfully')
+            } else {
+              // Handle the case where the order creation failed
+              console.error('Order creation failed');
+            }
+          } catch (error) {
+            // Handle network or other errors
+            console.error('Network error', error);
+          }
+        }
+      };
 
     return (
         <div className='payment'>
@@ -134,13 +187,16 @@ const Payment = () => {
                                 <div className='shipment-form'>
                                     <h2>Contact Details</h2>
                                     <label htmlFor='firstname'>Firstname:</label><br />
-                                    <input type='text' name='firstname' required />
+                                    <input type='text' name='firstname' value={userDetails.firstname}
+                                    onChange={(e) => setUserDetails({ ...userDetails, firstname: e.target.value })}required />
 
                                     <label htmlFor='lastname'>Lastname:</label>
-                                    <input type='text' name='lastname' /><br />
+                                    <input type='text' name='lastname' value={userDetails.lastname} /><br />
+                                    onChange={(e) => setUserDetails({ ...userDetails, lastname: e.target.value })}
 
                                     <label htmlFor='email'>Email:</label><br />
-                                    <input type='email' name='email' aria-required/><br />
+                                    <input type='email' name='email' value={userDetails.email} aria-required/>
+                                    onChange={(e) => setUserDetails({ ...userDetails, email: e.target.value })}<br />
 
                                     <label htmlFor='number'>Phone number:</label><br />
                                     <PhoneInput value={phoneNumber} defaultCountry='NG' onChange={handlePhoneNumberChange} id='number' />
@@ -153,7 +209,7 @@ const Payment = () => {
 
                                     <label htmlFor='address'>Address:</label><br />
                                     <input type='text' name='address' aria-required/><br/>
-
+s
                                     <label htmlFor='city'>City:</label><br />
                                     <input type='text' name='city' aria-required/>
 
@@ -217,6 +273,7 @@ const Payment = () => {
                         <input type="radio" id="delivery" name="payment_method" value="Pay online" />
                         <label for="delivery">Paystack
                             <p>Pay online using your Visa/Mastercard</p>
+                            <img src={paystackimg} alt='paystack logo' />
                         </label><br />
                         
                         {/* <input type="radio" id="credit" name="payment_method" value="Credit/Debit card" />
@@ -235,7 +292,7 @@ const Payment = () => {
                         </label><br /> */}
                     </form>
                     <button className='back-btn' onClick={() => handleClick('Delivery')}>Back</button>
-                    <button className='makePayment-btn' onClick={handlePaymentState}>Pay N{totalDue}</button>
+                    <button className='makePayment-btn' >Place Order</button>
                     </div>
                     )}
 

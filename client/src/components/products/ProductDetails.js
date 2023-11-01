@@ -43,7 +43,7 @@ const ProductDetails = () => {
             quantity,
             details: product.details,
           };
-        setShowPopup(true);
+            setShowPopup(true);
           addToCart(selectedItem);
         }
 
