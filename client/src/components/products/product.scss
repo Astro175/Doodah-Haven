@@ -39,7 +39,8 @@
             padding: 2rem 0.5rem;
             border: 1px solid rgb(59, 59, 216);
             height: 100vmax;
-            width: 500px;
+            width: 60%;
+            margin-right: 1rem;
             hr {
                 color: rgb(59, 59, 216);
             }
@@ -67,9 +68,11 @@
         
         .product-badge {
             background-color: #fff;
-            // border: 1px solid gray;
             padding: 1.5rem;
             width: 250px;
+            &:hover {
+                border: 1px solid gray;
+            }
             .product-link {
                 color: #000;
                 text-decoration: none;

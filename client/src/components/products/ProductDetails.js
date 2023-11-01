@@ -16,6 +16,7 @@ const ProductDetails = () => {
     const { isLoggedIn } = useContext(AuthContext);
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
+    
     useEffect(() => {
         // Fetch product data based on the productId
         fetch(`http://localhost:4000/api/products/${productId}`)
@@ -56,28 +57,29 @@ const ProductDetails = () => {
         }
     }
 
-    const arrayBufferToBase64 = (buffer) => {
-        const binary = [];
-        const bytes = new Uint8Array(buffer);
-        bytes.forEach((byte) => binary.push(String.fromCharCode(byte)));
-        return window.btoa(binary.join(''));
-      }
+    const truncateName = (name) => {
+        const words = name.split(' ');
+        if (words.length > 3) {
+            return words.slice(0, 14).join(' ') + '...';
+        }
+        return name;
+    }
 
     return(
         <div className='productDetails'>
             {showPopup && <CartPopup />}
             <div className='product-block'>
-                <img src={`data:image/jpeg;base64,${arrayBufferToBase64(product.photo1.data.data)}`} alt='product' />
+            <img src={product.images[1]} alt='product preview' />
                 <div className='details-block'>
                     <div className='cartLinks'>
                         <Link to="/" className='cart-link'>Home</Link>
                         <FontAwesomeIcon icon={faGreaterThan} size='xs' className='caret-icon' />
                         <Link to='/products' className='cart-link'>Product</Link>
                         < FontAwesomeIcon icon={faGreaterThan} size='xs' className='caret-icon' />
-                        <Link to='/products' className='cart-link'>{product.name}</Link>
+                        <Link to='/products' className='cart-link'>{truncateName(product.name)}</Link>
                     </div>
                     <div className='main-details'>
-                        <h2>{product.name}</h2>
+                        <h2>{truncateName(product.name)}</h2>
                         <div className='review'>
                             {[...Array(5)].map((_, index) => (
                                 <FontAwesomeIcon key={index} icon={faStar} className='star'/>

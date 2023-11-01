@@ -15,6 +15,7 @@ const CreateProduct = () => {
         photo3: null,
         reviews: [],
         label: '',
+        // category: ''
     });
 
     const handleInputChange = (e) => {
@@ -48,6 +49,7 @@ const CreateProduct = () => {
         formData.append('photo1', product.photo1);
         formData.append('photo2', product.photo2);
         formData.append('photo3', product.photo3);
+        // formData.append('category', product.category)
     
         const headers = {
             'Authorization': token,
@@ -113,10 +115,13 @@ const CreateProduct = () => {
             <input type="file" name="photo2" accept="image/*" onChange={handlePhotoChange} />
             <br />
 
-            <label htmlFor="photo3">Product Photo 3:</label>
+            {/* <label htmlFor="photo3">Product Photo 3:</label>
             <br />
             <input type="file" name="photo3" accept="image/*" onChange={handlePhotoChange} />
-            <br />
+            <br /> */}
+
+            {/* <label htmlFor='category'>Category:</label>
+            <input type='text' name='category' onChange={handleInputChange} /> */}
             
             <label htmlFor="label">Label:</label>
             {/* <br /> */}

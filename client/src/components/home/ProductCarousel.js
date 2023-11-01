@@ -26,20 +26,14 @@ const ProductCarousel = () => {
     }
     fetchPopular();
   }, []);
+  console.log(popularProducts)
 
   const truncateName = (name) => {
     const words = name.split(' ');
-    if (words.length > 7) {
+    if (words.length > 4) {
         return words.slice(0, 3).join(' ') + '...';
     }
     return name;
-  };
-
-  const arrayBufferToBase64 = (buffer) => {
-    const binary = [];
-    const bytes = new Uint8Array(buffer);
-    bytes.forEach((byte) => binary.push(String.fromCharCode(byte)));
-    return window.btoa(binary.join(''));
   };
 
   const settings = {
@@ -54,12 +48,12 @@ const ProductCarousel = () => {
     <div className="products-display">
       <h2>Popular Products</h2>
       <Slider {...settings}>
-      {popularProducts && popularProducts.length > 0 ? (
-          popularProducts.map((popular) => (
+      {popularProducts.popularProducts && popularProducts.popularProducts.length > 0 ? (
+          popularProducts.popularProducts.map((popular) => (
             <div key={popular._id} className="package">
             <Link to={`/products/${popular._id}`} className='productId-link'>
             <p>{truncateName(popular.name)}</p>
-            <img src={`data:image/jpeg;base64,${arrayBufferToBase64(popular.photo1.data.data)}`} alt='product-img' />
+            <img src={popular.images[0]} alt='product preview' />
             <div className="product-price">
                 <p>Price: ₦{popular.price}</p>
                 <FontAwesomeIcon icon={faArrowRight} className="arrow"/>

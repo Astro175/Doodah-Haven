@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-function ProductsByPriceRange() {
+export const ProductsByPriceRange = () => {
   const { minPrice, maxPrice } = useParams();
   const [productsInPriceRange, setProductsInPriceRange] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -30,6 +30,8 @@ function ProductsByPriceRange() {
       });
   }, [minPrice, maxPrice]);
 
+  console.log(productsInPriceRange);
+
   return (
     <div>
       {isLoading && <div>Loading...</div>}
@@ -54,6 +56,4 @@ function ProductsByPriceRange() {
       )}
     </div>
   );
-}
-
-export default ProductsByPriceRange;
+};
