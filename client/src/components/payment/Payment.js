@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../context/CartContext';
 import PhoneInput from 'react-phone-number-input';
-import 'react-phone-number-input/style.css'
+import 'react-phone-number-input/style.css';
+import { useNavigate } from 'react-router-dom';
 
 const Payment = () => {
     const { cart, removeFromCart } = useContext(CartContext);
@@ -13,6 +14,7 @@ const Payment = () => {
     const [activeLink, setActiveLink] = useState('Payment'); // State to track the active link
     const [phoneNumber, setPhoneNumber] = useState('');
     const [selectedState, setSelectedState] = useState('');
+    const navigate = useNavigate();
 
 
     const handleStateChange = (event) => {
@@ -54,6 +56,19 @@ const Payment = () => {
         }
     }
 
+    const truncateName = (name) => {
+        const words = name.split(' ');
+        if (words.length > 3) {
+            return words.slice(0, 7).join(' ') + '...';
+        }
+        return name;
+    };
+
+    const handlePaymentState = () => {
+        window.alert('Payment successful');
+        navigate('/')
+    }
+
     return (
         <div className='payment'>
             <div className='order'>
@@ -65,15 +80,15 @@ const Payment = () => {
                 <h2>Order Summary</h2>
                 {cartItems.map((item, index) => (
                 <div className='summary' key={index}>
-                    <div className='order-box'>     
+                    <div className='order-box'>
                         <img src={item.img} alt='order icon' />
                         <div className='items'>
-                            <p className='itemname'>{item.name}</p>
+                            <p className='itemname'>{truncateName(item.name)}</p>
                             <p className='qty'>Quantity: {item.quantity} item(s)</p>
                         </div>
                     </div>
                     <div className='price-box'>
-                        <p>N{item.price}</p>
+                        <p>₦{item.price}</p>
                         <FontAwesomeIcon icon={faTrash} size='xs' onClick={() => handleDeleteItem(index)} cursor='pointer' />
                     </div>
                 </div>     
@@ -92,7 +107,7 @@ const Payment = () => {
                     <hr />
                     <p>Shipping fee <span className='free'>FREE</span></p>
                     <hr />
-                    <p>Total due <span>N{totalDue}</span></p>
+                    <p>Total due <span>₦{totalDue}</span></p>
                 </div>
             </div>
             <div className='pay-ship'>
@@ -220,7 +235,7 @@ const Payment = () => {
                         </label><br /> */}
                     </form>
                     <button className='back-btn' onClick={() => handleClick('Delivery')}>Back</button>
-                    <button className='makePayment-btn'>Pay N{totalDue}</button>
+                    <button className='makePayment-btn' onClick={handlePaymentState}>Pay N{totalDue}</button>
                     </div>
                     )}
 

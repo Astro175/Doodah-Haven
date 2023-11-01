@@ -105,3 +105,52 @@
         }
     }
 }
+
+.price {
+    padding: 1rem;
+    h2 {
+        margin: 2rem 0;
+        text-align: center;
+    }
+
+    .priceRange-block {
+        .priceDiv {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+
+            .product-link {
+                color: #000;
+                text-decoration: none;
+            }
+            .price-block {
+                background-color: #fff;
+                padding: 1rem;
+                width: 300px;
+                img {
+                    width: 200px;
+                    height: 200px;
+                }
+                p {
+                    color: green;
+                    margin-top: 1rem;
+                }
+                .review {
+                    color: #A2A6B0;
+                    font-size: 12px;
+                    margin: 0.5rem 0;
+                    .star {
+                        color: #E9A426
+                    }
+                    span {
+                        margin-left: .5rem;
+                    }
+                }
+                &:hover {
+                    width: 320px;
+                }
+            }
+        }
+    }
+}

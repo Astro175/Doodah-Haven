@@ -20,7 +20,7 @@ import CreateProduct from './components/admin/CreateProduct';
 import AdminLayout from './components/admin/AdminLayout.js';
 import { TokenProvider } from './components/context/tokenContext';
 import EditProduct from './components/admin/EditProduct';
-import { ProductsByPriceRange } from './components/products/ProductsByPriceRange';
+import PriceRange from './components/products/ProductsByPriceRange';
 
 initFontAwesome();
 
@@ -35,8 +35,8 @@ function App() {
           <Routes>
             <Route path='/' exact element={<Home />} />
             <Route path='/products' element={<Products />} exact/>
-            <Route path="/products/price/:minPrice-:maxPrice" element={<ProductsByPriceRange />} />
-  <Route path='/products/:productId' element={<ProductDetails />} />
+            <Route path='/products/price' element={<PriceRange />} />
+            <Route path='/products/:productId' element={<ProductDetails />} />
             <Route path='/about' element={<AboutUs />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />

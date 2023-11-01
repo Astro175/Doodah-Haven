@@ -19,7 +19,7 @@ $blueColor: #011FCF;
         }
 
         .summary {
-            padding: 1rem;
+            padding: 0.5rem;
             display: flex;
             justify-content: space-between;
             text-align: right;
@@ -33,6 +33,7 @@ $blueColor: #011FCF;
                     margin-left: .5rem;
                     .itemname {
                         font-weight: 600;
+                        padding-left: 0.5rem;
                     }
                     .qty {
                         font-size: 0.8rem;

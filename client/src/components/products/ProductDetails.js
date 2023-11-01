@@ -37,7 +37,7 @@ const ProductDetails = () => {
         }
         
         const selectedItem = {
-            img: product.photo1, 
+            img: product.images[1], 
             name: product.name,
             price: product.price,
             quantity,

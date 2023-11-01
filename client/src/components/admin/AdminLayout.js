@@ -68,11 +68,6 @@ const AdminLayout = () => {
         ) : (
           <h2>Welcome, Admin</h2>
         )}
-            {/* <button onClick={logout} className='signout-btn'>
-            <Link className="link" to='/' onClick={() => {handleLogout()}}>
-              Sign Out
-            </Link>
-            </button> */}
             <Link to='/admin/add-product' className='active'>
               Create Product
             </Link>
@@ -87,6 +82,8 @@ const AdminLayout = () => {
               <th>Brand</th>
               <th>Stock Quantity</th>
               <th>Price</th>
+              <th>Update</th>
+              <th>Remove</th>
             </tr>
           </thead>
           <tbody>
@@ -95,7 +92,7 @@ const AdminLayout = () => {
                 <td>{truncateName(product.name)}</td>
                 <td>{product.brand}</td>
                 <td>{product.stock_quantity}</td>
-                <td>{product.price}</td>
+                <td>₦{product.price}</td>
                 <td>
                   <Link to={`/admin/edit-product/${product._id}`}>Edit</Link>
                 </td>
