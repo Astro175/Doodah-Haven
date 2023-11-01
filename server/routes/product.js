@@ -11,8 +11,12 @@ const {
 const isAdmin = require('../middleware/isAdmin');
 const requireLogin = require("../middleware/requireLogin");
 const formidable = require("express-formidable");
+const { uploadImage, imgResize } = require('../middleware/uploadImages');
 
 const router = express.Router()
+
+// Gets all product with label popular
+router.get('/popular', filterProduct);
 
 // List all products
 router.get('/', getAllProducts);
@@ -21,19 +25,20 @@ router.get('/', getAllProducts);
 router.get('/:id', getAProduct);
 
 // Create a new product
-router.post('/add', requireLogin, isAdmin, formidable(), addProduct);
+router.post('/add', 
+requireLogin,
+isAdmin,
+formidable(),
+addProduct);
 
 // Update a product by ID
-router.put('/update/:id', requireLogin, isAdmin, updateProduct);
+router.patch('/update/:id', requireLogin, isAdmin, updateProduct);
 
 // Delete a product by ID
 router.delete('/delete/:id', requireLogin, isAdmin, deleteProduct);
 
-// Gets all product with label popular
-
-router.get('/popular', filterProduct);
-
 // Searches for product
 
 router.get('/search/:keyword', searchProduct)
+
 module.exports = router;

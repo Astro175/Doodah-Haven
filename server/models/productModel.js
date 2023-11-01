@@ -10,6 +10,16 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: [true, "Product description is required"]
   },
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Category",
+    // required: true,
+  },
+  slug: {
+    type: String,
+    unique: true, 
+    lowercase: true,
+  },
   price: {
     type: Number,
     required: [true, "Product price is required"]
@@ -22,18 +32,7 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Product stock quantity is required"]
   },
-  photo1: {
-    data: Buffer,
-    contentType: String
-  },
-  photo2: {
-    data: Buffer,
-    contentType: String
-  },
-  photo3: {
-    data: Buffer,
-    contentType: String
-  },
+  images: [],
   reviews: [
     {
       user: {
@@ -51,8 +50,9 @@ const productSchema = new mongoose.Schema({
   ],
   label: {
     type: String,
-    required: [true, "Product's label is required"]
-  }
+  },
+  address: [{ type: mongoose.Schema.Types.ObjectId, ref: "Address" }],
+  wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
 }, {timestamps: true}); // Added timestamp for sorting products that were added recently
 
 const Product = mongoose.model('Product', productSchema);
