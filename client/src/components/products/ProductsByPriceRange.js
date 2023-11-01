@@ -54,6 +54,4 @@ export const ProductsByPriceRange = () => {
       )}
     </div>
   );
-}
-
-
+};

@@ -22,7 +22,6 @@ import { TokenProvider } from './components/context/tokenContext';
 import EditProduct from './components/admin/EditProduct';
 import { ProductsByPriceRange } from './components/products/ProductsByPriceRange';
 
-
 initFontAwesome();
 
 function App() {
@@ -37,7 +36,6 @@ function App() {
             <Route path='/' exact element={<Home />} />
             <Route path='/products' element={<Products />} />
             <Route path="/products/price/:minPrice-:maxPrice" element={<ProductsByPriceRange />} />
-
             <Route path='/products/:productId' element={<ProductDetails />} />
             <Route path='/about' element={<AboutUs />} />
             <Route path='/login' element={<Login />} />

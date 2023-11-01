@@ -65,8 +65,18 @@ const Products = () => {
     { label: '₦255,000 - ₦400,000', minPrice: 255000, maxPrice: 400000 },
     { label: '₦455,000 - ₦600,000', minPrice: 455000, maxPrice: 600000 },
     { label: '₦625,000 - ₦750,000', minPrice: 625000, maxPrice: 750000 },
+    { label: '₦725,000 - ₦2,000,000', minPrice: 725000, maxPrice: 6000000 },
   ];
 
+
+  const truncateName = (name) => {
+    const words = name.split(' ');
+    if (words.length > 3) {
+        return words.slice(0, 15).join(' ') + '...';
+    }
+    return name;
+}
+  
   return (
     <div className='products'>
       <img src={hero} alt='products hero im' />
@@ -85,7 +95,7 @@ const Products = () => {
             {priceRanges.map((range, index) => (
               <Link
                 key={index}
-                to={`/products/${range.minPrice}-${range.maxPrice}`}
+                to={`/products/price/${range.minPrice}-${range.maxPrice}`}
                 className='price-range-link'
               >
                 {range.label}
@@ -100,7 +110,6 @@ const Products = () => {
               <Link to={`/products/${product._id}`} className='product-link'>
                 <div>
                   <FontAwesomeIcon icon={faCheckCircle} color='#78A962'/>
-                  {/* <span className='stock'>In stock</span> */}
                   <span className={`${product.stock_quantity > 0 ? 'stock' : 'red'}`}>
             {product.stock_quantity > 0 ? 'In stock' : 'Not available'}
           </span>
@@ -109,20 +118,18 @@ const Products = () => {
                 {product.photo1 ? ( // Check if photo1 exists
                   <img src={`data:image/jpeg;base64,${arrayBufferToBase64(product.photo1.data.data)}`} alt='product-img' />
                 ) : (
-                  <img src={product.photo1} alt='placeholder' /> // Provide a placeholder image
+                  <img src={product.images[1]} alt='product preview' />
                 )}
 
-                <p className='productName'>{product.name}</p>
-                {/* <p className='small'>Brand: {product.brand}</p> */}
-                <p className='small'>Stock Quantity: {product.stock_quantity}</p>
-                {/* <p>Label: {product.label}</p> */}
+                <p className='productName'>{truncateName(product.name)}</p>
+                <p className='small'>Quantity: {product.stock_quantity}</p>
 
                 <div className='review'>
                   {[...Array(5)].map((_, index) => (
 
                     <FontAwesomeIcon key={index} icon={faStar} className={index < 4 ? 'star' : ''}/>
                   ))}
-                  <span>Review 4</span>
+                  <span>Review 1</span>
                 </div>
 
                 <p>₦{product.price}</p>

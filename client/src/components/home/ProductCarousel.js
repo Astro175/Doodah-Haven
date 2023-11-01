@@ -35,13 +35,6 @@ const ProductCarousel = () => {
     return name;
   };
 
-  const arrayBufferToBase64 = (buffer) => {
-    const binary = [];
-    const bytes = new Uint8Array(buffer);
-    bytes.forEach((byte) => binary.push(String.fromCharCode(byte)));
-    return window.btoa(binary.join(''));
-  };
-
   const settings = {
     dots: true,
     infinite: true,
@@ -59,7 +52,7 @@ const ProductCarousel = () => {
             <div key={popular._id} className="package">
             <Link to={`/products/${popular._id}`} className='productId-link'>
             <p>{truncateName(popular.name)}</p>
-            <img src={`data:image/jpeg;base64,${arrayBufferToBase64(popular.photo1.data.data)}`} alt='product-img' />
+            <img src={popular.images[0]} alt='product preview' />
             <div className="product-price">
                 <p>Price: ₦{popular.price}</p>
                 <FontAwesomeIcon icon={faArrowRight} className="arrow"/>
