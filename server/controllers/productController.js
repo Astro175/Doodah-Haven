@@ -164,6 +164,7 @@ const updateProduct = async (req, res) => {
 
 // Delete a product (admin-only): DELETE /api/products/delete/:id
 const deleteProduct = async (req, res) => {
+
   const { id } = req.params;
   // Checks if ID is valid
   if (!mongoose.Types.ObjectId.isValid(id)) {

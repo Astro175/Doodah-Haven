@@ -29,17 +29,14 @@
     .product-block {
         display: flex;
         margin-top: 1rem;
-       
-        // gap: 20px;
-        // justify-content: center;
         padding: 1rem;
         
         .price-ranges {
             background-color: rgb(216, 213, 213);
             padding: 2rem 0.5rem;
-            border: 1px solid rgb(59, 59, 216);
-            height: 100vmax;
-            width: 60%;
+            border: 1px solid #0156FF;
+            width: 800px;
+            height: 100%;
             margin-right: 1rem;
             hr {
                 color: rgb(59, 59, 216);
@@ -63,13 +60,13 @@
         }
         .badges {
             display: flex;
-                flex-wrap: wrap;
-                flex-direction: row;
+            flex-wrap: wrap;
+            flex-direction: row;
         
         .product-badge {
             background-color: #fff;
             padding: 1.5rem;
-            width: 250px;
+            width: 240px;
             &:hover {
                 border: 1px solid gray;
             }
@@ -147,6 +144,19 @@
         @media screen and (max-width: 700px) {
             flex-wrap: wrap;
             justify-content: center;
+            .price-ranges {
+                width: 100%;
+            }
+            .badges {
+                margin: 1rem 0;
+                .product-badge {
+                    width: 150px;
+                    padding: 0.5rem;
+                    img {
+                        width: 100%;
+                    }
+                }
+            }
         }
     }
 }

@@ -36,6 +36,10 @@
                     border: none;
                     border-radius: 2px;
                     padding: 0.5rem;
+                    cursor: pointer;
+                    &:hover {
+                        padding: 0.6rem;
+                    }
                 }
             }
             tr:nth-child(even) {
@@ -72,6 +76,7 @@
             background-color: #000;
             border: none;
             color: #fff;
+            cursor: pointer;
 
             &:hover {
                 background-color: #fff;

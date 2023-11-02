@@ -75,15 +75,15 @@ const Products = () => {
         return words.slice(0, 15).join(' ') + '...';
     }
     return name;
-}
-  
+};
+
   return (
     <div className='products'>
       <img src={hero} alt='products hero im' />
       <div>
         <div className='product-title'>
           <h1>Products</h1>
-          <a href='/'>See all new products</a>
+          {/* <a href='/'>See all new products</a> */}
         </div>
         <div className='product-block'>
 
@@ -95,7 +95,7 @@ const Products = () => {
             {priceRanges.map((range, index) => (
               <Link
                 key={index}
-                to={`/products/price/${range.minPrice}-${range.maxPrice}`}
+                to={`/products/price?minPrice=${range.minPrice}&maxPrice=${range.maxPrice}`}
                 className='price-range-link'
               >
                 {range.label}
@@ -111,8 +111,8 @@ const Products = () => {
                 <div>
                   <FontAwesomeIcon icon={faCheckCircle} color='#78A962'/>
                   <span className={`${product.stock_quantity > 0 ? 'stock' : 'red'}`}>
-            {product.stock_quantity > 0 ? 'In stock' : 'Not available'}
-          </span>
+                    {product.stock_quantity > 0 ? 'In stock' : 'Not available'}
+                  </span>
                 </div>
 
                 {product.photo1 ? ( // Check if photo1 exists

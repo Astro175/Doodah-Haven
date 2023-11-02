@@ -37,13 +37,13 @@ const ProductDetails = () => {
         }
         
         const selectedItem = {
-            img: product.photo1, 
+            img: product.images[1], 
             name: product.name,
             price: product.price,
             quantity,
             details: product.details,
           };
-        setShowPopup(true);
+            setShowPopup(true);
           addToCart(selectedItem);
         }
 

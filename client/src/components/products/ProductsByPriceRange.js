@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
+import './details.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
-export const ProductsByPriceRange = () => {
-  const { minPrice, maxPrice } = useParams();
+const PriceRange = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const minPrice = queryParams.get('minPrice');
+  const maxPrice = queryParams.get('maxPrice');
+
   const [productsInPriceRange, setProductsInPriceRange] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -30,10 +37,16 @@ export const ProductsByPriceRange = () => {
       });
   }, [minPrice, maxPrice]);
 
-  console.log(productsInPriceRange);
+  const truncateName = (name) => {
+    const words = name.split(' ');
+    if (words.length > 3) {
+        return words.slice(0, 15).join(' ') + '...';
+    }
+    return name;
+};
 
   return (
-    <div>
+    <div className='price'>
       {isLoading && <div>Loading...</div>}
       {!isLoading && productsInPriceRange.length === 0 && (
         <div>
@@ -41,15 +54,25 @@ export const ProductsByPriceRange = () => {
         </div>
       )}
       {!isLoading && productsInPriceRange.length > 0 && (
-        <div>
+        <div className='priceRange-block'>
           {/* Display the products within the price range */}
-          <h1>Products in the Price Range: #{minPrice} - #{maxPrice}</h1>
-          <div>
+          <h2>Products in the Price Range: ₦{minPrice} - ₦{maxPrice}</h2>
+          <div className='priceDiv'>
             {productsInPriceRange.map((product) => (
-              <div key={product._id}>
-                <p>Name: {product.name} </p>
-                <p>Price: #{product.price}</p>
+              <Link to={`/products/${product._id}`} className='product-link'>
+              <div key={product._id} className='price-block'>
+                 <img src={product.images[0]} alt='product preview' />
+                 <div className='review'>
+                  {[...Array(5)].map((_, index) => (
+
+                    <FontAwesomeIcon key={index} icon={faStar} className={index < 4 ? 'star' : ''}/>
+                  ))}
+                </div>
+                <h3>{truncateName(product.name)} </h3>
+
+                <p>Price: ₦{product.price}</p>
               </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -57,3 +80,5 @@ export const ProductsByPriceRange = () => {
     </div>
   );
 };
+
+export default PriceRange;

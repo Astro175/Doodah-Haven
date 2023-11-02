@@ -35,7 +35,7 @@ const Header = () => {
                     <img src={logo} alt="doodah logo" />
                     <div className="logo-text">
                         <h1 className="logo">Doodah</h1>
-                        <p>TAGLINE</p>
+                        {/* <p>TAGLINE</p> */}
                     </div>
                 </div>
                 <form className="search-form">
