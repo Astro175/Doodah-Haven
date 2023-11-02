@@ -9,7 +9,7 @@ const isAdmin = require('../middleware/isAdmin');
 const requireLogin = require("../middleware/requireLogin");
 
 // Create a new order, ADMIN-ACCESS ONLY
-router.post('/add', isAdmin, requireLogin, addOrder);
+router.post('/add',  requireLogin, addOrder);
 
 // Retrieves all orders
 router.get('/', requireLogin, getAllOrders);
@@ -18,6 +18,6 @@ router.get('/', requireLogin, getAllOrders);
 router.get('/:id', requireLogin, getOrder);
 
 // Deletes an order
-router.post('/delete/:id', requireLogin, deleteOrder);
+router.post('/delete/:id', requireLogin,  isAdmin, deleteOrder);
 
 module.exports = router;

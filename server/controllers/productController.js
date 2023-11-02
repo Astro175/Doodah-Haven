@@ -200,13 +200,13 @@ const filterProduct = async (req, res) => {
 
 const searchProduct = async (req, res) => {
   try {
-    const { keyword } = req.params;
-    const results = Product.find({
+    const { keyword } = req.query;
+    const results = await Product.find({
       $or: [
         { name: { $regex: keyword, $options: 'i' } },
         { description: { $regex: keyword, $options: 'i' } }
       ]
-    }).select('photo');
+    })
     res.status(200).json({ results });
   } catch (err) {
     console.log(err);
