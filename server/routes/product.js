@@ -24,16 +24,15 @@ router.get('/', getAllProducts);
 // Get a product by ID
 router.get('/:id', getAProduct);
 
+// Update a product by ID
+router.patch('/update/:id', requireLogin, isAdmin, updateProduct);
+
 // Create a new product
 router.post('/add', 
 requireLogin,
 isAdmin,
 formidable(),
 addProduct);
-
-// Update a product by ID
-router.patch('/update/:id', requireLogin, isAdmin, updateProduct);
-
 // Delete a product by ID
 router.delete('/delete/:id', requireLogin, isAdmin, deleteProduct);
 
