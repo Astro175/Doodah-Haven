@@ -11,7 +11,7 @@ import './app.scss';
 import initFontAwesome from './fontAwesome';
 import Payment from './components/payment/Payment';
 import Cart from './components/cart/Carts';
-import Account from './components/Account';
+import Account from './components/myaccount/Account';
 import ProductDetails from './components/products/ProductDetails'
 import { CartProvider } from './components/context/CartContext';
 import { AuthProvider } from './components/context/AuthContext';
