@@ -5,11 +5,11 @@ const { addOrder,
     getOrder,
     deleteOrder 
 } = require('../controllers/orderController');
-// const isAdmin = require('../middleware/isAdmin');
+const isAdmin = require('../middleware/isAdmin');
 const requireLogin = require("../middleware/requireLogin");
 
 // Create a new order, ADMIN-ACCESS ONLY
-router.post('/add', requireLogin, addOrder);
+router.post('/add', isAdmin, requireLogin, addOrder);
 
 // Retrieves all orders
 router.get('/', requireLogin, getAllOrders);

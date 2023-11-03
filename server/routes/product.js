@@ -33,9 +33,6 @@ requireLogin,
 isAdmin,
 formidable(),
 addProduct);
-
-
-
 // Delete a product by ID
 router.delete('/delete/:id', requireLogin, isAdmin, deleteProduct);
 
