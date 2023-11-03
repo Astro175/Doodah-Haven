@@ -12,10 +12,11 @@ import paystackimg from '../../images/paystack.png'
 const Payment = () => {
     const { cart, removeFromCart } = useContext(CartContext);
     const [cartItems, setCartItems] = useState([]);
-    const [activeLink, setActiveLink] = useState('Payment'); // State to track the active link
+    const [activeLink, setActiveLink] = useState('Shipping'); // State to track the active link
     const [phoneNumber, setPhoneNumber] = useState('');
     const [selectedState, setSelectedState] = useState('');
     const navigate = useNavigate();
+   
 
     const [userDetails, setUserDetails] = useState({
         firstname: '',
@@ -40,9 +41,10 @@ const Payment = () => {
 
     const states = ['', 'Lagos', 'Abuja', 'Kano', 'Ogun', 'Oyo', 'Enugu', 'Kwara', 'Imo', 'Anambra', 'Delta',
     'Cross-River', 'Akwa-Ibom', 'Rivers', 'Bayelsa', 'Kaduna', 'Abuja', 'Jos', 'Adamawa', 'Ebonyi', 'Abia']
+    
     const handlePhoneNumberChange = (value) => {
         setPhoneNumber(value);
-    }
+    };
 
     const handleClick = (link) => {
         setActiveLink(link);
@@ -85,6 +87,7 @@ const Payment = () => {
               email: userDetails.email,
               phoneNumber: userDetails.phoneNumber,
             },
+            
             products: cartItems,
             shippingDetails: {
               addressNo: shippingDetails.addressNo,
@@ -94,7 +97,7 @@ const Payment = () => {
               code: shippingDetails.code,
               landmark: shippingDetails.landmark,
             },
-            paymentMethod: 'Pay online', // Update based on user selection
+            paymentMethod: 'Pay online',
           };
     
           try {
@@ -107,16 +110,13 @@ const Payment = () => {
             });
     
             if (response.ok) {
-              // Order was successfully created
-              // Redirect the user to the order history in the "myAccount" component
               navigate('/my-account');
               window.alert('Order was created successfully')
             } else {
-              // Handle the case where the order creation failed
               console.error('Order creation failed');
             }
           } catch (error) {
-            // Handle network or other errors
+
             console.error('Network error', error);
           }
         }
@@ -154,7 +154,7 @@ const Payment = () => {
                         <button type='submit'>Apply</button>
                     </form>
 
-                    <p>Subtotal <span>N{calculateTotalPrice()}</span></p>
+                    <p>Subtotal <span>₦{calculateTotalPrice()}</span></p>
                     <hr />
                     <p>Sales tax (2%) <span>N{calculateSalesTax()}</span></p>
                     <hr />
@@ -183,7 +183,7 @@ const Payment = () => {
                 <div className='toPay'>
                     {activeLink === 'Shipping' && (
                         <div>
-                            <form onSubmit={handleSubmit}>
+                            <form >
                                 <div className='shipment-form'>
                                     <h2>Contact Details</h2>
                                     <label htmlFor='firstname'>Firstname:</label><br />
@@ -195,8 +195,8 @@ const Payment = () => {
                                     onChange={(e) => setUserDetails({ ...userDetails, lastname: e.target.value })}
 
                                     <label htmlFor='email'>Email:</label><br />
-                                    <input type='email' name='email' value={userDetails.email} aria-required/>
-                                    onChange={(e) => setUserDetails({ ...userDetails, email: e.target.value })}<br />
+                                    <input type='email' name='email' value={userDetails.email} onChange={(e) => setUserDetails({ ...userDetails, email: e.target.value })} 
+                                    aria-required/><br />
 
                                     <label htmlFor='number'>Phone number:</label><br />
                                     <PhoneInput value={phoneNumber} defaultCountry='NG' onChange={handlePhoneNumberChange} id='number' />
@@ -205,13 +205,16 @@ const Payment = () => {
                                 <div className='shipment-form'>
                                     <h2>Shipping Details</h2>
                                     <label htmlFor='addressNo'>Flat/House no.:</label><br />
-                                    <input type='number' name='addressNo' /><br />
+                                    <input type='number' name='addressNo' 
+                                    onChange={(e) => setShippingDetails({ ...shippingDetails, addressNo: e.target.value })} /><br />
 
                                     <label htmlFor='address'>Address:</label><br />
-                                    <input type='text' name='address' aria-required/><br/>
+                                    <input type='text' name='address' aria-required 
+                                    onChange={(e) => setShippingDetails({ ...shippingDetails, address: e.target.value })} /><br/>
 s
                                     <label htmlFor='city'>City:</label><br />
-                                    <input type='text' name='city' aria-required/>
+                                    <input type='text' name='city' aria-required 
+                                    onChange={(e) => setShippingDetails({ ...shippingDetails, city: e.target.value })} />
 
                                     <label htmlFor='state'>State:</label><br />
                                     <select id='state' name='state' value={selectedState} onChange={handleStateChange}>
@@ -225,10 +228,12 @@ s
                                     </select>
 
                                     <label htmlFor='code'>Postal Code:</label><br />
-                                    <input type='number' name='code' />
+                                    <input type='number' name='code' 
+                                    onChange={(e) => setShippingDetails({ ...shippingDetails, code: e.target.value })}  />
 
                                     <label htmlFor='landmark'>Famous Landmark:</label><br />
-                                    <input type='text' name='landmark' /><br />
+                                    <input type='text' name='landmark' 
+                                    onChange={(e) => setShippingDetails({ ...shippingDetails, landmark: e.target.value })}  /><br />
 
                                     <input type='checkbox' name='check' aria-required/>
                                     <label htmlFor='check' className='checkbox'>My shipping and Billing address are the same</label>
@@ -244,17 +249,17 @@ s
                         <form className='payment-form'>
                             <h2>Delivery Options</h2>
                             <input type="radio" id="outsideLagos" name="outsideLagos" value="Outside lagos" />
-                            <label for="outsideLagos">Outside Lagos Home Delivery via DHL usually takes between 5 - 7 working days
+                            <label htmlFor="outsideLagos">Outside Lagos Home Delivery via DHL usually takes between 5 - 7 working days
                                 <p>Pay with cash</p>
                             </label><br />
                             
                             <input type="radio" id="withinLagos" name="withinLagos" value="Within Lagos" />
-                            <label for="withinLagos">Within Lagos usually takes 4 to 5 working days
+                            <label htmlFor="withinLagos">Within Lagos usually takes 4 to 5 working days
                             <p>Delivery is free</p>
                             </label><br />
                             
                             <input type="radio" id="park" name="park" value="Park pickup" />
-                            <label for="park">Outside Lagos Park pick up usually takes 5 to 6 working days
+                            <label htmlFor="park">Outside Lagos Park pick up usually takes 5 to 6 working days
                                 <p>Pay with cash at the park</p>
                             </label><br />
                         </form>
@@ -268,10 +273,10 @@ s
 
                     {activeLink === 'Payment' && (
                         <div>
-                    <form className='payment-form'>
+                    <form className='payment-form' >
                         <h2>Payment Method</h2>
                         <input type="radio" id="delivery" name="payment_method" value="Pay online" />
-                        <label for="delivery">Paystack
+                        <label htmlFor="delivery">Paystack
                             <p>Pay online using your Visa/Mastercard</p>
                             <img src={paystackimg} alt='paystack logo' />
                         </label><br />
@@ -292,7 +297,7 @@ s
                         </label><br /> */}
                     </form>
                     <button className='back-btn' onClick={() => handleClick('Delivery')}>Back</button>
-                    <button className='makePayment-btn' >Place Order</button>
+                    <button className='makePayment-btn'  onSubmit={handleSubmit}>Place Order</button>
                     </div>
                     )}
 
