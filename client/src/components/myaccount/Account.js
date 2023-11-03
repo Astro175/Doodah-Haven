@@ -83,6 +83,9 @@ const Account = () => {
 {activeLink === 'Address' && (
     <div>
       <h2>Delivery Address</h2>
+      {orders.length === 0 ? (
+        <p>No Address has been entered.</p>
+      ) : (
       <table>
         <tr>
           <th>Address Number</th>
@@ -109,6 +112,7 @@ const Account = () => {
           <td>{orders.shippingDetails?.landmark}</td>
         </tr>
       </table>
+      )}
     </div>
   )}
 
@@ -116,6 +120,9 @@ const Account = () => {
 {activeLink === 'MyOrders' && (
             <div>
               <h2>Order History</h2>
+              {orders.length === 0 ? (
+                <p>No Orders have been made yet.</p>
+              ): (
               <table>
                 
                   <tr>
@@ -136,6 +143,7 @@ const Account = () => {
                   ))}
                 </tbody>
               </table>
+              )}
             </div>
           )}
         </div>

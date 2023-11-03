@@ -7,7 +7,8 @@ import { CartContext } from '../context/CartContext';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { useNavigate } from 'react-router-dom';
-import paystackimg from '../../images/paystack.png'
+import paystackimg from '../../images/paystack.png';
+import { useToken } from '../context/tokenContext';
 
 const Payment = () => {
     const { cart, removeFromCart } = useContext(CartContext);
@@ -16,6 +17,7 @@ const Payment = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [selectedState, setSelectedState] = useState('');
     const navigate = useNavigate();
+    const { token } = useToken();
    
 
     const [userDetails, setUserDetails] = useState({
@@ -101,10 +103,11 @@ const Payment = () => {
           };
     
           try {
-            const response = await fetch('/api/orders/add', {
+            const response = await fetch('http://localhost:4000/api/orders/add', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
+                'Authorization': token
               },
               body: JSON.stringify(order),
             });
@@ -191,8 +194,9 @@ const Payment = () => {
                                     onChange={(e) => setUserDetails({ ...userDetails, firstname: e.target.value })}required />
 
                                     <label htmlFor='lastname'>Lastname:</label>
-                                    <input type='text' name='lastname' value={userDetails.lastname} /><br />
+                                    <input type='text' name='lastname' value={userDetails.lastname} 
                                     onChange={(e) => setUserDetails({ ...userDetails, lastname: e.target.value })}
+                                    /><br />
 
                                     <label htmlFor='email'>Email:</label><br />
                                     <input type='email' name='email' value={userDetails.email} onChange={(e) => setUserDetails({ ...userDetails, email: e.target.value })} 
@@ -204,14 +208,14 @@ const Payment = () => {
 
                                 <div className='shipment-form'>
                                     <h2>Shipping Details</h2>
-                                    <label htmlFor='addressNo'>Flat/House no.:</label><br />
+                                    <label htmlFor='addressNo'>Flat/House no:</label><br />
                                     <input type='number' name='addressNo' 
                                     onChange={(e) => setShippingDetails({ ...shippingDetails, addressNo: e.target.value })} /><br />
 
                                     <label htmlFor='address'>Address:</label><br />
                                     <input type='text' name='address' aria-required 
                                     onChange={(e) => setShippingDetails({ ...shippingDetails, address: e.target.value })} /><br/>
-s
+                                    
                                     <label htmlFor='city'>City:</label><br />
                                     <input type='text' name='city' aria-required 
                                     onChange={(e) => setShippingDetails({ ...shippingDetails, city: e.target.value })} />
@@ -239,8 +243,7 @@ s
                                     <label htmlFor='check' className='checkbox'>My shipping and Billing address are the same</label>
                                 </div>
                                 <button type='submit' onClick={() => handleClick('Delivery')}>Continue to Delivery</button>
-                            </form>
-                            
+                            </form>       
                         </div>
                     )};
 
@@ -269,38 +272,21 @@ s
                         <button className='makePayment-btn' onClick={() => handleClick('Payment')}>Continue to payment</button>
                         </div>
                     )}
-
-
                     {activeLink === 'Payment' && (
                         <div>
-                    <form className='payment-form' >
-                        <h2>Payment Method</h2>
-                        <input type="radio" id="delivery" name="payment_method" value="Pay online" />
-                        <label htmlFor="delivery">Paystack
-                            <p>Pay online using your Visa/Mastercard</p>
-                            <img src={paystackimg} alt='paystack logo' />
-                        </label><br />
-                        
-                        {/* <input type="radio" id="credit" name="payment_method" value="Credit/Debit card" />
-                        <label for="credit">Credit / Debit card
-                            <p>Pay with your Credit / Debit Card</p>
-                        </label><br />
-                        
-                        <input type="radio" id="transfer" name="payment_method" value="Direct Bank Transfer" />
-                        <label for="transfer">Direct Bank Transfer
-                            <p>Make payment directly through bank account.</p>
-                        </label><br />
-
-                        <input type="radio" id="others" name="payment_method" value="Other Payment Method" />
-                        <label for="others">Other payment method
-                            <p>Make payment through Gpay, Paypal, Paytm etc</p>
-                        </label><br /> */}
-                    </form>
-                    <button className='back-btn' onClick={() => handleClick('Delivery')}>Back</button>
-                    <button className='makePayment-btn'  onSubmit={handleSubmit}>Place Order</button>
+                            <form className='payment-form' onSubmit={handleSubmit} >
+                                <h2>Payment Method</h2>
+                                <input type="radio" id="delivery" name="payment_method" value="Pay online" />
+                                <label htmlFor="delivery">Paystack
+                                    <p>Pay online using your Visa/Mastercard</p>
+                                    <img src={paystackimg} alt='paystack logo' />
+                                </label><br />
+                                <button className='back-btn' onClick={() => handleClick('Delivery')}>Back</button>
+                            <button type='submit' className='makePayment-btn'>Place Order</button>
+                            </form>
+                            
                     </div>
                     )}
-
                 </div>
             </div>
         </div>

@@ -14,7 +14,7 @@ const CreateProduct = () => {
         photo2: null,
         photo3: null,
         reviews: [],
-        label: '',
+        label: 'popular',
         // category: ''
     });
 
