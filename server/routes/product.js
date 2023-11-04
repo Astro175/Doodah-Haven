@@ -17,7 +17,7 @@ const { uploadImage, imgResize } = require('../middleware/uploadImages');
 const router = express.Router()
 
 // Gets all product with label popular
-router.get('/popular', filterProduct);
+router.get('/popular', cache(300), filterProduct);
 
 // List all products
 router.get('/', cache(300), getAllProducts);
