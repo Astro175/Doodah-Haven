@@ -10,6 +10,7 @@ const {
 } = require('../controllers/productController');
 const isAdmin = require('../middleware/isAdmin');
 const requireLogin = require("../middleware/requireLogin");
+const cache = require('../middleware/cache');
 const formidable = require("express-formidable");
 const { uploadImage, imgResize } = require('../middleware/uploadImages');
 
@@ -19,10 +20,10 @@ const router = express.Router()
 router.get('/popular', filterProduct);
 
 // List all products
-router.get('/', getAllProducts);
+router.get('/', cache(300), getAllProducts);
 
 // Get a product by ID
-router.get('/:id', getAProduct);
+router.get('/:id', cache(300), getAProduct);
 
 // Update a product by ID
 router.patch('/update/:id', requireLogin, isAdmin, updateProduct);
