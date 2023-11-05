@@ -14,15 +14,16 @@ const Account = () => {
   useEffect(() => {
     const fetchOrdersFromAPI = async () => {
       try {
-        const response = await fetch('http://localhost:4000/api/orders/', {
+        const response = await fetch(`http://localhost:4000/api/orders?user=${user._id}`, {
           headers: {
             'Authorization': token,
           },
         });
         if (response.ok) {
           const ordersData = await response.json();
-          setOrders(ordersData.orders)
-          console.log('orders data:', ordersData)
+          const userOrders = ordersData.orders.filter(order => order.user === user._id);
+          setOrders(userOrders);
+          console.log('orders data:', userOrders);
         } else {
           console.error('Failed to fetch user orders');
         }
@@ -34,7 +35,7 @@ const Account = () => {
     if (activeLink === 'MyOrders') {
       fetchOrdersFromAPI();
     }
-  }, [activeLink, token]);
+  }, [activeLink, token, user._id]);
 
 
   const handleLogout = () => {

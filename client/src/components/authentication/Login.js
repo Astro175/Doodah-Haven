@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
 import './auth.scss';
 import { AuthContext } from "../context/AuthContext";
-// import CreateProduct from "../admin/CreateProduct";
 import { useToken } from "../context/tokenContext";
 
 
@@ -29,10 +28,6 @@ const Login = () => {
     const handleLogin = (userData) => {
         login(userData);
     }
-
-    // const handleLogin = (userData) => {
-    //     login(userData);
-    // }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -132,13 +127,7 @@ const Login = () => {
                         <p className="acc">Don't have an account? <span><Link to='/signup' className="sig">Sign up</Link></span>.</p>
                     </form>
                     </div>
-                    {/* <div className="welcome-block">
-                        <h1>Hello customer</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur. Vulputate adipiscing amet purus dui donec malesuada nunc faucibus. Nascetur adipiscing netus egestas elementum facilisi. Quis eu euismod risus netus eu lectus in suspendisse amet. Dignissim tristique mi id in egestas mauris sollicitudin.</p>
-                        <button className='sig-btn'>
-                                <Link to='/signup' className="sig-link">Sign Up</Link>
-                        </button>
-                    </div> */}
+                    
                 </div>
         </div>
     )

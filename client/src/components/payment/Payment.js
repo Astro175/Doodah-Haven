@@ -12,7 +12,7 @@ import { useToken } from '../context/tokenContext';
 import { AuthContext } from '../context/AuthContext';
 
 const Payment = () => {
-    const { cart, removeFromCart } = useContext(CartContext);
+    const { cart, removeFromCart, clearCart } = useContext(CartContext);
     const [cartItems, setCartItems] = useState([]);
     const [activeLink, setActiveLink] = useState('Shipping'); // State to track the active link
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -105,7 +105,7 @@ const Payment = () => {
           };
     
           try {
-            console.log('Order:', order);
+            // console.log('Order:', order);
             const response = await fetch('http://localhost:4000/api/orders/add', {
               method: 'POST',
               headers: {
@@ -116,7 +116,7 @@ const Payment = () => {
             });
     
             if (response.ok) {
-                setCartItems([]); // Clear the cart
+                clearCart();
                 setActiveLink('Shipping');
               navigate('/my-account');
               window.alert('Order was created successfully')
@@ -142,7 +142,7 @@ const Payment = () => {
 
                 <h2>Order Summary</h2>
                 {cartItems.map((item, index) => (
-                <div className='summary' key={item._id}>
+                <div className='summary' key={index}>
                     <div className='order-box'>
                         <img src={item.img} alt='order icon' />
                         <div className='items'>

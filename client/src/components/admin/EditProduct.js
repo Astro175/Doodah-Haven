@@ -57,17 +57,7 @@ const EditProduct = () => {
     
     
       console.log('Edited product', editedProduct);
-    // //   console.log('image previews', imagePreviews)
-    //   if (!editedProduct) {
-    //     return <div>Loading...</div>;
-    //   }
-       
-    //   const arrayBufferToBase64 = (buffer) => {
-    //     const binary = [];
-    //     const bytes = new Uint8Array(buffer);
-    //     bytes.forEach((byte) => binary.push(String.fromCharCode(byte)));
-    //     return window.btoa(binary.join(''));
-    //   }
+
 
       const handleInputChange = (e) => {
         if (e.target) {

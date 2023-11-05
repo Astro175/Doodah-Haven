@@ -4,7 +4,6 @@ import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Home from './components/home/Home';
 import Products from './components/products/Products';
-import AboutUs from './components/AboutUs';
 import Login from './components/authentication/Login';
 import SignUp from './components/authentication/SignUp';
 import './app.scss';
@@ -37,7 +36,6 @@ function App() {
             <Route path='/products' element={<Products />} exact/>
             <Route path='/products/price' element={<PriceRange />} />
             <Route path='/products/:productId' element={<ProductDetails />} />
-            <Route path='/about' element={<AboutUs />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path='/payment' element={<Payment />} />
@@ -49,23 +47,10 @@ function App() {
             <Route path="/admin/edit-product/:productId" element={<EditProduct />} />
             {/* <Route path='/admin' element={<AdminRouteGuard><AdminLayout /></AdminRouteGuard>} /> */}
 
-
-        
-
           </Routes>
           {/* Render the Footer only if isAdmin is false */}
           {/* {!isAdmin && <Footer />} */}
 
-           {/* <Route path="/admin" element={<RouteGuard isAdmin={isAdmin} />}>
-              <Route index element={<AdminDashboard />} />
-            </Route> */}
-            {/* <Route path='/admin/*' element={ */}
-            {/* <AdminLayout> */}
-              {/* <Route path='add-product' element={<CreateProduct />} /> */}
-              {/* Add more admin-related routes here */}
-            {/* </AdminLayout> */}
-          {/* } */}
-        {/* /> */}
         </TokenProvider>
         
           <Footer />
