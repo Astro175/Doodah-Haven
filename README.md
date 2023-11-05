@@ -37,7 +37,7 @@ You can check out a live demo of the project at Demo Link Here. https://youtu.be
 
 [Back-end Technologies]:
 
-![nodejs](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white
+![nodejs](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![express](https://img.shields.io/badge/Express-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![json](https://img.shields.io/badge/json-5E5C5C?style=for-the-badge&logo=json&logoColor=white)
 
@@ -45,12 +45,9 @@ You can check out a live demo of the project at Demo Link Here. https://youtu.be
 
 ![cloudinary](https://img.shields.io/badge/Cloudinary-339AF0?style=for-the-badge&logo=fontawesome&logoColor=white)
 
-
-
 [Other Technologies]:
 
 ![fontawesome](https://img.shields.io/badge/Font_Awesome-339AF0?style=for-the-badge&logo=fontawesome&logoColor=white)
-
 ![googlefonts](https://img.shields.io/badge/GoogleFonts-339AF0?style=for-the-badge&logo=fontawesome&logoColor=white)
 ![jsonwebtokens](https://img.shields.io/badge/JsonWebTokens-339AF0?style=for-the-badge&logo=fontawesome&logoColor=white)
 
