@@ -17,7 +17,7 @@ const Home = () => {
       <div className='hero-section'>
         <div className='hero-text'>
           <h1>Best selling products</h1>
-          <p>Browse through our range of appliances and enjoy 12 Months Warranty.</p>
+          <p>Browse through our range of appliances and enjoy 12 Months Warranty!</p>
           <button>
             <Link className='shop-link' to='/products'>
             Shop here

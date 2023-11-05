@@ -7,6 +7,7 @@ import { AuthContext } from "../context/AuthContext";
 // import CreateProduct from "../admin/CreateProduct";
 import { useToken } from "../context/tokenContext";
 
+
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -67,6 +68,7 @@ const Login = () => {
 
                 localStorage.setItem('token', token); // Store in localStorage for simplicity
                 updateToken(token);
+                console.log(responseData);
 
             
                 console.log('role:', responseData.user.role);

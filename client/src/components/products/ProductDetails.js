@@ -17,6 +17,7 @@ const ProductDetails = () => {
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
     
+    
     useEffect(() => {
         // Fetch product data based on the productId
         fetch(`http://localhost:4000/api/products/${productId}`)
@@ -37,6 +38,7 @@ const ProductDetails = () => {
         }
         
         const selectedItem = {
+            productId: product._id,
             img: product.images[1], 
             name: product.name,
             price: product.price,
@@ -102,7 +104,6 @@ const ProductDetails = () => {
                         <button className='addCart' onClick={handleAddToCart}>
                             <FontAwesomeIcon icon={faCartShopping} size='xs' color='#fff' className='cart-icon'/>
                             Add To Cart
-                            {/* <Link to='/cart' className='cartLink'>Add to Cart</Link> */}
                         </button>
 
                         
@@ -110,13 +111,7 @@ const ProductDetails = () => {
                 </div>
             </div>
 
-            {/* <h3>Description</h3>
-            <hr />
-            <ul className='det'>
-                <li>Thin Bezel Intel 10th Gen i7 10875H.</li>
-                <li>16GB RAM - 1TB SSD NVME</li>
-                <li>Windows 10 PRO Laptop</li>
-            </ul> */}
+       
             
         
     </div>
