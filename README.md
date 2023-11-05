@@ -40,9 +40,7 @@ You can check out a live demo of the project at Demo Link Here. https://youtu.be
 ![nodejs](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![express](https://img.shields.io/badge/Express-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![json](https://img.shields.io/badge/json-5E5C5C?style=for-the-badge&logo=json&logoColor=white)
-
 ![mongodb](https://img.shields.io/badge/Mongodb-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-
 ![cloudinary](https://img.shields.io/badge/Cloudinary-339AF0?style=for-the-badge&logo=fontawesome&logoColor=white)
 
 [Other Technologies]:
@@ -135,5 +133,5 @@ Contributors:
     - [Github](https://github.com/Nnenna-udefi)
 - Jonathan Boomni
     - [Github](https://github.com/Boomni)
-- Victoria
+- Oluwabunmi Olabode
     - [Github](https://github.com/)
