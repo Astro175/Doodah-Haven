@@ -168,27 +168,10 @@ class SignUp extends Component {
                           <FontAwesomeIcon icon={['fab', 'google']} className="google-icon"
                           /> Sign up with google
                           </button>
-                          {/* <button className="google-btn">
-                          <FontAwesomeIcon icon={['fab', 'google']} className="google-icon"
-                          />
-                          </button>
-                          <button className="google-btn">
-                          <FontAwesomeIcon icon={['fab', 'google']} className="google-icon"
-                          />
-                          </button> */}
-                        
-                        
                         <button type="submit" className="submit-btn">Sign Up</button>
                         <p className="acc">If you already have an account <span ><Link to='/login' className="sig">Log In</Link></span>.</p>
                     </form>
                     </div>
-                    {/* <div className="welcome-block">
-                        <h1>Welcome to doodah</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur. Vulputate adipiscing amet purus dui donec malesuada nunc faucibus. Nascetur adipiscing netus egestas elementum facilisi. Quis eu euismod risus netus eu lectus in suspendisse amet. Dignissim tristique mi id in egestas mauris sollicitudin.</p>
-                        <button type="submit" className='log-btn'>
-                            <Link to='/login' className="log-link">Log In</Link>
-                        </button>
-                    </div> */}
                 </div>
             </div>
         )

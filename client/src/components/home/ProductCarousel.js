@@ -41,6 +41,16 @@ const ProductCarousel = () => {
     speed: 500,
     slidesToShow: 4, // Number of products to show at once
     slidesToScroll: 4, // Number of products to scroll by
+
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        }
+      }
+    ]
   };
 
   return (
