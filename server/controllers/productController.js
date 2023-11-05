@@ -2,8 +2,7 @@ const Product = require('../models/productModel');
 const mongoose = require('mongoose');
 const cloudinaryImageUpload = require('../utils/cloudinary');
 const fs = require('fs');
-const slugify = require("slugify");
-
+const slugify = require('slugify');
 
 // List all products: GET /api/products
 const getAllProducts = async (req, res) => {
@@ -121,12 +120,11 @@ const addProduct = async (req, res) => {
       }
       images = urls.map((file) => {
         console.log(file);
-        return file
-      })
-    } catch(err) {
+        return file;
+      });
+    } catch (err) {
       console.log(err);
       return res.status(400).json({ error: err });
-      
     }
     products.images = images;
     products.slug = slugify(name);
@@ -154,17 +152,19 @@ const updateProduct = async (req, res) => {
   const product = await Product.findByIdAndUpdate(id, { ...req.body }, { new: true });
 
   if (!product) {
-    return res.status(200).send({
-      message: 'Updated product successfully',
+    return res.status(404).send({
+      message: 'No such product',
       product
     });
   }
-  res.status(200).json(product);
+  res.status(200).send({
+    message: 'Product updated successfully',
+    product
+  });
 };
 
 // Delete a product (admin-only): DELETE /api/products/delete/:id
 const deleteProduct = async (req, res) => {
-
   const { id } = req.params;
   // Checks if ID is valid
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -200,13 +200,13 @@ const filterProduct = async (req, res) => {
 
 const searchProduct = async (req, res) => {
   try {
-    const { keyword } = req.params;
-    const results = Product.find({
+    const { keyword } = req.query;
+    const results = await Product.find({
       $or: [
         { name: { $regex: keyword, $options: 'i' } },
         { description: { $regex: keyword, $options: 'i' } }
       ]
-    }).select('photo');
+    });
     res.status(200).json({ results });
   } catch (err) {
     console.log(err);

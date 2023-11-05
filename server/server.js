@@ -17,7 +17,7 @@ const port = process.env.PORT
 
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev')); // Middleware to replace requestlogger function
 app.use(errorHandler);
 app.use('/api/users', userRoute);

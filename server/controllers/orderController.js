@@ -1,6 +1,7 @@
 const Order = require('../models/orderModel');
 const mongoose = require('mongoose');
 const Product = require('../models/productModel');
+const { ObjectId } = require('mongoose');
 
 // Get all orders
 const getAllOrders = async (req, res) => {
@@ -54,7 +55,7 @@ const addOrder = async (req, res) => {
     case !quantity:
       return res.status(500).send({ error: 'Quantity is Required' });
     case !address:
-      return res.status(500).send({ error: 'AddressID is Required' });
+      return res.status(500).send({ error: 'Address is Required' });
     case !totalAmount:
       return res.status(500).send({ error: 'Amount is Required' });
   }
@@ -101,8 +102,8 @@ const getOrder = async (req, res) => {
     return res.status(401).json({ error: 'No Order ID' });
   }
   Order.findById(id)
-    .exec()
     .populate('product', 'name price')
+    .exec()
     .then(order => {
       res.status(200).json({
         order,
@@ -142,4 +143,25 @@ const deleteOrder = async (req, res) => {
     });
 };
 
-module.exports = { addOrder, getAllOrders, getOrder, deleteOrder };
+const UpdateOrder = async (req, res) => {
+  const { id }= req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(401).json({ error: 'Invalid ID' });
+  }
+
+  Order.findByIdAndUpdate(id, { ...req.body }, { new: true })
+    .exec()
+    .then(order => {
+      res.status(200).send({
+        message: 'Updated order successfully',
+        order,
+        request: {
+          type: 'GET',
+          url: 'http://localhost:4000/orders'
+        }
+      });
+    });
+};
+
+module.exports = { addOrder, getAllOrders, getOrder, deleteOrder, UpdateOrder };

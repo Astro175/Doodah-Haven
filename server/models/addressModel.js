@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const addressSchema = new mongoose.Schema({
+  number: {
+    type: Number,
+  },
   street: {
     type: String,
     required: [true, "Street address is required"]

@@ -16,8 +16,7 @@ const orderSchema = new mongoose.Schema({
     required: [true, "Quantity is required"]
   },    
   address: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Address',
+    type: String,
     required: [true, "Shipping address is required"]
   },
   totalAmount: {
