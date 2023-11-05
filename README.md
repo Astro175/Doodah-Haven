@@ -55,7 +55,9 @@ Clone the repository to your local machine:
 ```git clone https://github.com/Astro175/Doodah-Haven.git```
 
 - Navigate to the project directory:
-```cd ecommerce-website```
+```
+cd ecommerce-website
+```
 - Install the required dependencies for both the front-end and back-end:
 
 ### Install front-end dependencies
