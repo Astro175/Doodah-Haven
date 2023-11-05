@@ -1,4 +1,4 @@
-Web-stack portfolio Project.
+# Web-stack portfolio Project.
 # Doodah
 ## Laptop eCommerce Website
 This is an eCommerce website project developed with React and Node js, designed to provide users with an online shopping platform where they can browse, search, and purchase products. The project includes features for product listing, shopping cart management, user authentication, and order processing.
@@ -29,7 +29,10 @@ You can check out a live demo of the project at Demo Link Here. https://youtu.be
 
 ## Technologies Used
 [Front-end Technologies]: 
-![html5](<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>HTML5</title><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/></svg>loading html5.svg…])
+![html5]
+![html5](https://github.com/Astro175/Doodah-Haven/assets/68693000/6cee35d7-fe6e-44a9-b713-476f911e4a5d)
+
+![Uploading html5.s<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>HTML5</title><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/></svg>vg…]()
 
 ![sass](../../Downloads/sass.svg)
 ![javascript](../../Downloads/javascript.svg)
