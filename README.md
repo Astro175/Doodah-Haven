@@ -56,7 +56,7 @@ Clone the repository to your local machine:
 
 - Navigate to the project directory:
 ```
-cd ecommerce-website
+cd Doodah-app
 ```
 - Install the required dependencies for both the front-end and back-end:
 
