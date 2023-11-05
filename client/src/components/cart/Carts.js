@@ -45,6 +45,7 @@ const Cart = () => {
         }
         return name;
     }
+
     return (
         <div className='cart'>
             <div className='cartLinks'>
@@ -71,7 +72,7 @@ const Cart = () => {
                                         <th>Price</th>
                                         <th>Quantity</th>
                                         <th>Subtotal</th>
-                                        <th>Edit</th>
+                                        <th>Remove</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -89,6 +90,7 @@ const Cart = () => {
                                                 <FontAwesomeIcon icon={faTrash} onClick={() => handleDeleteItem(index)} cursor='pointer'/>
                                             </td>
                                         </tr>
+                                        
                                     ))}
                                 </tbody>
                                 
@@ -105,11 +107,10 @@ const Cart = () => {
                         <p>₦{totalSubtotal}</p>
                     </div>
                     <p className='shipfee'>Shippings fees are free</p>
-                    <button>
-                        <Link to={{ pathname: '/payment', state: { cartItems: cart } }} className='ship-link'>
-                            Proceed to checkout
-                        </Link>
+                    <Link to={{ pathname: '/payment', state: { cartItems: cart } }} className='ship-link'>
+                    <button>Proceed to checkout
                     </button>
+                    </Link>
                 </div>
                 </div>
             )}

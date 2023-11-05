@@ -26,12 +26,11 @@ const ProductCarousel = () => {
     }
     fetchPopular();
   }, []);
-  console.log(popularProducts)
 
   const truncateName = (name) => {
     const words = name.split(' ');
     if (words.length > 4) {
-        return words.slice(0, 3).join(' ') + '...';
+        return words.slice(0, 6).join(' ') + '...';
     }
     return name;
   };
@@ -55,7 +54,7 @@ const ProductCarousel = () => {
             <p>{truncateName(popular.name)}</p>
             <img src={popular.images[0]} alt='product preview' />
             <div className="product-price">
-                <p>Price: ₦{popular.price}</p>
+                <p>Price: ₦ {popular.price}</p>
                 <FontAwesomeIcon icon={faArrowRight} className="arrow"/>
             </div>
             </Link>
@@ -63,7 +62,7 @@ const ProductCarousel = () => {
 
         ))
         ) : (
-          <p>No popular products available</p>
+          <p>Loading..</p>
         )}
       </Slider>
     </div>

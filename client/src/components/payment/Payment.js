@@ -7,15 +7,20 @@ import { CartContext } from '../context/CartContext';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { useNavigate } from 'react-router-dom';
-import paystackimg from '../../images/paystack.png'
+import paystackimg from '../../images/paystack.png';
+import { useToken } from '../context/tokenContext';
+import { AuthContext } from '../context/AuthContext';
 
 const Payment = () => {
     const { cart, removeFromCart } = useContext(CartContext);
     const [cartItems, setCartItems] = useState([]);
     const [activeLink, setActiveLink] = useState('Shipping'); // State to track the active link
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [selectedState, setSelectedState] = useState('');
+    // const [selectedState, setSelectedState] = useState('');
     const navigate = useNavigate();
+    const { token } = useToken();
+    const { user } = useContext(AuthContext); 
+    
    
 
     const [userDetails, setUserDetails] = useState({
@@ -29,18 +34,18 @@ const Payment = () => {
         addressNo: '',
         address: '',
         city: '',
-        state: '',
+        state: 'Lagos',
         code: '',
         landmark: '',
       });
 
 
-    const handleStateChange = (event) => {
-        setSelectedState(event.target.value);
-    }
+    // const handleStateChange = (event) => {
+    //     setSelectedState(event.target.value);
+    // }
 
-    const states = ['', 'Lagos', 'Abuja', 'Kano', 'Ogun', 'Oyo', 'Enugu', 'Kwara', 'Imo', 'Anambra', 'Delta',
-    'Cross-River', 'Akwa-Ibom', 'Rivers', 'Bayelsa', 'Kaduna', 'Abuja', 'Jos', 'Adamawa', 'Ebonyi', 'Abia']
+    // const states = ['', 'Lagos', 'Abuja', 'Kano', 'Ogun', 'Oyo', 'Enugu', 'Kwara', 'Imo', 'Anambra', 'Delta',
+    // 'Cross-River', 'Akwa-Ibom', 'Rivers', 'Bayelsa', 'Kaduna', 'Abuja', 'Jos', 'Adamawa', 'Ebonyi', 'Abia']
     
     const handlePhoneNumberChange = (value) => {
         setPhoneNumber(value);
@@ -79,41 +84,46 @@ const Payment = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (activeLink === 'Payment') {
-          // Create an order object with user, products, shipping details, and payment method
-          const order = {
-            user: {
-              firstname: userDetails.firstname,
-              lastname: userDetails.lastname,
-              email: userDetails.email,
-              phoneNumber: userDetails.phoneNumber,
-            },
             
-            products: cartItems,
-            shippingDetails: {
-              addressNo: shippingDetails.addressNo,
-              address: shippingDetails.address,
-              city: shippingDetails.city,
-              state: shippingDetails.state,
-              code: shippingDetails.code,
-              landmark: shippingDetails.landmark,
-            },
-            paymentMethod: 'Pay online',
+          // Create an order object with user, products, shipping details, and payment method
+
+          const products = cartItems.map((item) => ({
+            product: item.productId,
+            quantity: item.quantity,
+            totalAmount: item.price,
+          }));
+          const order = {
+            user: user._id,
+            product: products[0].product,
+            quantity: products[0].quantity,
+            address: shippingDetails.address,
+            totalAmount: products[0].totalAmount,
+            status: 'Shipped',
+            orderDate: new Date(),
+
+            
           };
     
           try {
-            const response = await fetch('/api/orders/add', {
+            console.log('Order:', order);
+            const response = await fetch('http://localhost:4000/api/orders/add', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
+                'Authorization': token
               },
               body: JSON.stringify(order),
             });
     
             if (response.ok) {
+                setCartItems([]); // Clear the cart
+                setActiveLink('Shipping');
               navigate('/my-account');
               window.alert('Order was created successfully')
+              console.log('Order created successfully');
             } else {
               console.error('Order creation failed');
+              window.alert('Order was not created, Log in please!')
             }
           } catch (error) {
 
@@ -132,7 +142,7 @@ const Payment = () => {
 
                 <h2>Order Summary</h2>
                 {cartItems.map((item, index) => (
-                <div className='summary' key={index}>
+                <div className='summary' key={item._id}>
                     <div className='order-box'>
                         <img src={item.img} alt='order icon' />
                         <div className='items'>
@@ -188,15 +198,16 @@ const Payment = () => {
                                     <h2>Contact Details</h2>
                                     <label htmlFor='firstname'>Firstname:</label><br />
                                     <input type='text' name='firstname' value={userDetails.firstname}
-                                    onChange={(e) => setUserDetails({ ...userDetails, firstname: e.target.value })}required />
+                                    onChange={(e) => setUserDetails({ ...userDetails, firstname: e.target.value })} required />
 
                                     <label htmlFor='lastname'>Lastname:</label>
-                                    <input type='text' name='lastname' value={userDetails.lastname} /><br />
+                                    <input type='text' name='lastname' value={userDetails.lastname} 
                                     onChange={(e) => setUserDetails({ ...userDetails, lastname: e.target.value })}
+                                    /><br />
 
                                     <label htmlFor='email'>Email:</label><br />
                                     <input type='email' name='email' value={userDetails.email} onChange={(e) => setUserDetails({ ...userDetails, email: e.target.value })} 
-                                    aria-required/><br />
+                                    required/><br />
 
                                     <label htmlFor='number'>Phone number:</label><br />
                                     <PhoneInput value={phoneNumber} defaultCountry='NG' onChange={handlePhoneNumberChange} id='number' />
@@ -204,15 +215,15 @@ const Payment = () => {
 
                                 <div className='shipment-form'>
                                     <h2>Shipping Details</h2>
-                                    <label htmlFor='addressNo'>Flat/House no.:</label><br />
+                                    {/* <label htmlFor='addressNo'>Flat/House no:</label><br />
                                     <input type='number' name='addressNo' 
-                                    onChange={(e) => setShippingDetails({ ...shippingDetails, addressNo: e.target.value })} /><br />
+                                    onChange={(e) => setShippingDetails({ ...shippingDetails, addressNo: e.target.value })} /><br /> */}
 
                                     <label htmlFor='address'>Address:</label><br />
                                     <input type='text' name='address' aria-required 
                                     onChange={(e) => setShippingDetails({ ...shippingDetails, address: e.target.value })} /><br/>
-s
-                                    <label htmlFor='city'>City:</label><br />
+                                    
+                                    {/* <label htmlFor='city'>City:</label><br />
                                     <input type='text' name='city' aria-required 
                                     onChange={(e) => setShippingDetails({ ...shippingDetails, city: e.target.value })} />
 
@@ -233,16 +244,15 @@ s
 
                                     <label htmlFor='landmark'>Famous Landmark:</label><br />
                                     <input type='text' name='landmark' 
-                                    onChange={(e) => setShippingDetails({ ...shippingDetails, landmark: e.target.value })}  /><br />
+                                    onChange={(e) => setShippingDetails({ ...shippingDetails, landmark: e.target.value })}  /><br /> */}
 
-                                    <input type='checkbox' name='check' aria-required/>
+                                    <input type='checkbox' name='check' required aria-required/>
                                     <label htmlFor='check' className='checkbox'>My shipping and Billing address are the same</label>
                                 </div>
-                                <button type='submit' onClick={() => handleClick('Delivery')}>Continue to Delivery</button>
-                            </form>
-                            
+                                <button className='back-btn' onClick={() => handleClick('Delivery')}>Continue to Delivery</button>
+                            </form>       
                         </div>
-                    )};
+                    )}
 
                     {activeLink === 'Delivery' && (
                             <div>
@@ -269,38 +279,21 @@ s
                         <button className='makePayment-btn' onClick={() => handleClick('Payment')}>Continue to payment</button>
                         </div>
                     )}
-
-
                     {activeLink === 'Payment' && (
                         <div>
-                    <form className='payment-form' >
-                        <h2>Payment Method</h2>
-                        <input type="radio" id="delivery" name="payment_method" value="Pay online" />
-                        <label htmlFor="delivery">Paystack
-                            <p>Pay online using your Visa/Mastercard</p>
-                            <img src={paystackimg} alt='paystack logo' />
-                        </label><br />
-                        
-                        {/* <input type="radio" id="credit" name="payment_method" value="Credit/Debit card" />
-                        <label for="credit">Credit / Debit card
-                            <p>Pay with your Credit / Debit Card</p>
-                        </label><br />
-                        
-                        <input type="radio" id="transfer" name="payment_method" value="Direct Bank Transfer" />
-                        <label for="transfer">Direct Bank Transfer
-                            <p>Make payment directly through bank account.</p>
-                        </label><br />
-
-                        <input type="radio" id="others" name="payment_method" value="Other Payment Method" />
-                        <label for="others">Other payment method
-                            <p>Make payment through Gpay, Paypal, Paytm etc</p>
-                        </label><br /> */}
+                            <form className='payment-form' onSubmit={handleSubmit} >
+                                <h2>Payment Method</h2>
+                                <input type="radio" id="delivery" name="payment_method" value="Pay online" />
+                                <label htmlFor="delivery">Paystack
+                                    <p>Pay online using your Visa/Mastercard</p>
+                                    <img src={paystackimg} alt='paystack logo' />
+                                </label><br />
+                                <button className='back-btn' onClick={() => handleClick('Delivery')}>Back</button>
+                            <button type='submit' className='makePayment-btn'>Place Order</button>
                     </form>
-                    <button className='back-btn' onClick={() => handleClick('Delivery')}>Back</button>
-                    <button className='makePayment-btn'  onSubmit={handleSubmit}>Place Order</button>
+                            
                     </div>
                     )}
-
                 </div>
             </div>
         </div>
