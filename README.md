@@ -59,8 +59,10 @@ Clone the repository to your local machine:
 - Install the required dependencies for both the front-end and back-end:
 
 ### Install front-end dependencies
-```cd client```
-```npm install```
+```
+cd client
+npm install
+```
 
 ### Install back-end dependencies
 ```
