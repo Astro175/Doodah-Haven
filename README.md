@@ -35,19 +35,24 @@ You can check out a live demo of the project at Demo Link Here. https://youtu.be
 ![js](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
 ![react](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 
-[Back-end Technologies]: 
+[Back-end Technologies]:
+
 ![nodejs](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white
 ![express](https://img.shields.io/badge/Express-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![json](https://img.shields.io/badge/json-5E5C5C?style=for-the-badge&logo=json&logoColor=white)
-[Database]:
+
 ![mongodb](https://img.shields.io/badge/Mongodb-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+
+![cloudinary](https://img.shields.io/badge/Cloudinary-339AF0?style=for-the-badge&logo=fontawesome&logoColor=white)
 
 
 
 [Other Technologies]:
-![fontawesome](https://img.shields.i![C](https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white "C")
-![googlefonts](https://github.com/Astro175/Doodah-Haven/assets/68693000/3c35c6ae-beb9-48c3-aeb5-c2adae7194bf)
-![jsonwebtokens](https://github.com/Astro175/Doodah-Haven/assets/68693000/326b0440-c7f1-438c-b071-2e9ad1ab6bf7)
+
+![fontawesome](https://img.shields.io/badge/Font_Awesome-339AF0?style=for-the-badge&logo=fontawesome&logoColor=white)
+
+![googlefonts](https://img.shields.io/badge/GoogleFonts-339AF0?style=for-the-badge&logo=fontawesome&logoColor=white)
+![jsonwebtokens](https://img.shields.io/badge/JsonWebTokens-339AF0?style=for-the-badge&logo=fontawesome&logoColor=white)
 
 ## Installation
 Clone the repository to your local machine:
