@@ -29,26 +29,24 @@ You can check out a live demo of the project at Demo Link Here. https://youtu.be
 
 ## Technologies Used
 [Front-end Technologies]: 
-![html5]
+
 ![html5](https://github.com/Astro175/Doodah-Haven/assets/68693000/6cee35d7-fe6e-44a9-b713-476f911e4a5d)
-
-![Uploading html5.s<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>HTML5</title><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/></svg>vg…]()
-
-![sass](../../Downloads/sass.svg)
-![javascript](../../Downloads/javascript.svg)
-![React](../../Downloads/react.svg)
+![sass](https://github.com/Astro175/Doodah-Haven/assets/68693000/c9786c7a-2e5b-4cc7-a677-810a9ee37569)
+![javascript](https://github.com/Astro175/Doodah-Haven/assets/68693000/f294ea8a-8769-4ccd-91d5-9191ef5ff9f2)
+![react](https://github.com/Astro175/Doodah-Haven/assets/68693000/9ecfda8f-5fba-408c-8aac-16ac5a030d8a)
 
 [Back-end Technologies]: 
-![NODEJS](../../Downloads/nodedotjs.svg)
-![EXPRESS](../../Downloads/express.svg)
+![nodedotjs](https://github.com/Astro175/Doodah-Haven/assets/68693000/0ddbe7c0-109d-4ebf-b44e-26d566cfccbb)
+![express](https://github.com/Astro175/Doodah-Haven/assets/68693000/f5cbdd0a-9b63-4bcc-9d70-b3422eb75f9f)
 [Database]:
-![MONGODB](../../Downloads/mongodb.svg)
+![mongodb](https://github.com/Astro175/Doodah-Haven/assets/68693000/c438bf51-ae46-4061-9d36-438a980bf6dc)
+
 
 
 [Other Technologies]:
-![JWT](../../Downloads/jsonwebtokens.svg)
-![GOOGLE FONT ](../../Downloads/googlefonts.svg)
-![FONTAWESOME](../../Downloads/fontawesome.svg)
+![fontawesome](https://github.com/Astro175/Doodah-Haven/assets/68693000/750a55ee-be5a-49d5-98d0-a99e9181affd)
+![googlefonts](https://github.com/Astro175/Doodah-Haven/assets/68693000/3c35c6ae-beb9-48c3-aeb5-c2adae7194bf)
+![jsonwebtokens](https://github.com/Astro175/Doodah-Haven/assets/68693000/326b0440-c7f1-438c-b071-2e9ad1ab6bf7)
 
 ## Installation
 Clone the repository to your local machine:
