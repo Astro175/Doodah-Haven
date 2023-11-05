@@ -15,11 +15,10 @@ const orderSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Quantity is required"]
   },    
-  // address: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'Address',
-  //   required: [true, "Shipping address is required"]
-  // },
+  address: {
+    type: String,
+    required: [true, "Shipping address is required"]
+  },
   totalAmount: {
     type: Number,
     required: [true, "Total amount is required"]

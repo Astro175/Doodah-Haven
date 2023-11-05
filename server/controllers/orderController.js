@@ -42,7 +42,7 @@ const addOrder = async (req, res) => {
     user,
     product,
     quantity,
-    // address,
+    address,
     totalAmount,
     status,
     orderDate
@@ -54,8 +54,8 @@ const addOrder = async (req, res) => {
       return res.status(500).send({ error: 'ProductID is Required' });
     case !quantity:
       return res.status(500).send({ error: 'Quantity is Required' });
-    // case !address:
-    //   return res.status(500).send({ error: 'AddressID is Required' });
+    case !address:
+      return res.status(500).send({ error: 'Address is Required' });
     case !totalAmount:
       return res.status(500).send({ error: 'Amount is Required' });
   }
@@ -70,7 +70,7 @@ const addOrder = async (req, res) => {
       user,
       product,
       quantity,
-      // address,
+      address,
       totalAmount,
       status,
       orderDate
