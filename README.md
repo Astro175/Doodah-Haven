@@ -30,21 +30,22 @@ You can check out a live demo of the project at Demo Link Here. https://youtu.be
 ## Technologies Used
 [Front-end Technologies]: 
 
-![html5](https://github.com/Astro175/Doodah-Haven/assets/68693000/6cee35d7-fe6e-44a9-b713-476f911e4a5d)
-![sass](https://github.com/Astro175/Doodah-Haven/assets/68693000/c9786c7a-2e5b-4cc7-a677-810a9ee37569)
-![javascript](https://github.com/Astro175/Doodah-Haven/assets/68693000/f294ea8a-8769-4ccd-91d5-9191ef5ff9f2)
-![react](https://github.com/Astro175/Doodah-Haven/assets/68693000/9ecfda8f-5fba-408c-8aac-16ac5a030d8a)
+![sass](https://img.shields.io/badge/Sass-339933?style=for-the-badge&logo=nodedotjs&logoColor=white))
+![html](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![js](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+![react](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 
 [Back-end Technologies]: 
-![nodedotjs](https://github.com/Astro175/Doodah-Haven/assets/68693000/0ddbe7c0-109d-4ebf-b44e-26d566cfccbb)
-![express](https://github.com/Astro175/Doodah-Haven/assets/68693000/f5cbdd0a-9b63-4bcc-9d70-b3422eb75f9f)
+![nodejs](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white
+![express](https://img.shields.io/badge/Express-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![json](https://img.shields.io/badge/json-5E5C5C?style=for-the-badge&logo=json&logoColor=white)
 [Database]:
-![mongodb](https://github.com/Astro175/Doodah-Haven/assets/68693000/c438bf51-ae46-4061-9d36-438a980bf6dc)
+![mongodb](https://img.shields.io/badge/Mongodb-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 
 
 
 [Other Technologies]:
-![fontawesome](https://github.com/Astro175/Doodah-Haven/assets/68693000/750a55ee-be5a-49d5-98d0-a99e9181affd)
+![fontawesome](https://img.shields.i![C](https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white "C")
 ![googlefonts](https://github.com/Astro175/Doodah-Haven/assets/68693000/3c35c6ae-beb9-48c3-aeb5-c2adae7194bf)
 ![jsonwebtokens](https://github.com/Astro175/Doodah-Haven/assets/68693000/326b0440-c7f1-438c-b071-2e9ad1ab6bf7)
 
@@ -53,9 +54,9 @@ Clone the repository to your local machine:
 
 ```git clone https://github.com/Astro175/Doodah-Haven.git```
 
-Navigate to the project directory:
+- Navigate to the project directory:
 ```cd ecommerce-website```
-Install the required dependencies for both the front-end and back-end:
+- Install the required dependencies for both the front-end and back-end:
 
 ### Install front-end dependencies
 ```cd client```
