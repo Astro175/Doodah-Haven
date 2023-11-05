@@ -63,10 +63,7 @@ const Login = () => {
 
                 localStorage.setItem('token', token); // Store in localStorage for simplicity
                 updateToken(token);
-                console.log(responseData);
-
             
-                console.log('role:', responseData.user.role);
                 if (responseData.user.role === 'admin') {
                     try {
                         console.log(`${responseData.user.firstname} Admin logged in successfully`);

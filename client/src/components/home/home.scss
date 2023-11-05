@@ -145,7 +145,13 @@
                         .arrow {
                             color: #EB2D66;
                         }
-                    } 
+                    }
+                    @media screen and (max-width: 768px){
+                        img {
+                            width: 100%;
+                            height: 100px;
+                        }
+                    }
             
                 }
             }
