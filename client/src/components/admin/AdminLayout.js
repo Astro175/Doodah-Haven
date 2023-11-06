@@ -51,6 +51,7 @@ const AdminLayout = () => {
         setProducts((prevProducts) =>
           prevProducts.filter((product) => product._id !== productId)
         );
+        window.alert('Product deleted successfully')
       } else {
         console.error('Failed to delete the product');
       }

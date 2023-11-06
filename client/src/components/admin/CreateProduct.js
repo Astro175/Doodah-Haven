@@ -63,6 +63,7 @@ const CreateProduct = () => {
         if (response.ok) {
             const data = await response.json();
             console.log('Product added successfully', data);
+            window.alert('Product added successfully');
         } else {
             console.error('Error adding product:', response.statusText)
         }
