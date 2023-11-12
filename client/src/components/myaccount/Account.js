@@ -8,7 +8,7 @@ import { useToken } from '../context/tokenContext';
 const Account = () => {
   const [orders, setOrders] = useState([]);
   const [activeLink, setActiveLink] = useState('Information');
-  const { logout, user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const { token } = useToken();
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const Account = () => {
           const ordersData = await response.json();
           const userOrders = ordersData.orders.filter(order => order.user === user._id);
           setOrders(userOrders);
-          console.log('orders data:', userOrders);
+          // console.log('orders data:', userOrders);
         } else {
           console.error('Failed to fetch user orders');
         }
@@ -38,17 +38,13 @@ const Account = () => {
   }, [activeLink, token, user._id]);
 
 
-  const handleLogout = () => {
-    logout();
-  }
-
-  const truncateName = (name) => {
-    const words = name.split(' ');
-    if (words.length > 3) {
-        return words.slice(0, 3).join(' ') + '...';
-    }
-    return name;
-}
+//   const truncateName = (name) => {
+//     const words = name.split(' ');
+//     if (words.length > 3) {
+//         return words.slice(0, 3).join(' ') + '...';
+//     }
+//     return name;
+// }
 
   return (
     <div className="my-account">
@@ -67,14 +63,13 @@ const Account = () => {
                 <Link className={activeLink === 'Address' ? 'active-link' : 'link'} onClick={() => setActiveLink('Address')}>
                 Address Book
                 </Link>
-
-                <button onClick={handleLogout}>Logout</button>
         </div>
         <div className='details'>
           {activeLink === 'Information' && (
             <div>
               <h2>Account Information</h2>
               <table>
+                <tbody>
                 <tr>
                   <th>Firstname</th>
                   <td>{user?.firstname}</td>
@@ -92,74 +87,81 @@ const Account = () => {
                   <th>Phone Number</th>
                   <td>{orders.userDetails.phoneNumber}</td>
                 </tr> */}
+
+                </tbody>
+              
               </table>
             </div>
           )}
-{activeLink === 'Address' && (
-    <div>
-      <h2>Delivery Address</h2>
-      {orders.length === 0 ? (
-        <p>No Address has been entered.</p>
-      ) : (
-        <div>
-
-        {orders.map((order, index) => (
-          <div key={index}>
-            <p className='address'>{order.address}</p>
-          </div>
-        ))}
-        </div>
-      // <table>
-      //   <tr>
-      //     <th>Address Number</th>
-      //     <td>{orders.shippingDetails?.addressNo}</td>
-      //   </tr>
-      //   <tr>
-      //     <th>Address</th>
-      //     <td>{orders.shippingDetails?.address}</td>
-      //   </tr>
-      //   <tr>
-      //     <th>City</th>
-      //     <td>{orders.shippingDetails?.city}</td>
-      //   </tr>
-      //   <tr>
-      //     <th>State</th>
-      //     <td>{orders.shippingDetails?.state}</td>
-      //   </tr>
-      //   <tr>
-      //     <th>Postal Code</th>
-      //     <td>{orders.shippingDetails?.code}</td>
-      //   </tr>
-      //   <tr>
-      //     <th>Landmark</th>
-      //     <td>{orders.shippingDetails?.landmark}</td>
-      //   </tr>
-      // </table>
-      )}
-    </div>
-  )}
-
-
-{activeLink === 'MyOrders' && (
+        {activeLink === 'Address' && (
             <div>
+              <h2>Delivery Address</h2>
+              {orders.length === 0 ? (
+                <p>No Address has been entered.</p>
+              ) : (
+                <div>
+
+                {orders.map((order, index) => (
+                  <div key={index}>
+                    <p className='address'>{order.address}</p>
+                  </div>
+                ))}
+                </div>
+              // <table>
+              //   <tr>
+              //     <th>Address Number</th>
+              //     <td>{orders.shippingDetails?.addressNo}</td>
+              //   </tr>
+              //   <tr>
+              //     <th>Address</th>
+              //     <td>{orders.shippingDetails?.address}</td>
+              //   </tr>
+              //   <tr>
+              //     <th>City</th>
+              //     <td>{orders.shippingDetails?.city}</td>
+              //   </tr>
+              //   <tr>
+              //     <th>State</th>
+              //     <td>{orders.shippingDetails?.state}</td>
+              //   </tr>
+              //   <tr>
+              //     <th>Postal Code</th>
+              //     <td>{orders.shippingDetails?.code}</td>
+              //   </tr>
+              //   <tr>
+              //     <th>Landmark</th>
+              //     <td>{orders.shippingDetails?.landmark}</td>
+              //   </tr>
+              // </table>
+              )}
+            </div>
+          )}
+
+
+        {activeLink === 'MyOrders' && (
+            <div className='table-scroll'>
               <h2>Order History</h2>
               {orders.length === 0 ? (
                 <p>No Orders have been made yet.</p>
               ): (
+              <div>
               <table>
-                
+                <thead>
                   <tr>
-                    <th>Product Purchased</th>
+                    <th>Product ID</th>
+                    {/* <th>Product Purchased</th> */}
                     <th>Quantity</th>
                     <th>Date Ordered</th>
                     <th>Status</th>
                     <th>Amount Purchased</th>
                   </tr>
+                  </thead>
                 
                 <tbody>
                   {orders.map((order, index) => (
                     <tr key={index}>
-                      <td>{truncateName(order.product.name)}</td>
+                      <td>{order.id}</td>
+                      {/* <td>{truncateName(order.product.name)}</td> */}
                       <td>{order.quantity}</td>
                       <td>{order.orderDate}</td>
                       <td>{order.status}</td>
@@ -168,6 +170,7 @@ const Account = () => {
                   ))}
                 </tbody>
               </table>
+              </div>
               )}
             </div>
           )}
