@@ -59,7 +59,7 @@ const PriceRange = () => {
           <h2>Products in the Price Range: ₦{minPrice} - ₦{maxPrice}</h2>
           <div className='priceDiv'>
             {productsInPriceRange.map((product) => (
-              <Link to={`/products/${product._id}`} className='product-link'>
+              <Link to={`/products/${product._id}`} className='product-link' key={product._id}>
               <div key={product._id} className='price-block'>
                  <img src={product.images[0]} alt='product preview' />
                  <div className='review'>
