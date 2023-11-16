@@ -9,11 +9,13 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [noResults, setNoResults] = useState(false);
+  const [page, setPage] = useState(1);
+  const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:4000/api/products/');
+        const response = await fetch(`http://localhost:4000/api/products?page=${page}`);
         if (!response.ok) {
           console.error('API response does not indicate success');
           setNoResults(true);
@@ -24,6 +26,7 @@ const Products = () => {
         const data = await response.json();
   
         setProducts(data.products);
+        setPageCount(data.totalPages);
         setIsLoading(false);
         // console.log(data.products);
       } catch (error) {
@@ -33,7 +36,7 @@ const Products = () => {
     };
   
     fetchData();
-  }, []);
+  }, [page]);
   
 
   const arrayBufferToBase64 = (buffer) => {
@@ -75,6 +78,73 @@ const Products = () => {
         return words.slice(0, 15).join(' ') + '...';
     }
     return name;
+};
+
+// const handlePrevious = () => {
+//   setPage((p) => {
+//     if (p === 1) return p; // when you get to page 1 this allows you stay in page 1 cos there is no page 0
+//     return p - 1;
+//   })
+// }
+
+// const handleNext = () => {
+//   setPage((p) => {
+//     if (p === pageCount) return p;
+//     return p + 1;
+//   })
+// }
+
+const handlePageClick = (pageNumber) => {
+  setPage(pageNumber);
+};
+
+
+// Function to generate an array of page numbers based on pageCount
+const generatePageNumbers = () => {
+  const max_visible_pages = 5;
+  const pageNumbers = [];
+
+  if (pageCount <= max_visible_pages) {
+    // display all the page numbers
+    for (let i = 1; i <= pageCount; i++) {
+      pageNumbers.push(
+        <button
+          key={i}
+          onClick={() => handlePageClick(i)}
+          className={i === page ? 'active' : ''}
+        >
+          {i}
+        </button>
+      );
+    }
+  } else {
+    const middle = Math.floor(max_visible_pages / 2);
+    const start = page <= middle ? 1 : page - middle;
+    const end = page <= middle ? max_visible_pages : page + middle;
+
+    for (let i = start; i <= end; i++) {
+      pageNumbers.push(
+        <button key={i} onClick={handlePageClick(i)}
+        className={i === page ? 'active' : ''}>{i}</button>
+      );
+    }
+
+    if (start !== 1) {
+      pageNumbers.push(
+        <button key='lt' onClick={() => handlePageClick(page - max_visible_pages)} disabled={page === 1}>
+          &lt;
+        </button>
+      )
+    }
+    if (end !== pageCount) {
+      pageNumbers.push(
+        <button key='gt' onClick={() => handlePageClick(page + max_visible_pages)} disabled={page === pageCount}
+        >&gt;</button>
+      );
+    }
+  }
+  
+  return pageNumbers;
 };
 
   return (
@@ -138,8 +208,16 @@ const Products = () => {
             </div>
 
           ))}
+
+          
           </div>
         </div>
+        <div className='pagination'>
+            {/* disabled keyword disables the previous or next button if youre on the last page or first page */}
+            {/* <button disabled={page === 1} onClick={handlePrevious}>Previous</button>
+            <button disabled={page === pageCount} onClick={handleNext}>Next</button> */}
+            Pages: {generatePageNumbers()}
+          </div>
       </div>
     </div>
   );

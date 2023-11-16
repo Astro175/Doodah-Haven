@@ -3,6 +3,29 @@
     img {
         width: 100%;
     }
+    .pagination {
+        background-color: #000;
+        margin: -15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem;
+        color: #fff;
+        button {
+            background: #fff;
+            padding: 0.5rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 3px;
+            margin-left: 1rem;
+            &:disabled {
+                opacity: 0.5;
+                background-color: gray;
+                cursor: not-allowed;
+            }
+        }
+    }
+    
     .product-title {
         display: flex;
         justify-content: space-between;
@@ -62,67 +85,68 @@
             display: flex;
             flex-wrap: wrap;
             flex-direction: row;
+            
         
-        .product-badge {
-            background-color: #fff;
-            padding: 1.5rem;
-            width: 240px;
-            &:hover {
-                border: 1px solid gray;
-            }
-            .product-link {
-                color: #000;
-                text-decoration: none;
-                
-            }
-            img {
-                width: 200px;
-                height: 200px;
-                margin: 1rem 0;
-            }
-            .small {
-                font-weight: 500;
-                font-size: 11px;
-                // margin: 0;
-            }
-            .stock {
-                color: #78A962;
-                font-size: 11px;
-                margin-left: .5rem;
-            }
-            .red {
-                color: red;
-                font-size: 11px;
-                margin-left: .5rem;
-            }
-            .review {
-                color: #A2A6B0;
-                font-size: 12px;
-                .star {
-                    color: #E9A426
+            .product-badge {
+                background-color: #fff;
+                padding: 1.5rem;
+                width: 240px;
+                &:hover {
+                    border: 1px solid gray;
                 }
-                span {
+                .product-link {
+                    color: #000;
+                    text-decoration: none;
+                    
+                }
+                img {
+                    width: 200px;
+                    height: 200px;
+                    margin: 1rem 0;
+                }
+                .small {
+                    font-weight: 500;
+                    font-size: 11px;
+                    // margin: 0;
+                }
+                .stock {
+                    color: #78A962;
+                    font-size: 11px;
                     margin-left: .5rem;
                 }
-            }
-            .strike {
-                color: #666;
-                font-size: 12px;
-                text-decoration-line: line-through;
-            }
-            p {
-                padding: .3rem 0;
-            }
-            .details {
-                font-size: 13px;
-            }
-            .productName{
-                &:hover {
+                .red {
                     color: red;
+                    font-size: 11px;
+                    margin-left: .5rem;
                 }
+                .review {
+                    color: #A2A6B0;
+                    font-size: 12px;
+                    .star {
+                        color: #E9A426
+                    }
+                    span {
+                        margin-left: .5rem;
+                    }
+                }
+                .strike {
+                    color: #666;
+                    font-size: 12px;
+                    text-decoration-line: line-through;
+                }
+                p {
+                    padding: .3rem 0;
+                }
+                .details {
+                    font-size: 13px;
+                }
+                .productName{
+                    &:hover {
+                        color: red;
+                    }
+                }
+            
             }
-        
-        }
     }
         .back-tag {
             background-image: url('../../images/backdrop.png');
