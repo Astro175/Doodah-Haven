@@ -6,16 +6,19 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: [true, "Product name is required"]
   },
-  description: {
+  shortDescription: {
     type: String,
     required: [true, "Product description is required"]
   },
-
-  // category: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "Category",
-  //   required: true,
-  // },
+  longDescription: {
+    type: String,
+    required: [true, "More in depth description is required"]
+  },
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Category",
+    required: true,
+  },
   slug: {
     type: String,
     unique: true, 
@@ -32,6 +35,10 @@ const productSchema = new mongoose.Schema({
   stock_quantity: {
     type: Number,
     required: [true, "Product stock quantity is required"]
+  },
+  featuredImage: {
+   type: String,
+   required: true,  
   },
   images: [],
   reviews: [

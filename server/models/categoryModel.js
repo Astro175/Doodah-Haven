@@ -1,11 +1,13 @@
-const mongoose = require('mongoose'); 
+const mongoose = require('mongoose');
+const slugify = require('slugify');
 
-// Declare the Schema of the Mongo model
+
 const categorySchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
     unique: true,
+    index: true,
   },
   slug: {
     type: String,
@@ -13,5 +15,10 @@ const categorySchema = new mongoose.Schema({
   },
 });
 
-//Export the model
-module.exports = mongoose.model('Category', categorySchemaSchema);
+categorySchema.pre('save', (next) => {
+  this.slug = slugify(this.name, {lower: true});
+  next();
+});
+
+
+module.exports = mongoose.model('Category', categorySchema);

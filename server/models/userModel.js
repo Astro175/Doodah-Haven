@@ -18,7 +18,11 @@ const userSchema = new schema({
     },
     password: {
         type: String,
-        required: [true, "Password Required"]
+        required: false
+    },
+    oauthId: {
+        type: String,
+        unique: true,
     },
     role: {
         type: String,
@@ -26,5 +30,6 @@ const userSchema = new schema({
         default: "user"}
 });
 
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+const User = mongoose.model('User', userSchema, 'users');
+const OAuthUser = mongoose.model('OAuthUser', userSchema, 'oauthUsers');
+module.exports = {OAuthUser, User}
